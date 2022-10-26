@@ -5,9 +5,14 @@ import '../../constants/colors.dart';
 import '../widgets/customTextField.dart';
 import 'package:fk_toggle/fk_toggle.dart';
 
-class AddTransaction extends StatelessWidget {
+class AddTransaction extends StatefulWidget {
   const AddTransaction({super.key});
 
+  @override
+  State<AddTransaction> createState() => _AddTransactionState();
+}
+
+class _AddTransactionState extends State<AddTransaction> {
   @override
   Widget build(BuildContext context) {
     final OnSelected selected = ((index, instance) {
@@ -15,6 +20,8 @@ class AddTransaction extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Select $index, toggle ${instance.labels[index]}')));
     });
+
+    List<bool> isCardEnabled = [];
 
     return Scaffold(
       appBar: AppBar(
@@ -55,25 +62,33 @@ class AddTransaction extends StatelessWidget {
           ],
           onSelected: selected),
             SizedBox(
-              height: 40,
+              height: 30,
             ),
             CustomText(text: 'Category'),
             SizedBox(
               height: 10,
             ),
-            Row(
-              children: [
-                // loop through the category constants
-                Card(
-                  child: Icon(Icons.health_and_safety),
-                ),
-                Card(
-                  child: Icon(Icons.wifi),
-                )
-              ],
-            ),
-            SizedBox(
-              height: 40,
+            
+            Flexible(
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Container(child: Column(
+                    
+                    children: [
+                      Card( 
+                         child:
+                        SizedBox(
+                          height: 48,
+                          width: 48,
+                          child: Icon(Icons.wifi, color: Colors.black,))),
+                          Text('Internet', style: TextStyle(fontSize: 10),
+                          ),
+                      // selected
+                    ],
+                  )),
+                ],
+              ),
             ),
             CustomTextField(
               text: 'Amount',
@@ -89,7 +104,7 @@ class AddTransaction extends StatelessWidget {
               onSave: ((value) {}),
             ),
             SizedBox(
-              height: 40,
+              height: 30,
             ),
 
             CustomText(text: 'Date'),
@@ -104,29 +119,9 @@ class AddTransaction extends StatelessWidget {
               onDateChange: (date) {},
             ),
 
-            // Row(
-            //   children: [
-            //     Text('Date'),
-            //     SizedBox(
-            //       width: 50,
-            //     ),
-            //     Text('Time'),
-            //   ],
-            // ),
-
-            // Row(
-            //   children: [
-            //     Text('Date Picker'),
-
-            //     SizedBox(
-            //       width: 50,
-            //     ),
-            //     Text('Time Picker'),
-            //   ],
-            // ),
 
             SizedBox(
-              height: 60,
+              height: 50,
             ),
             Container(
               height: 60,
@@ -147,7 +142,9 @@ class AddTransaction extends StatelessWidget {
                   alignment: Alignment.center,
                 ),
               ),
+              
             ),
+            SizedBox(height: 50,)
           ]),
         ),
       ),
