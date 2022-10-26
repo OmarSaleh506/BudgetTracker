@@ -31,7 +31,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +39,9 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+
       body: Center(
-        
         child: Text('Bushra'),
       ),
-    );
   }
 }
