@@ -43,6 +43,7 @@ dependencies:
   flutter_screenutil: ^5.5.4
   intl: null
   image_picker:
+  fk_toggle: ^0.1.4
 
 dev_dependencies:
   flutter_test:
