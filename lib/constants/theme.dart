@@ -4,6 +4,7 @@ import 'colors.dart';
 
 class Themes {
   static final lightTheme = ThemeData(
+    textTheme: GoogleFonts.k2dTextTheme(),
     primarySwatch: Colors.grey,
     brightness: Brightness.light,
     scaffoldBackgroundColor: lightModeScaffoldBgCle,
@@ -12,10 +13,4 @@ class Themes {
       elevation: 0,
     ),
   );
-  TextStyle get headingTextStyle => TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.w700,
-      fontStyle: FontStyle.normal,
-      wordSpacing: 0.11,
-      fontFamily: GoogleFonts.k2d());
 }
