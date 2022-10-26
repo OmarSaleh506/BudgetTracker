@@ -1,7 +1,14 @@
+import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'constants/theme.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -9,34 +16,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return ScreenUtilInit(
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          defaultTransition: Transition.rightToLeftWithFade,
+          transitionDuration: Duration(milliseconds: 1000),
+          title: 'Budget Tracker App',
+          theme: Themes.lightTheme,
+          home: child,
+        );
+      },
+      child: HomeScreen(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: Center(
-          child: Text('Hello'),
-        ));
   }
 }
