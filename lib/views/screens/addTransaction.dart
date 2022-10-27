@@ -47,6 +47,11 @@ class AddTransaction extends StatelessWidget {
       );
       await DatabaseProvider.insertTransaction(transactionModel);
       Get.to(HomeScreen());
+      print("this is a list ${transactionModel.amount}");
+      print("this is a list ${transactionModel.name}");
+      print("this is a list ${transactionModel.type}");
+      print("this is a list ${transactionModel.category}");
+      print("this is a list ${transactionModel.date}");
     }
   }
 
@@ -174,7 +179,7 @@ class AddTransaction extends StatelessWidget {
               height: 60,
               width: 311,
               child: ElevatedButton(
-                onPressed: () => Get.to(HomeScreen()),
+                onPressed: () => _addTransaction(),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(primaryColor),
