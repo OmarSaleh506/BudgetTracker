@@ -23,11 +23,11 @@ class HomeController extends GetxController {
     tracker(transactionsFromDB);
   }
 
-  Future<int> deleteTransaction(String id) async {
+  Future<int?> deleteTransaction(String id) async {
     return await DatabaseProvider.deleteTransaction(id);
   }
 
-  Future<int> updateTransaction(TransactionModel transactionModel) async {
+  Future<int?> updateTransaction(TransactionModel transactionModel) async {
     return await DatabaseProvider.updateTransaction(transactionModel);
   }
 
