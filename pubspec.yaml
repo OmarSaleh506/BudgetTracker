@@ -37,7 +37,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   date_picker_timeline: null
-  get: null
+  get: ^4.6.5
   get_storage: null
   google_fonts: null
   flutter_screenutil: ^5.5.4

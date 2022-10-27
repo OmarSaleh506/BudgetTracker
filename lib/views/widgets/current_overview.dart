@@ -60,7 +60,7 @@ class CurrentOverview extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        letterSpacing: 3),
+                        letterSpacing: 3,color: expenseColor),
                   )
                 ],
               ),

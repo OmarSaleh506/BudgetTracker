@@ -23,7 +23,7 @@ class CustomTextField extends StatelessWidget {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            hintText: '2000...',
+            hintText: hint,
           ),
         ),
       ],

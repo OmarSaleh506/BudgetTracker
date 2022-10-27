@@ -1,4 +1,6 @@
+import 'package:budget_tracker/views/screens/dashboardScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
 
@@ -42,7 +44,7 @@ class Header extends StatelessWidget {
                 IconButton(
                   color: lightModeScaffoldBgCle,
                   iconSize: 45,
-                  onPressed: () {},
+                  onPressed: () {Get.to(DashboardScreen());},
                   icon: const Icon(Icons.bar_chart),
                 ),
                 IconButton(
