@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String text;
   final String? hint;
-  final void Function(String?)? onSave;
+ final TextEditingController? controller;
 
   const CustomTextField(
-      {required this.text, required this.hint, required this.onSave});
+      {required this.text, required this.hint, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class CustomTextField extends StatelessWidget {
         ),
         SizedBox(height: 10,),
         TextFormField(
-          onSaved: onSave,
+          controller: controller,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),

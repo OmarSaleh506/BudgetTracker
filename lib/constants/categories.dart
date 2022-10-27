@@ -1,8 +1,11 @@
 final categories =[
-'Health & care',
-'Internet & Phone',
+'Health',
+'Internet',
 'Transportation',
 'Grocery',
 'Savings',
 'other',
 ];
+
+// color
+// icon
