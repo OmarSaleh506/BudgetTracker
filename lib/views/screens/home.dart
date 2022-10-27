@@ -1,49 +1,46 @@
 import 'package:budget_tracker/constants/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+import '../widgets/add_goal.dart';
+import '../widgets/budget.dart';
+import '../widgets/current_overview.dart';
+import '../widgets/dashbord.dart';
+import '../widgets/goals.dart';
+import '../widgets/header.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Scaffold(
-        appBar: _appBar(),
-        body: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-            vertical: 12.h,
+    return Scaffold(
+      body: Column(
+        children: [
+          Stack(
+            alignment: const Alignment(0, 54),
+            children: const <Widget>[Header(), DashBord()],
           ),
-        ),
-      );
-    });
+          const SizedBox(
+            height: 160,
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(0, 0, 210, 0),
+            child: Text(
+              'Current Month`s Overview',
+              style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 14,
+                  color: detailColor),
+            ),
+          ),
+          const CurrentOverview(),
+          const SizedBox(
+            height: 20,
+          ),
+          Budget(),
+          Goals(),
+          AddGoal()
+        ],
+      ),
+    );
   }
-}
-
-AppBar _appBar() {
-  return AppBar(
-    toolbarHeight: 50,
-    backgroundColor: primaryColor,
-    leading: const Text('Welcome'),
-    actions: [
-      IconButton(
-        onPressed: () => Get.to(() => ''),
-        icon: Icon(
-          Icons.bar_chart,
-          size: 27.sp,
-          color: lightModeScaffoldBgCle,
-        ),
-      ),
-      IconButton(
-        onPressed: () => Get.to(() => ''),
-        icon: Icon(
-          Icons.notification_add_outlined,
-          size: 27.sp,
-          color: lightModeScaffoldBgCle,
-        ),
-      ),
-    ],
-  );
 }

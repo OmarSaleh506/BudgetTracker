@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color lightModeScaffoldBgCle = Color(0xfffcfcfc);
 const Color darkModeScaffoldBgClr = Color(0xFF060609);
-const Color primaryColor = Color(0xff146658);
+const Color primaryColor = Color(0xff21AA93);
 const Color secondaryColor = Color(0xff0e3768);
 const Color blackClr = darkModeScaffoldBgClr;
 const Color savingColor = Color(0xffFF5678);

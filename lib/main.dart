@@ -1,14 +1,10 @@
 import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'constants/theme.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await ScreenUtil.ensureScreenSize();
-  runApp(MyApp());
+void main() {
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -16,21 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return GetMaterialApp(
-          debugShowCheckedModeBanner: false,
-          defaultTransition: Transition.rightToLeftWithFade,
-          transitionDuration: Duration(milliseconds: 1000),
-          title: 'Budget Tracker App',
-          theme: Themes.lightTheme,
-          home: child,
-        );
-      },
-      child: HomeScreen(),
+    return MaterialApp(
+      theme: Themes.lightTheme,
+      home: HomeScreen(),
     );
   }
 }
