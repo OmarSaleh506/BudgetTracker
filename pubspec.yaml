@@ -44,8 +44,8 @@ dependencies:
   fl_chart: ^0.55.2
   sqflite: null
   intl: null
-
   image_picker:
+  fk_toggle: ^0.1.4
 
 dev_dependencies:
   flutter_test:

@@ -20,8 +20,8 @@ class DatabaseProvider {
           version: _version, onCreate: (db, version) => db.execute('''
          CREATE TABLE $_tableName(
           id STRING PRIMARY KEY,
-          type TEXT, image TEXT, name TEXT, amount TEXT, 
-          date TEXT, time TEXT, category TEXT, mode TEXT)
+          type TEXT, name TEXT, amount TEXT, 
+          date TEXT, category TEXT)
         '''));
     } catch (e) {
       Get.snackbar(
@@ -45,20 +45,16 @@ class DatabaseProvider {
     return await _db!.rawUpdate('''
       UPDATE $_tableName 
       SET type = ?,
-      image = ?,
       name = ?,
       amount = ?,
       date = ?,
-      time = ?,
       category = ?,
-      mode = ?
       WHERE id = ? 
 ''', [
       tm.type,
       tm.name,
       tm.amount,
       tm.date,
-      tm.time,
       tm.category,
       tm.id,
     ]);

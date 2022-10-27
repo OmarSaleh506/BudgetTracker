@@ -14,7 +14,6 @@ List<PieChartSectionData> getSection(int touchedIndex)=> Categories.data.asMap()
       final double fontSize= isTouched? 20 :14;
       final value= PieChartSectionData(
         radius: 120,
-
         color: data.color,
         value: data.amount ,
         title: "SR${data.amount}",
