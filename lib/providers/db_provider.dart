@@ -33,16 +33,16 @@ class DatabaseProvider {
     }
   }
 
-  static Future<int> insertTransaction(TransactionModel transaction) async {
-    return await _db!.insert(_tableName, transaction.toMap());
+  static Future<int?> insertTransaction(TransactionModel transaction) async {
+    return await _db?.insert(_tableName, transaction.toMap());
   }
 
-  static Future<int> deleteTransaction(String id) async {
-    return await _db!.delete(_tableName, where: 'id=?', whereArgs: [id]);
+  static Future<int?> deleteTransaction(String id) async {
+    return await _db?.delete(_tableName, where: 'id=?', whereArgs: [id]);
   }
 
-  static Future<int> updateTransaction(TransactionModel tm) async {
-    return await _db!.rawUpdate('''
+  static Future<int?> updateTransaction(TransactionModel tm) async {
+    return await _db?.rawUpdate('''
       UPDATE $_tableName 
       SET type = ?,
       name = ?,

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: Themes.lightTheme,
-      home: HomeScreen(),
+      home: AddTransaction(),
     );
   }
 }
