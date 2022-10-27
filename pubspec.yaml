@@ -42,6 +42,7 @@ dependencies:
   google_fonts: null
   flutter_screenutil: ^5.5.4
   fl_chart: ^0.55.2
+  sqflite: null
   intl: null
 
   image_picker:
