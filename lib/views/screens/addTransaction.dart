@@ -110,6 +110,7 @@ class AddTransaction extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: categories.length,
                 itemBuilder:(context, index) {
+
                   final data = categories[index];
                   return   Container(
                       child: Column(
@@ -117,16 +118,18 @@ class AddTransaction extends StatelessWidget {
               
                           Card(
                              child: InkWell(onTap: () {
-                              _addTransactionController.updateSelectedCategory(data);
+                              _addTransactionController.updateSelectedCategory(data.name ?? '');
                              }, 
                               child: SizedBox(
                                   height: 48,
                                   width: 48,
                                   child: Icon(
+                                    // data.icon ?? 
                                     Icons.wifi,
+                                    // Icons.wifi,
                                     color: Colors.black,
                                   )))),
-                      CustomText(text: data,
+                      CustomText(text: data.name ?? '',
                       fontSize: 10,
                       fontWeight: FontWeight.normal,)
                     ],
