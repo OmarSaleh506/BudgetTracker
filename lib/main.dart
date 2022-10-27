@@ -1,7 +1,7 @@
-import 'package:budget_tracker/views/screens/addTransaction.dart';
-import 'package:budget_tracker/views/screens/dashboardScreen.dart';
+import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+
+import 'constants/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,33 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    return MaterialApp(
+      theme: Themes.lightTheme,
+      home: HomeScreen(),
     );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: DashboardScreen());
   }
 }
