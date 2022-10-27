@@ -1,3 +1,4 @@
+import 'package:budget_tracker/views/screens/addTransaction.dart';
 import 'package:budget_tracker/views/screens/dashboardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
