@@ -1,3 +1,4 @@
+import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:get/get.dart';
@@ -5,13 +6,14 @@ import 'package:intl/intl.dart';
 import '../../constants/categories.dart';
 import '../../controllers/addTransactionController.dart';
 import '../../models/transactionModel.dart';
+import '../../providers/db_provider.dart';
 import '../../views/widgets/customText.dart';
 import '../../constants/colors.dart';
 import '../widgets/customTextField.dart';
 import 'package:fk_toggle/fk_toggle.dart';
 
 class AddTransaction extends StatelessWidget {
-  const AddTransaction({super.key});
+   AddTransaction({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,8 @@ class AddTransaction extends StatelessWidget {
             : DateFormat.yMd().format(now),
         category: _addTransactionController.selectedCategory
       );
+      await DatabaseProvider.insertTransaction(transactionModel);
+      Get.to(HomeScreen());
     }
   }
 
@@ -86,7 +90,7 @@ class AddTransaction extends StatelessWidget {
                 enabledElementColor: Colors.black,
                 disabledElementColor: Colors.grey,
                 labels:_transactionTypes,
-                icons: const [
+                icons:  [
                   Icon(
                     Icons.call_made,
                     color: Color(0xff21AA93),
@@ -123,12 +127,7 @@ class AddTransaction extends StatelessWidget {
                               child: SizedBox(
                                   height: 48,
                                   width: 48,
-                                  child: Icon(
-                                    // data.icon ?? 
-                                    Icons.wifi,
-                                    // Icons.wifi,
-                                    color: Colors.black,
-                                  )))),
+                                  child:data.icon))),
                       CustomText(text: data.name ?? '',
                       fontSize: 10,
                       fontWeight: FontWeight.normal,)
@@ -175,7 +174,7 @@ class AddTransaction extends StatelessWidget {
               height: 60,
               width: 311,
               child: ElevatedButton(
-                onPressed: () => _addTransaction,
+                onPressed: () => Get.to(HomeScreen()),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(primaryColor),

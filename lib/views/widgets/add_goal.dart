@@ -1,4 +1,6 @@
+import 'package:budget_tracker/views/screens/addTransaction.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
 
@@ -30,7 +32,9 @@ class AddGoal extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 25),
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(AddTransaction());
+            },
             child: const Icon(
               Icons.add,
               color: lightModeScaffoldBgCle,

@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           Stack(
             alignment: const Alignment(0, 54),
-            children: const <Widget>[Header(), DashBord()],
+            children:  <Widget>[Header(), DashBord()],
           ),
           const SizedBox(
             height: 160,
