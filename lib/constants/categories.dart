@@ -11,18 +11,18 @@ import 'package:flutter/material.dart';
 
 
 final List<Category> categories =[
-Category(name: 'Health' , icon: Icon(Icons.local_pharmacy)),
-Category(name: 'Internet' , icon: Icon(Icons.wifi)),
-Category(name: 'Transportation' , icon: Icon(Icons.directions_car)),
-Category(name: 'Grocery' , icon: Icon(Icons.local_grocery_store)),
-Category(name: 'Savings' , icon: Icon(Icons.wifi)),
-Category(name: 'other' , icon: Icon(Icons.add)),
+Category(name: 'Health' , icon: Image.asset("lib/constants/icons/health.png")),
+Category(name: 'Internet' , icon: Image.asset("lib/constants/icons/wifi.png")),
+Category(name: 'Transportation' , icon: Image.asset("lib/constants/icons/transportation.png")),
+Category(name: 'Grocery' , icon: Image.asset("lib/constants/icons/grocery.png")),
+// Category(name: 'Savings' , icon: Icon(Icons.wifi)),
+Category(name: 'other' , icon: Image.asset("lib/constants/icons/plus.png")),
 ];
 
 
 class Category{
  final String? name;
- final Icon? icon;
+ final Image? icon;
 
   Category({ this.name, this.icon});
  

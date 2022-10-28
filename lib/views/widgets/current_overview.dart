@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
+import '../../controllers/home_controlle.dart';
 
 class CurrentOverview extends StatelessWidget {
-  const CurrentOverview({
-    Key? key,
-  }) : super(key: key);
+  // const CurrentOverview({
+  //   Key? key,
+  // }) : super(key: key);
+
+  final HomeController _homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -18,23 +22,24 @@ class CurrentOverview extends StatelessWidget {
             width: 163,
             height: 73,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding:  EdgeInsets.only(left: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children:  [
                   Text(
                     'Income',
                     style: TextStyle(
                         color: detailColor, fontSize: 12, letterSpacing: 1),
                   ),
-                  Text(
-                    'SAR 3,050',
+                 Obx(() =>  Text(
+                    'SAR ${_homeController.totalIncome.value}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                         letterSpacing: 3),
-                  )
+                  )),
+                  
                 ],
               ),
             ),
@@ -45,23 +50,23 @@ class CurrentOverview extends StatelessWidget {
             width: 163,
             height: 73,
             child: Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding:  EdgeInsets.only(left: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children:  [
                   Text(
-                    'Spindling',
+                    'Spending ',
                     style: TextStyle(
                         color: detailColor, fontSize: 12, letterSpacing: 1),
                   ),
-                  Text(
-                    'SAR 550.23',
+                 Obx(() =>  Text(
+                    'SAR ${_homeController.totalExpense.value}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
                         letterSpacing: 3,color: expenseColor),
-                  )
+                  )),
                 ],
               ),
             ),

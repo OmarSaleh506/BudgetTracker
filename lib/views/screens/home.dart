@@ -8,7 +8,8 @@ import '../widgets/goals.dart';
 import '../widgets/header.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  
+  
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +17,13 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Stack(
-            alignment: const Alignment(0, 54),
+            alignment:  Alignment(0, 54),
             children:  <Widget>[Header(), DashBord()],
           ),
-          const SizedBox(
+           SizedBox(
             height: 160,
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 210, 0),
             child: Text(
               'Current Month`s Overview',
@@ -32,8 +33,8 @@ class HomeScreen extends StatelessWidget {
                   color: detailColor),
             ),
           ),
-          const CurrentOverview(),
-          const SizedBox(
+           CurrentOverview(),
+           SizedBox(
             height: 20,
           ),
           Budget(),
