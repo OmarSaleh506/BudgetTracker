@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constants/colors.dart';
-import '../../controllers/home_controlle.dart';
+import '../../../constants/colors.dart';
+import '../../../controllers/home_controlle.dart';
 
 class DashBord extends StatelessWidget {
-   DashBord({
+  DashBord({
     Key? key,
   }) : super(key: key);
 
-  // var num=0.obs;
   final HomeController _homeController = Get.put(HomeController());
 
   @override
@@ -22,7 +21,7 @@ class DashBord extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children:  [
+          children: [
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 150, 0),
               child: Text(
@@ -30,12 +29,14 @@ class DashBord extends StatelessWidget {
                 style: TextStyle(
                     color: detailColor, fontSize: 14, letterSpacing: 1),
               ),
-            ),Obx(() =>   Text(
-              "SAR ${_homeController.totalBalance.value.toStringAsFixed(2)}",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 24, letterSpacing: 3),
-            ))
-          ,
+            ),
+            Obx(() => Text(
+                  "SAR ${_homeController.totalBalance.value.toStringAsFixed(2)}",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      letterSpacing: 3),
+                )),
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 210, 0),
               child: Text(

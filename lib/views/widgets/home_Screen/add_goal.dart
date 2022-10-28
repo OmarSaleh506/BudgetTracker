@@ -1,8 +1,9 @@
 import 'package:budget_tracker/views/screens/addTransaction.dart';
+import 'package:budget_tracker/views/screens/add_goals.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constants/colors.dart';
+import '../../../constants/colors.dart';
 
 class AddGoal extends StatelessWidget {
   const AddGoal({
@@ -18,7 +19,12 @@ class AddGoal extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 18),
           child: TextButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              Scaffold.of(context)
+                  .showBottomSheet<void>(((BuildContext context) {
+                return Card(child: Container(height: 650, child: AddGoals()));
+              }));
+            },
             icon: Icon(
               Icons.add,
               size: 15,

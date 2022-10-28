@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constants/colors.dart';
-import '../../controllers/home_controlle.dart';
+import '../../../constants/colors.dart';
+import '../../../controllers/home_controlle.dart';
 
 class CurrentOverview extends StatelessWidget {
   // const CurrentOverview({
