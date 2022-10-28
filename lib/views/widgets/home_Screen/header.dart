@@ -44,7 +44,9 @@ class Header extends StatelessWidget {
                 IconButton(
                   color: lightModeScaffoldBgCle,
                   iconSize: 45,
-                  onPressed: () {Get.to(DashboardScreen());},
+                  onPressed: () {
+                    Get.to(DashboardScreen());
+                  },
                   icon: const Icon(Icons.bar_chart),
                 ),
                 IconButton(

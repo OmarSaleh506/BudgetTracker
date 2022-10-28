@@ -100,7 +100,6 @@ class _AddGoalsState extends State<AddGoals> {
                   padding: const EdgeInsets.all(15),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 5,
-                    crossAxisSpacing: 2,
                   ),
                   itemCount: categoriesGoals.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -119,8 +118,8 @@ class _AddGoalsState extends State<AddGoals> {
                       child: Column(
                         children: [
                           Container(
-                            height: 55,
-                            width: 55,
+                            height: 50,
+                            width: 50,
                             child: Card(
                               color: isCardEnabled[index]
                                   ? Color(0xffFF5678)
@@ -153,9 +152,6 @@ class _AddGoalsState extends State<AddGoals> {
               controller: _nameController,
               text: 'Saved',
               hint: '50...',
-            ),
-            SizedBox(
-              height: 30,
             ),
             SizedBox(
               height: 20,
@@ -198,7 +194,7 @@ class _AddGoalsState extends State<AddGoals> {
               ],
             ),
             SizedBox(
-              height: 50,
+              height: 20,
             ),
             Container(
               height: 60,
@@ -221,7 +217,7 @@ class _AddGoalsState extends State<AddGoals> {
               ),
             ),
             SizedBox(
-              height: 50,
+              height: 10,
             )
           ]),
         ),

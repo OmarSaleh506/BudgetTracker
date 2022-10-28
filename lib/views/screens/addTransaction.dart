@@ -1,6 +1,5 @@
 import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
-import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../constants/categories.dart';
@@ -9,10 +8,9 @@ import '../../models/transactionModel.dart';
 import '../../providers/db_provider.dart';
 import '../../views/widgets/customText.dart';
 import '../../constants/colors.dart';
+import '../widgets/add_goals/input_field.dart';
 import '../widgets/customTextField.dart';
 import 'package:fk_toggle/fk_toggle.dart';
-
-import '../widgets/input_field.dart';
 
 class AddTransaction extends StatefulWidget {
   AddTransaction({super.key});
@@ -36,8 +34,6 @@ class _AddTransactionState extends State<AddTransaction> {
 
     final DateTime now = DateTime.now();
 
-    
-
     _addTransaction() async {
       if (_nameController.text.isEmpty || _amountController.text.isEmpty) {
         Get.snackbar(
@@ -48,16 +44,16 @@ class _AddTransactionState extends State<AddTransaction> {
         final TransactionModel transactionModel = TransactionModel(
             id: DateTime.now().toString(),
             type: _addTransactionController.transactionType.isNotEmpty
-            ? _addTransactionController.transactionType
-            : _transactionTypes[0],
+                ? _addTransactionController.transactionType
+                : _transactionTypes[0],
             name: _nameController.text,
             amount: _amountController.text,
             date: _addTransactionController.selectedDate.isNotEmpty
                 ? _addTransactionController.selectedDate
                 : DateFormat.yMd().format(now),
-             time: _addTransactionController.selectedTime.isNotEmpty
-            ? _addTransactionController.selectedTime
-            : DateFormat('hh:mm a').format(now),
+            time: _addTransactionController.selectedTime.isNotEmpty
+                ? _addTransactionController.selectedTime
+                : DateFormat('hh:mm a').format(now),
             category: _addTransactionController.selectedCategory);
         await DatabaseProvider.insertTransaction(transactionModel);
         Get.to(HomeScreen());
@@ -67,38 +63,38 @@ class _AddTransactionState extends State<AddTransaction> {
         print("this is category ${transactionModel.category}");
         print("this is date ${transactionModel.date}");
         print("this is time ${transactionModel.time}");
-
       }
     }
 
-  _getTimeFromUser(
-    BuildContext context,
-  ) async {
-    String? formatedTime;
-    await showTimePicker(
-      initialEntryMode: TimePickerEntryMode.input,
-      context: context,
-      initialTime: TimeOfDay(
-        hour: DateTime.now().hour,
-        minute: DateTime.now().minute,
-      ),
-    ).then((value) => formatedTime = value!.format(context));
-
-    _addTransactionController.updateSelectedTime(formatedTime!);
-  }
-
-  _getDateFromUser(BuildContext context) async {
-    DateTime? pickerDate = await showDatePicker(
+    _getTimeFromUser(
+      BuildContext context,
+    ) async {
+      String? formatedTime;
+      await showTimePicker(
+        initialEntryMode: TimePickerEntryMode.input,
         context: context,
-        firstDate: DateTime(2012),
-        initialDate: DateTime.now(),
-        lastDate: DateTime(2122));
+        initialTime: TimeOfDay(
+          hour: DateTime.now().hour,
+          minute: DateTime.now().minute,
+        ),
+      ).then((value) => formatedTime = value!.format(context));
 
-    if (pickerDate != null) {
-      _addTransactionController
-          .updateSelectedDate(DateFormat.yMd().format(pickerDate));
+      _addTransactionController.updateSelectedTime(formatedTime!);
     }
-  }
+
+    _getDateFromUser(BuildContext context) async {
+      DateTime? pickerDate = await showDatePicker(
+          context: context,
+          firstDate: DateTime(2012),
+          initialDate: DateTime.now(),
+          lastDate: DateTime(2122));
+
+      if (pickerDate != null) {
+        _addTransactionController
+            .updateSelectedDate(DateFormat.yMd().format(pickerDate));
+      }
+    }
+
     final OnSelected selected = ((index, instance) {
       // ScaffoldMessenger.of(context).hideCurrentSnackBar();
       // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -111,7 +107,7 @@ class _AddTransactionState extends State<AddTransaction> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: GestureDetector(
-            onTap:  () {
+            onTap: () {
               Get.to(HomeScreen());
             },
             child: Icon(
@@ -160,48 +156,49 @@ class _AddTransactionState extends State<AddTransaction> {
             ),
             Expanded(
               child: GridView.builder(
-                      padding: const EdgeInsets.all(15),
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 5,
-              // childAspectRatio: 1,
-              // crossAxisSpacing: 10,
-                      ),
-                      itemCount: categories.length,
-                      itemBuilder: (BuildContext context, int index) {
-              isCardEnabled.add(false);
-              final data = categories[index];
-              return GestureDetector(
-                  onTap: () {
-                    _addTransactionController.updateSelectedCategory(data.name ?? '');
-                    isCardEnabled.replaceRange(0, isCardEnabled.length,
-                        [for (int i = 0; i < isCardEnabled.length; i++) false]);
-                    isCardEnabled[index] = true;
-                    setState(() {});
-                  },
-                  child: Column(
-                    children: [
-                      Container(
-                        height: 55,
-                        width: 55,
-                        child: Card(
-                          color: isCardEnabled[index]
-                              ? Color(0xffFF5678)
-                              : Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8)),
-                          child: Center(child:
-                           data.icon),
-                        ),
-                      ),
-                      CustomText(
-                        text: data.name ?? '',
-                        fontSize: 10,
-                        fontWeight: FontWeight.normal,
-                        alignment: Alignment.center,
-                      )
-                    ],
-                  ));
-                      }),
+                  padding: const EdgeInsets.all(15),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 5,
+                    // childAspectRatio: 1,
+                    // crossAxisSpacing: 10,
+                  ),
+                  itemCount: categories.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    isCardEnabled.add(false);
+                    final data = categories[index];
+                    return GestureDetector(
+                        onTap: () {
+                          _addTransactionController
+                              .updateSelectedCategory(data.name ?? '');
+                          isCardEnabled.replaceRange(0, isCardEnabled.length, [
+                            for (int i = 0; i < isCardEnabled.length; i++) false
+                          ]);
+                          isCardEnabled[index] = true;
+                          setState(() {});
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 55,
+                              width: 55,
+                              child: Card(
+                                color: isCardEnabled[index]
+                                    ? Color(0xffFF5678)
+                                    : Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Center(child: data.icon),
+                              ),
+                            ),
+                            CustomText(
+                              text: data.name ?? '',
+                              fontSize: 10,
+                              fontWeight: FontWeight.normal,
+                              alignment: Alignment.center,
+                            )
+                          ],
+                        ));
+                  }),
             ),
             CustomTextField(
               controller: _amountController,
@@ -234,44 +231,43 @@ class _AddTransactionState extends State<AddTransaction> {
             //   }),
             // ),
 
-
             Row(
-                children: [
-                  Expanded(
-                    child: InputField(
-                      hint: _addTransactionController.selectedDate.isNotEmpty
-                          ? _addTransactionController.selectedDate
-                          : DateFormat.yMd().format(now),
-                      label: 'Date',
-                      widget: IconButton(
-                        onPressed: () => _getDateFromUser(context),
-                        icon: Icon(
-                          Icons.calendar_month_outlined,
-                          color: Colors.grey,
-                        ),
+              children: [
+                Expanded(
+                  child: InputField(
+                    hint: _addTransactionController.selectedDate.isNotEmpty
+                        ? _addTransactionController.selectedDate
+                        : DateFormat.yMd().format(now),
+                    label: 'Date',
+                    widget: IconButton(
+                      onPressed: () => _getDateFromUser(context),
+                      icon: Icon(
+                        Icons.expand_more,
+                        color: Colors.black,
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                  Expanded(
-                    child: InputField(
-                      hint: _addTransactionController.selectedTime.isNotEmpty
-                          ? _addTransactionController.selectedTime
-                          : DateFormat('hh:mm a').format(now),
-                      label: 'Time',
-                      widget: IconButton(
-                        onPressed: () => _getTimeFromUser(context),
-                        icon: Icon(
-                          Icons.access_time_rounded,
-                          color: Colors.grey,
-                        ),
+                ),
+                SizedBox(
+                  width: 12,
+                ),
+                Expanded(
+                  child: InputField(
+                    hint: _addTransactionController.selectedTime.isNotEmpty
+                        ? _addTransactionController.selectedTime
+                        : DateFormat('hh:mm a').format(now),
+                    label: 'Time',
+                    widget: IconButton(
+                      onPressed: () => _getTimeFromUser(context),
+                      icon: Icon(
+                        Icons.expand_more,
+                        color: Colors.black,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
+            ),
             SizedBox(
               height: 50,
             ),

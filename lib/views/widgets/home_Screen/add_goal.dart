@@ -22,7 +22,7 @@ class AddGoal extends StatelessWidget {
             onPressed: () {
               Scaffold.of(context)
                   .showBottomSheet<void>(((BuildContext context) {
-                return Card(child: Container(height: 650, child: AddGoals()));
+                return Card(child: Container(height: 570, child: AddGoals()));
               }));
             },
             icon: Icon(
