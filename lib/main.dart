@@ -17,7 +17,12 @@ import '../../views/widgets/customText.dart';
 import '../../constants/colors.dart';
 import 'package:fk_toggle/fk_toggle.dart';
 
-void main() {
+void main() async{
+   WidgetsFlutterBinding.ensureInitialized();
+  // await ScreenUtil.ensureScreenSize();
+
+ 
+  await DatabaseProvider.initDb();
   runApp(const MyApp());
 }
 
@@ -27,8 +32,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: Themes.lightTheme,
-      home: AddTransaction(),
+      home: HomeScreen(),
     );
   }
 }

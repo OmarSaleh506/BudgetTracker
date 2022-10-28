@@ -13,6 +13,7 @@ class HomeController extends GetxController {
 
   final Rx<List<TransactionModel>> _myTransactions =
       Rx<List<TransactionModel>>([]);
+  final _box = GetStorage();
 
   List<TransactionModel> get myTransactions => _myTransactions.value;
   double get totalForSelectedDate => _totalForSelectedDate.value;
@@ -56,11 +57,13 @@ class HomeController extends GetxController {
     }
     double total = 0;
     for (TransactionModel transactionModel in tm) {
+      if (transactionModel.date == DateFormat.yMd().format(selectedDate)) {
         if (transactionModel.type == 'Income') {
           total += double.parse(transactionModel.amount!);
         } else {
           total -= double.parse(transactionModel.amount!);
         }
+      }
     }
     _totalForSelectedDate.value = total;
   }

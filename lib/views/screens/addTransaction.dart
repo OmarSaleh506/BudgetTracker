@@ -103,7 +103,9 @@ class _AddTransactionState extends State<AddTransaction> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: GestureDetector(
-            onTap: () {},
+            onTap:  () {
+              Get.to(HomeScreen());
+            },
             child: Icon(
               Icons.arrow_back_ios,
               color: Colors.black,
