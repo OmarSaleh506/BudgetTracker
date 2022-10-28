@@ -1,11 +1,10 @@
 import 'package:budget_tracker/constants/colors.dart';
 import 'package:flutter/material.dart';
-import '../widgets/add_goal.dart';
-import '../widgets/budget.dart';
-import '../widgets/current_overview.dart';
-import '../widgets/dashbord.dart';
-import '../widgets/goals.dart';
-import '../widgets/header.dart';
+import '../widgets/home_Screen/add_goal.dart';
+import '../widgets/home_Screen/current_overview.dart';
+import '../widgets/home_Screen/dashbord.dart';
+import '../widgets/home_Screen/goals.dart';
+import '../widgets/home_Screen/header.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         children: [
           Stack(
             alignment: const Alignment(0, 54),
-            children:  <Widget>[Header(), DashBord()],
+            children: <Widget>[Header(), DashBord()],
           ),
           const SizedBox(
             height: 160,
@@ -32,11 +31,11 @@ class HomeScreen extends StatelessWidget {
                   color: detailColor),
             ),
           ),
-          const CurrentOverview(),
+          CurrentOverview(),
           const SizedBox(
             height: 20,
           ),
-          Budget(),
+          // Budget(),
           Goals(),
           AddGoal()
         ],

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'colors.dart';
@@ -13,4 +15,9 @@ class Themes {
       elevation: 0,
     ),
   );
+  TextStyle get labelStyle => TextStyle(
+      fontSize: 14,
+      color: darkModeScaffoldBgClr,
+      fontWeight: FontWeight.w700,
+      letterSpacing: 1);
 }

@@ -2,7 +2,7 @@ import 'package:budget_tracker/views/screens/dashboardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../constants/colors.dart';
+import '../../../constants/colors.dart';
 
 class Header extends StatelessWidget {
   const Header({

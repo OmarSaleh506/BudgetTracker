@@ -1,6 +1,4 @@
-import 'package:budget_tracker/views/screens/addTransaction.dart';
-import 'package:budget_tracker/views/screens/dashboardScreen.dart';
-import 'package:budget_tracker/views/screens/home.dart';
+import 'package:budget_tracker/views/screens/first_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants/theme.dart';
@@ -16,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: Themes.lightTheme,
-      home: HomeScreen(),
+      home: FirstPage(),
     );
   }
 }
