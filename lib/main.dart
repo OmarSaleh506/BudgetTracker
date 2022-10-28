@@ -1,10 +1,8 @@
-import 'package:budget_tracker/views/screens/home.dart';
+import 'package:budget_tracker/views/screens/first_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants/theme.dart';
 import '../../providers/db_provider.dart';
-
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +20,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Themes.lightTheme,
-      home: HomeScreen(),
+      home: FirstPage(),
     );
   }
 }

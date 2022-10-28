@@ -1,6 +1,7 @@
 import 'package:budget_tracker/constants/colors.dart';
 import 'package:flutter/material.dart';
 import '../widgets/home_Screen/add_goal.dart';
+import '../widgets/home_Screen/budget.dart';
 import '../widgets/home_Screen/current_overview.dart';
 import '../widgets/home_Screen/dashbord.dart';
 import '../widgets/home_Screen/goals.dart';
@@ -30,11 +31,10 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           CurrentOverview(),
-
           const SizedBox(
             height: 20,
           ),
-          // Budget(),
+          Budget(),
           Goals(),
           AddGoal()
         ],
