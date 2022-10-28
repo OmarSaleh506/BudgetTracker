@@ -22,6 +22,7 @@ class AddTransaction extends StatefulWidget {
 }
 
 class _AddTransactionState extends State<AddTransaction> {
+  List<bool> isCardEnabled = [];
   @override
   Widget build(BuildContext context) {
     final AddTransactionController _addTransactionController =
@@ -29,11 +30,13 @@ class _AddTransactionState extends State<AddTransaction> {
     final TextEditingController _nameController = TextEditingController();
     final TextEditingController _amountController = TextEditingController();
     final List<String> _transactionTypes = ['Income', 'Spending'];
-    bool ispressed = false;
+
+    // bool ispressed = false;
+    final List<bool> ispressed = List.generate(5, (i) => false);
 
     final DateTime now = DateTime.now();
 
-    List<bool> isCardEnabled = [];
+    
 
     _addTransaction() async {
       if (_nameController.text.isEmpty || _amountController.text.isEmpty) {
@@ -44,12 +47,17 @@ class _AddTransactionState extends State<AddTransaction> {
       } else {
         final TransactionModel transactionModel = TransactionModel(
             id: DateTime.now().toString(),
-            type: _addTransactionController.transactionType,
+            type: _addTransactionController.transactionType.isNotEmpty
+            ? _addTransactionController.transactionType
+            : _transactionTypes[0],
             name: _nameController.text,
             amount: _amountController.text,
             date: _addTransactionController.selectedDate.isNotEmpty
                 ? _addTransactionController.selectedDate
                 : DateFormat.yMd().format(now),
+             time: _addTransactionController.selectedTime.isNotEmpty
+            ? _addTransactionController.selectedTime
+            : DateFormat('hh:mm a').format(now),
             category: _addTransactionController.selectedCategory);
         await DatabaseProvider.insertTransaction(transactionModel);
         Get.to(HomeScreen());
@@ -121,7 +129,7 @@ class _AddTransactionState extends State<AddTransaction> {
         child: Container(
           child: Column(children: [
             SizedBox(
-              height: 95,
+              height: 50,
             ),
             FkToggle(
                 width: 120,
@@ -150,49 +158,50 @@ class _AddTransactionState extends State<AddTransaction> {
             SizedBox(
               height: 8,
             ),
-            Flexible(
-              child: ListView.builder(
-                itemExtent: 85.0,
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: categories.length,
-                itemBuilder: (context, index) {
-                  final data = categories[index];
-                  return GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          ispressed = !ispressed;
-                        });
-                        _addTransactionController
-                            .updateSelectedCategory(data.name ?? '');
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 48,
-                            width: 48,
-                            decoration: BoxDecoration(
-                                color: ispressed ? expenseColor : Colors.white,
-                                borderRadius: BorderRadius.circular(8.0),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.2),
-                                    spreadRadius: 5,
-                                    blurRadius: 6,
-                                  ),
-                                ]),
-                            child: data.icon,
-                          ),
-                          CustomText(
-                            text: data.name ?? '',
-                            fontSize: 10,
-                            fontWeight: FontWeight.normal,
-                            alignment: Alignment.center,
-                          )
-                        ],
-                      ));
-                },
-              ),
+            Expanded(
+              child: GridView.builder(
+                      padding: const EdgeInsets.all(15),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 5,
+              // childAspectRatio: 1,
+              // crossAxisSpacing: 10,
+                      ),
+                      itemCount: categories.length,
+                      itemBuilder: (BuildContext context, int index) {
+              isCardEnabled.add(false);
+              final data = categories[index];
+              return GestureDetector(
+                  onTap: () {
+                    _addTransactionController.updateSelectedCategory(data.name ?? '');
+                    isCardEnabled.replaceRange(0, isCardEnabled.length,
+                        [for (int i = 0; i < isCardEnabled.length; i++) false]);
+                    isCardEnabled[index] = true;
+                    setState(() {});
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 55,
+                        width: 55,
+                        child: Card(
+                          color: isCardEnabled[index]
+                              ? Color(0xffFF5678)
+                              : Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                          child: Center(child:
+                           data.icon),
+                        ),
+                      ),
+                      CustomText(
+                        text: data.name ?? '',
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal,
+                        alignment: Alignment.center,
+                      )
+                    ],
+                  ));
+                      }),
             ),
             CustomTextField(
               controller: _amountController,
