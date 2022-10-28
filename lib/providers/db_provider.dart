@@ -48,6 +48,7 @@ class DatabaseProvider {
       name = ?,
       amount = ?,
       date = ?,
+      time = ?,
       category = ?,
       WHERE id = ? 
 ''', [
@@ -55,6 +56,7 @@ class DatabaseProvider {
       tm.name,
       tm.amount,
       tm.date,
+      tm.time,
       tm.category,
       tm.id,
     ]);

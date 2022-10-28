@@ -6,6 +6,7 @@ class TransactionModel {
   final String? amount;
   final String? name;
   final String? date;
+  final String? time;
   
 
   TransactionModel({
@@ -15,6 +16,7 @@ class TransactionModel {
     this.name,
     this.amount,
     this.date,
+    this.time,
   });
 
   TransactionModel fromJson(Map<String, dynamic> json) => TransactionModel(
@@ -23,6 +25,7 @@ class TransactionModel {
     amount: json['amount'],
     name: json['name'],
     date: json['date'],
+    time: json['time'],
     category: json['category'],
   );
 
@@ -32,6 +35,7 @@ class TransactionModel {
     'name': name,
     'amount': amount,
     'date': date,
+    'time': time,
     'category': category,
   };
 

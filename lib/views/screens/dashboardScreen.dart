@@ -16,7 +16,7 @@ class DashboardScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     int touchedIndex=1;
     return Scaffold(
-        appBar: AppBar(title: Text("Dashboard",)),
+        appBar: AppBar(title: Text("Dashboard",), backgroundColor: Colors.transparent, elevation: 0,),
         body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[

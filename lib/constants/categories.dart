@@ -15,7 +15,7 @@ Category(name: 'Health' , icon: Icon(Icons.local_pharmacy)),
 Category(name: 'Internet' , icon: Icon(Icons.wifi)),
 Category(name: 'Transportation' , icon: Icon(Icons.directions_car)),
 Category(name: 'Grocery' , icon: Icon(Icons.local_grocery_store)),
-Category(name: 'Savings' , icon: Icon(Icons.wifi)),
+// Category(name: 'Savings' , icon: Icon(Icons.wifi)),
 Category(name: 'other' , icon: Icon(Icons.add)),
 ];
 

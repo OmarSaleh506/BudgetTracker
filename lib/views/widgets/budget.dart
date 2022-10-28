@@ -108,7 +108,7 @@ class Budget extends StatelessWidget {
                           children: [
                             Container(
                               decoration: const BoxDecoration(
-                                color: Color(0xff1C6DD0),
+                                color: primaryColor,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                               ),
@@ -133,7 +133,7 @@ class Budget extends StatelessWidget {
                           children: [
                             Container(
                               decoration: const BoxDecoration(
-                                color: Color(0xffFF5678),
+                                color: expenseColor,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(20)),
                               ),
