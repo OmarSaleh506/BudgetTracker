@@ -20,8 +20,8 @@ class DashboardScreen extends StatelessWidget {
     int touchedIndex=1;
     return Scaffold(
         appBar: AppBar(title: Text("Dashboard",), backgroundColor: Colors.transparent, elevation: 0,),
-        body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+        body: ListView(
+
             children: <Widget>[
               Center(
                 child: SizedBox(
@@ -58,7 +58,7 @@ class DashboardScreen extends StatelessWidget {
                 ],
               ),
 
-    Expanded(
+    Container(
       child: Column(
       children: [
       const SizedBox(
@@ -67,7 +67,7 @@ class DashboardScreen extends StatelessWidget {
       Padding(
       padding: EdgeInsets.all(10),
       child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.start,
       children:  const [
       Text(
       "Recent Transactions",
@@ -76,23 +76,28 @@ class DashboardScreen extends StatelessWidget {
       fontWeight: FontWeight.bold,
       color: detailColor,letterSpacing: 0.5,
       ),),
-      Text(
-      "View Detail",
-      style: TextStyle(
-      fontSize: 10,
-      fontWeight: FontWeight.w400,
-      color: detailColor,letterSpacing: 0.5,
-      decoration: TextDecoration.underline),
-      )
+      // Text(
+      // "View Detail",
+      // style: TextStyle(
+      // fontSize: 10,
+      // fontWeight: FontWeight.w400,
+      // color: detailColor,letterSpacing: 0.5,
+      // decoration: TextDecoration.underline),
+      // )
       ],
       ),
 
       ),
         Container(
-          child: _homeController.myTransactions.length == 0?Text("No any students to show."): //show message if there is no any student
+          child: _homeController.myTransactions.length == 0?Text("No Transactions to show."): //show message if there is no any student
           Column(  //or populate list to Column children if there is student data.
             children: _homeController.myTransactions.map((transaction){
-              return TransactionWidget(transactionModel: transaction,);
+              final text = transaction.amount;
+              final bool isIncome = transaction.type == 'Income' ? true : false;
+              final formatAmount = isIncome ? '+ $text' : '- $text';
+              return TransactionWidget(transactionModel: transaction,
+              formatAmount: formatAmount,
+              isIncome: isIncome,);
             }).toList(),
           ),
         ),
