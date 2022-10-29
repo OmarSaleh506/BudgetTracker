@@ -30,7 +30,7 @@ class _AddTransactionState extends State<AddTransaction> {
     final List<String> _transactionTypes = ['Income', 'Spending'];
 
     // bool ispressed = false;
-    final List<bool> ispressed = List.generate(5, (i) => false);
+    // final List<bool> ispressed = List.generate(5, (i) => false);
 
     final DateTime now = DateTime.now();
 
@@ -187,7 +187,9 @@ class _AddTransactionState extends State<AddTransaction> {
                                     : Colors.white,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)),
-                                child: Center(child: data.icon),
+                                child: Center(
+                                  child: data.icon,
+                                ),
                               ),
                             ),
                             CustomText(
@@ -220,17 +222,6 @@ class _AddTransactionState extends State<AddTransaction> {
             SizedBox(
               height: 20,
             ),
-            // DatePicker(
-            //   DateTime.now(),
-            //   initialSelectedDate: DateTime.now(),
-            //   selectionColor: Color(0xffFF5678),
-            //   selectedTextColor: Colors.white,
-            //   onDateChange: ((selectedDate) {
-            //     _addTransactionController
-            //         .updateSelectedDate(DateFormat.yMd().format(selectedDate));
-            //   }),
-            // ),
-
             Row(
               children: [
                 Expanded(

@@ -17,12 +17,12 @@ class FirstPage extends StatelessWidget {
               height: 67,
             ),
             Image(image: AssetImage('images/first.png')),
-            const SizedBox(
+             SizedBox(
               height: 30,
             ),
             Padding(
               padding: const EdgeInsets.only(right: 85),
-              child: const Text(
+              child:  Text(
                 'Set Your Financial Goals',
                 style: TextStyle(
                     fontSize: 18,
@@ -30,7 +30,7 @@ class FirstPage extends StatelessWidget {
                     fontStyle: FontStyle.normal),
               ),
             ),
-            const SizedBox(
+             SizedBox(
               height: 15,
             ),
             Container(
@@ -42,7 +42,7 @@ class FirstPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(120, 62, 0, 0),
+              padding: EdgeInsets.fromLTRB(120, 62, 0, 0),
               child: Stack(
                 children: [
                   Image(

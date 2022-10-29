@@ -21,7 +21,7 @@ class DatabaseProvider {
          CREATE TABLE $_tableName(
           id STRING PRIMARY KEY,
           type TEXT, name TEXT, amount TEXT, 
-          date TEXT, category TEXT)
+          date TEXT,time TEXT, category TEXT)
         '''));
     } catch (e) {
       Get.snackbar(
