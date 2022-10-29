@@ -1,6 +1,9 @@
 import 'package:get/get.dart';
 
+import '../models/transactionModel.dart';
+
 class AddTransactionController extends GetxController {
+ 
   final Rx<String> _transactionType = ''.obs;
   final Rx<String> _selectedCategory = Rx<String>('');
   final Rx<String> _selectedDate = ''.obs;

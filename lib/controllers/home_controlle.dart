@@ -10,20 +10,15 @@ class HomeController extends GetxController {
   final Rx<double> totalBalance = 0.0.obs;
   final Rx<double> totalSaved = 0.0.obs;
 
-  // final Rx<double> _totalForSelectedDate = 0.0.obs;
-  // final Rx<DateTime> _selectedDate = DateTime.now().obs;
-
   final Rx<List<TransactionModel>> _myTransactions =
       Rx<List<TransactionModel>>([]);
 
   List<TransactionModel> get myTransactions => _myTransactions.value;
-  // double get totalForSelectedDate => _totalForSelectedDate.value;
-  // DateTime get selectedDate => _selectedDate.value;
 
   @override
   void onInit() {
-    super.onInit();
     getTransactions();
+    super.onInit();
   }
 
   getTransactions() async {
@@ -46,10 +41,6 @@ class HomeController extends GetxController {
     return await DatabaseProvider.updateTransaction(transactionModel);
   }
 
-  // updateSelectedDate(DateTime date) {
-  //   _selectedDate.value = date;
-  //   getTransactions();
-  // }
 
   getTotalAmount(List<TransactionModel> tm) {
     if (tm.isEmpty) {
@@ -63,7 +54,8 @@ class HomeController extends GetxController {
         total -= double.parse(transactionModel.amount!);
       }
     }
-    // _totalForSelectedDate.value = total;
+
+    getTransactions();
   }
 
   tracker(List<TransactionModel> tm) {

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants/theme.dart';
 import '../../providers/db_provider.dart';
+import 'views/screens/dashboardScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
