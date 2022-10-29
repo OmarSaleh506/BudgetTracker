@@ -27,7 +27,8 @@ class DashboardScreen extends StatelessWidget {
                 child: SizedBox(
                   width: 50.0,
                   height: 300.0,
-                  child: PieChart(
+                  child:
+                  PieChart(
                       PieChartData(
                     pieTouchData: PieTouchData(
                         touchCallback: (FlTouchEvent event, pieTouchResponse) {

@@ -46,6 +46,7 @@ dependencies:
   intl: null
   image_picker:
   fk_toggle: ^0.1.4
+  pie_chart: ^5.3.2
 
 dev_dependencies:
   flutter_test:
