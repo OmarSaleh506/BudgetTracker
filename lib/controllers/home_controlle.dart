@@ -8,7 +8,7 @@ class HomeController extends GetxController {
   final Rx<double> totalIncome = 0.0.obs;
   final Rx<double> totalExpense = 0.0.obs;
   final Rx<double> totalBalance = 0.0.obs;
-  final Rx<DateTime> _selectedDate = DateTime.now().obs;
+  final Rx<double> totalSaved = 0.0.obs;
 
   final Rx<List<TransactionModel>> _myTransactions =
       Rx<List<TransactionModel>>([]);
@@ -20,7 +20,6 @@ class HomeController extends GetxController {
     getTransactions();
     super.onInit();
   }
-
 
   getTransactions() async {
     final List<TransactionModel> transactionsFromDB = [];
@@ -42,15 +41,20 @@ class HomeController extends GetxController {
     return await DatabaseProvider.updateTransaction(transactionModel);
   }
 
+
   getTotalAmount(List<TransactionModel> tm) {
+    if (tm.isEmpty) {
+      return;
+    }
     double total = 0;
     for (TransactionModel transactionModel in tm) {
-        if (transactionModel.type == 'Income') {
-          total += double.parse(transactionModel.amount!);
-        } else {
-          total -= double.parse(transactionModel.amount!);
-        }
+      if (transactionModel.type == 'Income') {
+        total += double.parse(transactionModel.amount!);
+      } else {
+        total -= double.parse(transactionModel.amount!);
+      }
     }
+
     getTransactions();
   }
 
@@ -61,6 +65,7 @@ class HomeController extends GetxController {
     double expense = 0;
     double income = 0;
     double balance = 0;
+    double saved = 0;
 
     for (TransactionModel transactionModel in tm) {
       if (transactionModel.type == 'Income') {
@@ -73,5 +78,7 @@ class HomeController extends GetxController {
     totalIncome.value = income;
     totalExpense.value = expense;
     totalBalance.value = balance;
+    saved = saved - balance;
+    totalSaved.value = saved ;
   }
 }

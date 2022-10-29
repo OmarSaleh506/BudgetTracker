@@ -13,7 +13,7 @@ class SecondPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-             SizedBox(
+            const SizedBox(
               height: 63,
             ),
             Image(image: AssetImage('images/second.png')),

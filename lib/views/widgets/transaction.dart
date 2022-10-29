@@ -7,9 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TransactionWidget extends StatelessWidget {
   final TransactionModel transactionModel;
+  final bool isIncome;
+  final String formatAmount;
   TransactionWidget({
     Key? key,
     required this.transactionModel,
+    required this.formatAmount,
+    required this.isIncome,
   }) : super(key: key);
 
 
@@ -21,9 +25,13 @@ class TransactionWidget extends StatelessWidget {
             elevation: 5,
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: Colors.green.withOpacity(.3),
+                backgroundColor: isIncome
+                  ? primaryColor
+                : expenseColor,
                 child: Icon(
-                  Icons.keyboard_double_arrow_up,
+                  isIncome
+                 ? Icons.keyboard_double_arrow_up
+                  : Icons.keyboard_double_arrow_down,
                   color: Colors.white,
                 ),
               ),
@@ -49,10 +57,10 @@ class TransactionWidget extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                  transactionModel.amount!,
+                  formatAmount,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        color: Color(0xff21AA93),
+                        color: isIncome ?primaryColor :expenseColor,
                         fontSize: 18),
                   )
                 ],
