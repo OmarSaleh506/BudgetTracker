@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:budget_tracker/constants/colors.dart';
 import 'package:intl/intl.dart';
-
 import '../widgets/chartIndicator.dart';
 import '../widgets/transaction.dart';
 import 'file.dart';
