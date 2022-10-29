@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../constants/goal_categories.dart';
 import '../../controllers/addTransactionController.dart';
+import '../../controllers/home_controlle.dart';
 import '../../models/transactionModel.dart';
 import '../../providers/db_provider.dart';
 import '../../views/widgets/customText.dart';
@@ -28,6 +29,7 @@ class _AddGoalsState extends State<AddGoals> {
         Get.put(AddTransactionController());
     final TextEditingController _nameController = TextEditingController();
     final TextEditingController _amountController = TextEditingController();
+    final String _transactionTypes = 'Saved';
 
     final DateTime now = DateTime.now();
 
@@ -40,12 +42,17 @@ class _AddGoalsState extends State<AddGoals> {
       } else {
         final TransactionModel transactionModel = TransactionModel(
             id: DateTime.now().toString(),
-            type: _addTransactionController.transactionType,
+            type: _addTransactionController.transactionType.isNotEmpty
+                ? _addTransactionController.transactionType
+                : _transactionTypes[0],
             name: _nameController.text,
             amount: _amountController.text,
             date: _addTransactionController.selectedDate.isNotEmpty
                 ? _addTransactionController.selectedDate
                 : DateFormat.yMd().format(now),
+            time: _addTransactionController.selectedTime.isNotEmpty
+                ? _addTransactionController.selectedTime
+                : DateFormat('hh:mm a').format(now),
             category: _addTransactionController.selectedCategory);
         await DatabaseProvider.insertTransaction(transactionModel);
         Get.to(HomeScreen());
@@ -200,7 +207,7 @@ class _AddGoalsState extends State<AddGoals> {
               height: 60,
               width: 311,
               child: ElevatedButton(
-                onPressed: () => Get.to(HomeScreen()),
+                onPressed: () => _addTransaction(),
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(primaryColor),
