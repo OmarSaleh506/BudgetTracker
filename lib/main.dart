@@ -1,5 +1,6 @@
 import 'package:budget_tracker/views/screens/first_page.dart';
 import 'package:budget_tracker/views/screens/home.dart';
+import 'package:budget_tracker/views/screens/second_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants/theme.dart';
