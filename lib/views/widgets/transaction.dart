@@ -22,7 +22,7 @@ class TransactionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return
         Card(
-            elevation: 5,
+            elevation: 0.4,
             child: ListTile(
               leading: CircleAvatar(
                 backgroundColor: isIncome
@@ -38,9 +38,10 @@ class TransactionWidget extends StatelessWidget {
               title:  Text(
                 transactionModel.name!,
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: textColor,
+                  letterSpacing: 2
                 ),
               ),
               subtitle: Text(
