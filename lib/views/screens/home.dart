@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             children: <Widget>[Header(), DashBord()],
           ),
           SizedBox(
-            height: 160,
+            height: 150,
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 210, 0),
@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          // Budget(),
+          Budget(),
           Goals(),
           AddGoal()
         ],
