@@ -4,15 +4,19 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:budget_tracker/constants/colors.dart';
 import 'package:intl/intl.dart';
+import '../../controllers/home_controlle.dart';
 import '../widgets/chartIndicator.dart';
 import '../widgets/transaction.dart';
 import 'file.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+
+
+  final HomeController _homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
+    print("this is ${_homeController.myTransactions.length}");
     int touchedIndex=1;
     return Scaffold(
         appBar: AppBar(title: Text("Dashboard",), backgroundColor: Colors.transparent, elevation: 0,),
@@ -85,8 +89,13 @@ class DashboardScreen extends StatelessWidget {
 
       ),
         Container(
-
-          child: TransactionWidget(),)
+          child: _homeController.myTransactions.length == 0?Text("No any students to show."): //show message if there is no any student
+          Column(  //or populate list to Column children if there is student data.
+            children: _homeController.myTransactions.map((transaction){
+              return TransactionWidget(transactionModel: transaction,);
+            }).toList(),
+          ),
+        ),
       ]),
     ),
 
