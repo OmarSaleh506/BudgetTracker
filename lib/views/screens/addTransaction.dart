@@ -56,7 +56,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 : DateFormat('hh:mm a').format(now),
             category: _addTransactionController.selectedCategory);
         await DatabaseProvider.insertTransaction(transactionModel);
-        Get.to(HomeScreen());
+        Get.to(() => HomeScreen());
         print("this is amount ${transactionModel.amount}");
         print("this is name ${transactionModel.name}");
         print("this is type ${transactionModel.type}");

@@ -20,7 +20,7 @@ class DatabaseProvider {
           version: _version, onCreate: (db, version) => db.execute('''
          CREATE TABLE $_tableName(
           id STRING PRIMARY KEY,
-          type TEXT, name TEXT, amount TEXT, 
+          type TEXT, name TEXT, amount TEXT, time TEXT,
           date TEXT, category TEXT)
         '''));
     } catch (e) {
