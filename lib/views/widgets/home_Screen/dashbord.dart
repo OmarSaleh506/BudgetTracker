@@ -47,12 +47,15 @@ class DashBord extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Text('SAR 10,200.89',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      letterSpacing: 3,
-                      color: primaryColor)),
+              child: Obx(
+                () => Text(
+                    'SAR ${_homeController.totalSaved.value.toStringAsFixed(2)}',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        letterSpacing: 3,
+                        color: primaryColor)),
+              ),
             )
           ],
         ),

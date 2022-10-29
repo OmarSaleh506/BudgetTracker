@@ -8,6 +8,8 @@ class HomeController extends GetxController {
   final Rx<double> totalIncome = 0.0.obs;
   final Rx<double> totalExpense = 0.0.obs;
   final Rx<double> totalBalance = 0.0.obs;
+  final Rx<double> totalSaved = 0.0.obs;
+
   // final Rx<double> _totalForSelectedDate = 0.0.obs;
   // final Rx<DateTime> _selectedDate = DateTime.now().obs;
 
@@ -19,12 +21,10 @@ class HomeController extends GetxController {
   // DateTime get selectedDate => _selectedDate.value;
 
   @override
-  
   void onInit() {
     super.onInit();
     getTransactions();
   }
-
 
   getTransactions() async {
     final List<TransactionModel> transactionsFromDB = [];
@@ -57,11 +57,11 @@ class HomeController extends GetxController {
     }
     double total = 0;
     for (TransactionModel transactionModel in tm) {
-        if (transactionModel.type == 'Income') {
-          total += double.parse(transactionModel.amount!);
-        } else {
-          total -= double.parse(transactionModel.amount!);
-        }
+      if (transactionModel.type == 'Income') {
+        total += double.parse(transactionModel.amount!);
+      } else {
+        total -= double.parse(transactionModel.amount!);
+      }
     }
     // _totalForSelectedDate.value = total;
   }
@@ -73,6 +73,7 @@ class HomeController extends GetxController {
     double expense = 0;
     double income = 0;
     double balance = 0;
+    double saved = 0;
 
     for (TransactionModel transactionModel in tm) {
       if (transactionModel.type == 'Income') {
@@ -85,5 +86,7 @@ class HomeController extends GetxController {
     totalIncome.value = income;
     totalExpense.value = expense;
     totalBalance.value = balance;
+    saved = saved - balance;
+    totalSaved.value = saved ;
   }
 }
