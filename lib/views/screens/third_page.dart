@@ -13,8 +13,8 @@ class ThirdPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const SizedBox(
-              height: 70,
+             SizedBox(
+              height: 67,
             ),
             Image(image: AssetImage('images/third.png')),
             const SizedBox(
