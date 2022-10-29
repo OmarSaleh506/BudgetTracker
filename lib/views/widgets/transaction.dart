@@ -6,11 +6,13 @@ import '../../models/transactionModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TransactionWidget extends StatelessWidget {
-  // final TransactionModel transactionModel;
-  // TransactionWidget({
-  //   Key? key,
-  //   required this.transactionModel,
-  // }) : super(key: key);
+  final TransactionModel transactionModel;
+  TransactionWidget({
+    Key? key,
+    required this.transactionModel,
+  }) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +27,8 @@ class TransactionWidget extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              title: const Text(
-                "Salary",
+              title:  Text(
+                transactionModel.name!,
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
@@ -34,7 +36,7 @@ class TransactionWidget extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                "Today",
+                transactionModel.date!,
                 style: TextStyle(
                   color: detailColor,
                   fontSize: 11,
@@ -47,7 +49,7 @@ class TransactionWidget extends StatelessWidget {
                     height: 20,
                   ),
                   Text(
-                    "100SR",
+                  transactionModel.amount!,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color(0xff21AA93),
