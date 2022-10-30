@@ -85,6 +85,7 @@ class ChartController extends GetxController {
     double totalgroceries=0;
     double totalothers=0;
     for (TransactionModel transactionModel in tm) {
+
       if (transactionModel.category == 'Internet') {
         totalInternt += double.parse(transactionModel.amount!);
         totalInternts.value=totalInternt;
@@ -92,11 +93,13 @@ class ChartController extends GetxController {
         totalhealth += double.parse(transactionModel.amount!);
         totalHealth.value=totalhealth;
       }else if (transactionModel.category == 'Transportation'){
-        totalhealth += double.parse(transactionModel.amount!);
+        totaltranspo += double.parse(transactionModel.amount!);
         totaltrans.value=totaltranspo;
       } else if(transactionModel.category== 'Grocery'){
+        totalgroceries += double.parse(transactionModel.amount!);
         totalgrocery.value=totalgroceries;
       }else if(transactionModel.category== 'other'){
+        totalothers += double.parse(transactionModel.amount!);
         totalother.value=totalothers;
       }
 

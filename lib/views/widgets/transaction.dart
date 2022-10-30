@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../models/transactionModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../providers/db_provider.dart';
+
 class TransactionWidget extends StatelessWidget {
   final TransactionModel transactionModel;
   final bool isIncome;
@@ -51,21 +53,26 @@ class TransactionWidget extends StatelessWidget {
                   fontSize: 11,
                 ),
               ),
-              trailing: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              trailing:SizedBox(height: 100,width: 120, child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(
-                    height: 20,
-                  ),
+
+
                   Text(
-                  formatAmount,
+                    formatAmount,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: isIncome ?primaryColor :expenseColor,
                         fontSize: 18),
-                  )
+                  ),
+                  IconButton(onPressed: () async {
+                    await DatabaseProvider.deleteTransaction(transactionModel.id!);
+                    // Get.back();
+                  }, icon: Icon(
+                    Icons.delete,
+                    color: expenseColor,),),
                 ],
-              ),
+              ),)
             ));
   }
 }

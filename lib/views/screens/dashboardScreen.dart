@@ -125,9 +125,11 @@ class DashboardScreen extends StatelessWidget {
 
                       ),
                       Container(
-                        child: _homeController.myTransactions.length == 0?Text("No Transactions to show."): //show message if there is no any student
-                        Column(  //or populate list to Column children if there is student data.
-                          children: _homeController.myTransactions.map((transaction){
+                        child: _homeController.myTransactions.length == 0?Text("No Transactions to show."): //show message if there is no any transaction
+                        Column(  //or populate list to Column children if there is transaction data.
+                          children:
+
+                          _homeController.myTransactions.map((transaction){
                             final text = transaction.amount;
                             final bool isIncome = transaction.type == 'Income' ? true : false;
                             final formatAmount = isIncome ? '+ $text' : '- $text';
