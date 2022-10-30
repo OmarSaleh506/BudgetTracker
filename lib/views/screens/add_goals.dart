@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../constants/goal_categories.dart';
-import '../../controllers/addTransactionController.dart';
-import '../../controllers/home_controlle.dart';
-import '../../models/transactionModel.dart';
-import '../../providers/db_provider.dart';
+import '../../controllers/addTrans_goal_controller.dart';
+import '../../models/goalModel.dart';
+import '../../providers/db_provider_goals.dart';
 import '../../views/widgets/customText.dart';
 import '../../constants/colors.dart';
 import '../widgets/customTextField.dart';
-import 'package:fk_toggle/fk_toggle.dart';
 
 import '../widgets/add_goals/input_field.dart';
 
@@ -25,28 +23,26 @@ class _AddGoalsState extends State<AddGoals> {
   List<bool> isCardEnabled = [];
   @override
   Widget build(BuildContext context) {
-    final AddTransactionController _addTransactionController =
-        Get.put(AddTransactionController());
-    final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _amountController = TextEditingController();
-    final String _transactionTypes = 'Saved';
+    final AddGoalController _addTransactionController =
+        Get.put(AddGoalController());
+    final TextEditingController _goalAmountController = TextEditingController();
+    final TextEditingController _savedAmountController =
+        TextEditingController();
 
     final DateTime now = DateTime.now();
 
     _addTransaction() async {
-      if (_nameController.text.isEmpty || _amountController.text.isEmpty) {
+      if (_goalAmountController.text.isEmpty ||
+          _goalAmountController.text.isEmpty) {
         Get.snackbar(
           'Required',
           'All fields are requried',
         );
       } else {
-        final TransactionModel transactionModel = TransactionModel(
+        final GoalModel transactionModel = GoalModel(
             id: DateTime.now().toString(),
-            type: _addTransactionController.transactionType.isNotEmpty
-                ? _addTransactionController.transactionType
-                : _transactionTypes[0],
-            name: _nameController.text,
-            amount: _amountController.text,
+            goalAmount: _goalAmountController.text,
+            savedAmount: _savedAmountController.text,
             date: _addTransactionController.selectedDate.isNotEmpty
                 ? _addTransactionController.selectedDate
                 : DateFormat.yMd().format(now),
@@ -54,14 +50,10 @@ class _AddGoalsState extends State<AddGoals> {
                 ? _addTransactionController.selectedTime
                 : DateFormat('hh:mm a').format(now),
             category: _addTransactionController.selectedCategory);
-        await DatabaseProvider.insertTransaction(transactionModel);
+        await DatabaseProviderGoals.insertGoal(transactionModel);
         Get.to(HomeScreen());
       }
     }
-
-    final OnSelected selected = ((index, instance) {
-      _addTransactionController.changeTransactionType((instance.labels[index]));
-    });
 
     _getTimeFromUser(
       BuildContext context,
@@ -148,7 +140,7 @@ class _AddGoalsState extends State<AddGoals> {
                   }),
             ),
             CustomTextField(
-              controller: _amountController,
+              controller: _goalAmountController,
               text: 'Amount',
               hint: '200,000...',
             ),
@@ -156,7 +148,7 @@ class _AddGoalsState extends State<AddGoals> {
               height: 20,
             ),
             CustomTextField(
-              controller: _nameController,
+              controller: _savedAmountController,
               text: 'Saved',
               hint: '50...',
             ),

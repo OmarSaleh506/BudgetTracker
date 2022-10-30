@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
+import '../../../controllers/add_goal_controller.dart';
 
 class Goals extends StatelessWidget {
-  const Goals({
+  Goals({
     Key? key,
   }) : super(key: key);
+  final GoalsController _goalController = Get.put(GoalsController());
 
   @override
   Widget build(BuildContext context) {
@@ -132,14 +135,16 @@ class Goals extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'SAR 17,000 / 310.000',
-                            style: TextStyle(
-                                color: detailColor,
-                                fontWeight: FontWeight.w400),
+                          Obx(
+                            (() => Text(
+                                  'SAR ${_goalController.totalSaved} / ${_goalController.totalGoalAmount}',
+                                  style: TextStyle(
+                                      color: detailColor,
+                                      fontWeight: FontWeight.w400),
+                                )),
                           ),
                           Text(
-                            'SAR 253,000 Lift',
+                            'SAR ${_goalController.totalGoalAmount} Lift',
                             style: TextStyle(
                               color: detailColor,
                               fontWeight: FontWeight.w600,
