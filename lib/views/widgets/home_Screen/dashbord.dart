@@ -15,6 +15,10 @@ class DashBord extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: lightModeScaffoldBgCle,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.white70, width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: SizedBox(
         height: 170,
         width: 327,

@@ -21,6 +21,10 @@ class Goals extends StatelessWidget {
           height: 10,
         ),
         Card(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.white70, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: Container(
             width: 354,
             height: 144,
@@ -58,21 +62,22 @@ class Goals extends StatelessWidget {
                             ),
                             Text(
                               '% 12',
-                              style: TextStyle(color: detailColor),
+                              style: TextStyle(
+                                  color: detailColor,
+                                  fontWeight: FontWeight.w700),
                             ),
                             SizedBox(
                               width: 6,
                             ),
                             Expanded(
                               child: CircleAvatar(
-                                radius: 20,
-                                backgroundColor: Color(0xff1C6DD0),
-                                child: Icon(
-                                  Icons.house,
-                                  size: 36.0,
-                                  color: lightModeScaffoldBgCle,
-                                ),
-                              ),
+                                  radius: 20,
+                                  backgroundColor: Color(0xff1C6DD0),
+                                  child: Image(
+                                    image: AssetImage(
+                                        'lib/constants/goalsIcons/house.png'),
+                                    color: Colors.white,
+                                  )),
                             )
                           ],
                         ),
@@ -87,7 +92,7 @@ class Goals extends StatelessWidget {
                         style: TextStyle(color: detailColor),
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 15,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -136,8 +141,10 @@ class Goals extends StatelessWidget {
                           Text(
                             'SAR 253,000 Lift',
                             style: TextStyle(
-                                color: detailColor,
-                                fontWeight: FontWeight.w700),
+                              color: detailColor,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1,
+                            ),
                           )
                         ],
                       )

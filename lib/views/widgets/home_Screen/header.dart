@@ -27,8 +27,8 @@ class Header extends StatelessWidget {
                     'Welcome',
                     style: TextStyle(
                         color: lightModeScaffoldBgCle,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.5,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 3,
                         fontSize: 20),
                   ),
                   Text(
@@ -41,18 +41,17 @@ class Header extends StatelessWidget {
                 ]),
             Row(
               children: [
-                IconButton(
-                  color: lightModeScaffoldBgCle,
-                  iconSize: 45,
+                TextButton(
                   onPressed: () {
                     Get.to(DashboardScreen());
                   },
-                  icon: const Icon(Icons.bar_chart),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: Image.asset('images/chart.png'),
+                  ),
                 ),
-                IconButton(
-                  color: lightModeScaffoldBgCle,
-                  iconSize: 25,
-                  icon: const Icon(Icons.add_alert),
+                TextButton(
+                  child: Image.asset('images/Vector.png'),
                   onPressed: () {},
                 ),
               ],
