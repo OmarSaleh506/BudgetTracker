@@ -34,16 +34,16 @@ class DatabaseProviderGoals {
     }
   }
 
-  static Future<int?> insertGoal(GoalModel goals) async {
-    return await _db?.insert(_tableName, goals.toMap());
+  static Future<int> insertGoal(GoalModel goals) async {
+    return await _db!.insert(_tableName, goals.toMap());
   }
 
-  static Future<int?> deleteGoal(String id) async {
-    return await _db?.delete(_tableName, where: 'id=?', whereArgs: [id]);
+  static Future<int> deleteGoal(String id) async {
+    return await _db!.delete(_tableName, where: 'id=?', whereArgs: [id]);
   }
 
-  static Future<int?> updateGoal(GoalModel tm) async {
-    return await _db?.rawUpdate('''
+  static Future<int> updateGoal(GoalModel tm) async {
+    return await _db!.rawUpdate('''
       UPDATE $_tableName 
       goalAmount = ?,
       savedAmount = ?,

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'constants/theme.dart';
 import '../../providers/db_provider.dart';
+import 'providers/db_provider_goals.dart';
 import 'views/screens/dashboardScreen.dart';
 
 void main() async {
@@ -14,12 +15,12 @@ void main() async {
   // await ScreenUtil.ensureScreenSize();
 
   await DatabaseProvider.initDb();
-  runApp( MyApp());
+  await DatabaseProviderGoals.initDb();
+
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
