@@ -3,9 +3,8 @@ import '../models/goalModel.dart';
 import '../providers/db_provider_goals.dart';
 
 class GoalsController extends GetxController {
-  final Rx<double> totalGoalAmount = 20000.0.obs;
-  final Rx<double> totalSaved = 100.0.obs;
-
+  final Rx<double> totalGoalAmount = 0.0.obs;
+  final Rx<double> totalSaved = 0.0.obs;
 
   final Rx<double> totalBalance = 0.0.obs;
 
@@ -31,11 +30,11 @@ class GoalsController extends GetxController {
     tracker(transactionsFromDB);
   }
 
-  Future<int?> deleteTransaction(String id) async {
+  Future<int> deleteTransaction(String id) async {
     return await DatabaseProviderGoals.deleteGoal(id);
   }
 
-  Future<int?> updateTransaction(GoalModel transactionModel) async {
+  Future<int> updateTransaction(GoalModel transactionModel) async {
     return await DatabaseProviderGoals.updateGoal(transactionModel);
   }
 
@@ -45,9 +44,7 @@ class GoalsController extends GetxController {
     }
     double total = 0;
     for (GoalModel transactionGoalModel in gm) {
-      
-        total += double.parse(transactionGoalModel.savedAmount!);
-   
+      total += double.parse(transactionGoalModel.savedAmount!);
     }
 
     getTransactions();
@@ -62,8 +59,7 @@ class GoalsController extends GetxController {
     double balance = 0;
 
     for (GoalModel transactionGoalModel in gm) {
-     
-        saved += double.parse(transactionGoalModel.goalAmount!);
+      saved += double.parse(transactionGoalModel.goalAmount!);
     }
     saved = 100;
     goalAmount = goalAmount - saved;
