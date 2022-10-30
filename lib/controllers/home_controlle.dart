@@ -86,4 +86,40 @@ class HomeController extends GetxController {
     totalExpense.value = expense;
     totalBalance.value = balance;
   }
+
+  getTotalCategoryInter(List<TransactionModel> tm) {
+    if (tm.isEmpty) {
+      return;
+    }
+    double total = 0;
+    for (TransactionModel transactionModel in tm) {
+      if (transactionModel.category == 'internet') {
+        total += double.parse(transactionModel.amount!);
+      } else {
+        total -= double.parse(transactionModel.amount!);
+      }
+    }
+    tracker2(List<TransactionModel> tm) {
+      if (tm.isEmpty) {
+        return;
+      }
+      double expense = 0;
+      double income = 0;
+      String Internet="";
+
+
+      for (TransactionModel transactionModel in tm) {
+        if (transactionModel.category == 'Internet') {
+          income += double.parse(transactionModel.amount!);
+        } else {
+          expense += double.parse(transactionModel.amount!);
+        }
+      }
+
+
+      totalIncome.value = income;
+      totalExpense.value = expense;
+    }
+    // _totalForSelectedDate.value = total;
+  }
 }

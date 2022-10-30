@@ -1,4 +1,5 @@
 
+import 'package:budget_tracker/controllers/chart_controller.dart';
 import 'package:budget_tracker/models/transactionModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,8 @@ class DashboardScreen extends StatelessWidget {
 
 
   final HomeController _homeController = Get.put(HomeController());
+  final ChartController _chartController=Get.put(ChartController());
+
 
 
 
@@ -26,13 +29,8 @@ class DashboardScreen extends StatelessWidget {
   // }
 
 
-  Map<String, double> dataMap = {
-    "Health & Care": 18.47,
-    "Transportation": 17.70,
-    "Internet": 4.25,
-    "Grocery": 3.51,
-    "Other": 2.83,
-  };
+
+
 
   List<Color> colorList = [
     const Color(0xff1E9984),
@@ -60,6 +58,17 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print("this is ${_homeController.myTransactions.length}");
+    print("internet ${ _chartController.totalInternts}");
+    print("Health ${ _chartController.totalHealth}");
+
+    Map<String, double> dataMap = {
+      "Health & Care": _chartController.totalHealth.value,
+      "Transportation": _chartController.totaltrans.value,
+      "Internet": _chartController.totalInternts.value,
+      "Grocery": _chartController.totalgrocery.value,
+      "Other": _chartController.totalother.value,
+    };
+
 
     int touchedIndex=1;
     return Obx(() => Scaffold(
