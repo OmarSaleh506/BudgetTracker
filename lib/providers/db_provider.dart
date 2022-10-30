@@ -65,4 +65,9 @@ class DatabaseProvider {
   static Future<List<Map<String, dynamic>>> queryTransaction() async {
     return await _db!.query(_tableName);
   }
+
+  _qCategoryInter() async{
+    List<Map> result = await _db!.rawQuery('SELECT amount FROM transactions WHERE category=?', ['Internet']);
+  }
+
 }

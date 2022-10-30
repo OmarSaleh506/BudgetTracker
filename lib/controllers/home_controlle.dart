@@ -81,4 +81,6 @@ class HomeController extends GetxController {
     saved = saved - balance;
     totalSaved.value = saved ;
   }
+
 }
+
