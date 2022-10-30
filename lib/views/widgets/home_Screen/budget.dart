@@ -21,6 +21,10 @@ class Budget extends StatelessWidget {
           height: 10,
         ),
         Card(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.white70, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: Container(
             width: 357,
             height: 170,
@@ -49,9 +53,8 @@ class Budget extends StatelessWidget {
                         width: 5,
                       ),
                       Text('Of 3,000',
-                          style: TextStyle(
-                            color: detailColor,
-                          ))
+                          style:
+                              TextStyle(color: detailColor, letterSpacing: 1))
                     ],
                   ),
                   Row(
@@ -120,7 +123,8 @@ class Budget extends StatelessWidget {
                             ),
                             const Text(
                               'Spending',
-                              style: TextStyle(color: detailColor),
+                              style: TextStyle(
+                                  color: detailColor, letterSpacing: 1),
                             )
                           ],
                         ),
@@ -145,7 +149,8 @@ class Budget extends StatelessWidget {
                             ),
                             const Text(
                               'Saving',
-                              style: TextStyle(color: detailColor),
+                              style: TextStyle(
+                                  color: detailColor, letterSpacing: 1),
                             )
                           ],
                         ),

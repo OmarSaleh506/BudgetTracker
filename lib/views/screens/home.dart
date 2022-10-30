@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
             height: 150,
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 210, 0),
+            padding: EdgeInsets.fromLTRB(0, 0, 210, 5),
             child: Text(
               'Current Month`s Overview',
               style: TextStyle(
