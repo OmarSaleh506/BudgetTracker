@@ -25,13 +25,15 @@ class _AddGoalsState extends State<AddGoals> {
   Widget build(BuildContext context) {
     final AddGoalController _addTransactionController =
         Get.put(AddGoalController());
-    final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _amountController = TextEditingController();
+    final TextEditingController _goalAmountController = TextEditingController();
+    final TextEditingController _savedAmountController =
+        TextEditingController();
 
     final DateTime now = DateTime.now();
 
     _addTransaction() async {
-      if (_nameController.text.isEmpty || _amountController.text.isEmpty) {
+      if (_goalAmountController.text.isEmpty ||
+          _goalAmountController.text.isEmpty) {
         Get.snackbar(
           'Required',
           'All fields are requried',
@@ -39,8 +41,8 @@ class _AddGoalsState extends State<AddGoals> {
       } else {
         final GoalModel transactionModel = GoalModel(
             id: DateTime.now().toString(),
-            goalAmount: _amountController.text,
-            savedAmount: _amountController.text,
+            goalAmount: _goalAmountController.text,
+            savedAmount: _savedAmountController.text,
             date: _addTransactionController.selectedDate.isNotEmpty
                 ? _addTransactionController.selectedDate
                 : DateFormat.yMd().format(now),
@@ -138,7 +140,7 @@ class _AddGoalsState extends State<AddGoals> {
                   }),
             ),
             CustomTextField(
-              controller: _amountController,
+              controller: _goalAmountController,
               text: 'Amount',
               hint: '200,000...',
             ),
@@ -146,7 +148,7 @@ class _AddGoalsState extends State<AddGoals> {
               height: 20,
             ),
             CustomTextField(
-              controller: _nameController,
+              controller: _savedAmountController,
               text: 'Saved',
               hint: '50...',
             ),
