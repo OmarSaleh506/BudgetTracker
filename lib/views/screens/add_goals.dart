@@ -52,6 +52,12 @@ class _AddGoalsState extends State<AddGoals> {
             category: _addTransactionController.selectedCategory);
         await DatabaseProviderGoals.insertGoal(transactionModel);
         Get.to(HomeScreen());
+        print("this is goal amount ${transactionModel.goalAmount}");
+        print("this is saved amount ${transactionModel.savedAmount}");
+        print("this is category ${transactionModel.category}");
+        print("this is date ${transactionModel.date}");
+        print("this is time ${transactionModel.time}");
+
       }
     }
 

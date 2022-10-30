@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
+import '../../../controllers/add_goal_controller.dart';
 import '../../../controllers/home_controlle.dart';
 
 class DashBord extends StatelessWidget {
@@ -10,7 +11,7 @@ class DashBord extends StatelessWidget {
   }) : super(key: key);
 
   final HomeController _homeController = Get.put(HomeController());
-
+  final GoalsController _goalsController = Get.put(GoalsController());
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -53,7 +54,7 @@ class DashBord extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Obx(
                 () => Text(
-                    'SAR ${_homeController.totalSaved.value.toStringAsFixed(2)}',
+                    'SAR ${_goalsController.totalSaved.value.toStringAsFixed(2)}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,

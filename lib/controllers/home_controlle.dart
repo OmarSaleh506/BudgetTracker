@@ -8,7 +8,6 @@ class HomeController extends GetxController {
   final Rx<double> totalIncome = 0.0.obs;
   final Rx<double> totalExpense = 0.0.obs;
   final Rx<double> totalBalance = 0.0.obs;
-  final Rx<double> totalSaved = 0.0.obs;
 
   final Rx<List<TransactionModel>> _myTransactions =
       Rx<List<TransactionModel>>([]);
@@ -65,7 +64,6 @@ class HomeController extends GetxController {
     double expense = 0;
     double income = 0;
     double balance = 0;
-    double saved = 0;
 
     for (TransactionModel transactionModel in tm) {
       if (transactionModel.type == 'Income') {
@@ -78,8 +76,7 @@ class HomeController extends GetxController {
     totalIncome.value = income;
     totalExpense.value = expense;
     totalBalance.value = balance;
-    saved = saved - balance;
-    totalSaved.value = saved ;
+   
   }
 
 }

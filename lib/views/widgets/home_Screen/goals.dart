@@ -137,14 +137,14 @@ class Goals extends StatelessWidget {
                         children: [
                           Obx(
                             (() => Text(
-                                  'SAR ${_goalController.totalSaved} / ${_goalController.totalGoalAmount}',
+                                  'SAR ${_goalController.totalSaved.value} / ${_goalController.totalGoalAmount.value}',
                                   style: TextStyle(
                                       color: detailColor,
                                       fontWeight: FontWeight.w400),
                                 )),
                           ),
                           Text(
-                            'SAR ${_goalController.totalGoalAmount} Lift',
+                            'SAR ${_goalController.totalGoalAmount.value} Left',
                             style: TextStyle(
                               color: detailColor,
                               fontWeight: FontWeight.w600,
