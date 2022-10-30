@@ -19,19 +19,6 @@ class DashboardScreen extends StatelessWidget {
   final ChartController _chartController=Get.put(ChartController());
 
 
-
-
-
-
-
-  // double totalSum (int listId){
-  //   return _homeController.myTransactions.where((element) => element.amount== listId).fold(0.0, (previousValue, element) => previousValue + element.amount);
-  // }
-
-
-
-
-
   List<Color> colorList = [
     const Color(0xff1E9984),
     const Color(0xff63C3B3),
@@ -103,36 +90,9 @@ class DashboardScreen extends StatelessWidget {
                     ),
 
                   ),
-                  // PieChart(
-                  //     PieChartData(
-                  //   pieTouchData: PieTouchData(
-                  //       touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                  //     if (!event.isInterestedForInteractions ||
-                  //         pieTouchResponse == null ||
-                  //         pieTouchResponse.touchedSection == null) {
-                  //       touchedIndex = -1;
-                  //       return;
-                  //     }
-                  //     touchedIndex =
-                  //         pieTouchResponse.touchedSection!.touchedSectionIndex;
-                  //     (context as Element).markNeedsBuild();
-                  //   }
-                  //   ),
-                  //   centerSpaceRadius: 0,
-                  //   sectionsSpace: 2,
-                  //   sections: getSection(touchedIndex),
-                  // )),
+            
 
               ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: const [
-              //     Padding(
-              //       padding: EdgeInsets.all(1),
-              //       child: IndicatorsWidget(),
-              //     ),
-              //   ],
-              // ),
 
               Container(
                 child: Column(
@@ -182,7 +142,6 @@ class DashboardScreen extends StatelessWidget {
 
 
 
-
             ]))) ;
-  }
-}
+      }
+      }

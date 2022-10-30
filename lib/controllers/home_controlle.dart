@@ -8,23 +8,18 @@ class HomeController extends GetxController {
   final Rx<double> totalIncome = 0.0.obs;
   final Rx<double> totalExpense = 0.0.obs;
   final Rx<double> totalBalance = 0.0.obs;
-  // final Rx<double> _totalForSelectedDate = 0.0.obs;
-  // final Rx<DateTime> _selectedDate = DateTime.now().obs;
+  final Rx<double> totalSaved = 0.0.obs;
 
   final Rx<List<TransactionModel>> _myTransactions =
       Rx<List<TransactionModel>>([]);
 
   List<TransactionModel> get myTransactions => _myTransactions.value;
-  // double get totalForSelectedDate => _totalForSelectedDate.value;
-  // DateTime get selectedDate => _selectedDate.value;
 
   @override
-  
   void onInit() {
-    super.onInit();
     getTransactions();
+    super.onInit();
   }
-
 
   getTransactions() async {
     final List<TransactionModel> transactionsFromDB = [];
@@ -46,10 +41,6 @@ class HomeController extends GetxController {
     return await DatabaseProvider.updateTransaction(transactionModel);
   }
 
-  // updateSelectedDate(DateTime date) {
-  //   _selectedDate.value = date;
-  //   getTransactions();
-  // }
 
   getTotalAmount(List<TransactionModel> tm) {
     if (tm.isEmpty) {
@@ -57,13 +48,14 @@ class HomeController extends GetxController {
     }
     double total = 0;
     for (TransactionModel transactionModel in tm) {
-        if (transactionModel.type == 'Income') {
-          total += double.parse(transactionModel.amount!);
-        } else {
-          total -= double.parse(transactionModel.amount!);
-        }
+      if (transactionModel.type == 'Income') {
+        total += double.parse(transactionModel.amount!);
+      } else {
+        total -= double.parse(transactionModel.amount!);
+      }
     }
-    // _totalForSelectedDate.value = total;
+
+    getTransactions();
   }
 
   tracker(List<TransactionModel> tm) {
@@ -73,6 +65,7 @@ class HomeController extends GetxController {
     double expense = 0;
     double income = 0;
     double balance = 0;
+    double saved = 0;
 
     for (TransactionModel transactionModel in tm) {
       if (transactionModel.type == 'Income') {
@@ -85,41 +78,9 @@ class HomeController extends GetxController {
     totalIncome.value = income;
     totalExpense.value = expense;
     totalBalance.value = balance;
+    saved = saved - balance;
+    totalSaved.value = saved ;
   }
 
-  getTotalCategoryInter(List<TransactionModel> tm) {
-    if (tm.isEmpty) {
-      return;
-    }
-    double total = 0;
-    for (TransactionModel transactionModel in tm) {
-      if (transactionModel.category == 'internet') {
-        total += double.parse(transactionModel.amount!);
-      } else {
-        total -= double.parse(transactionModel.amount!);
-      }
-    }
-    tracker2(List<TransactionModel> tm) {
-      if (tm.isEmpty) {
-        return;
-      }
-      double expense = 0;
-      double income = 0;
-      String Internet="";
-
-
-      for (TransactionModel transactionModel in tm) {
-        if (transactionModel.category == 'Internet') {
-          income += double.parse(transactionModel.amount!);
-        } else {
-          expense += double.parse(transactionModel.amount!);
-        }
-      }
-
-
-      totalIncome.value = income;
-      totalExpense.value = expense;
-    }
-    // _totalForSelectedDate.value = total;
-  }
 }
+

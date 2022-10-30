@@ -27,11 +27,16 @@ class AddGoal extends StatelessWidget {
             },
             icon: Icon(
               Icons.add,
-              size: 15,
+              size: 19,
+              color: Color(0xff797979),
             ),
             label: Text(
               'Add Goal',
-              style: TextStyle(fontSize: 13),
+              style: TextStyle(
+                fontSize: 13,
+                color: Color(0xff797979),
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
         ),

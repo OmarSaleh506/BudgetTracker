@@ -15,6 +15,10 @@ class DashBord extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: lightModeScaffoldBgCle,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.white70, width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: SizedBox(
         height: 170,
         width: 327,
@@ -47,12 +51,15 @@ class DashBord extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Text('SAR 10,200.89',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      letterSpacing: 3,
-                      color: primaryColor)),
+              child: Obx(
+                () => Text(
+                    'SAR ${_homeController.totalSaved.value.toStringAsFixed(2)}',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        letterSpacing: 3,
+                        color: primaryColor)),
+              ),
             )
           ],
         ),
