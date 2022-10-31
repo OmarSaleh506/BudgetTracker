@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:budget_tracker/views/widgets/home_Screen/barchart.dart';
 
 import '../models/transactionModel.dart';
 import '../providers/db_provider.dart';
@@ -12,9 +15,15 @@ class ChartController extends GetxController {
   final Rx<double> totaltrans=0.0.obs;
   final Rx<double> totalgrocery=0.0.obs;
   final Rx<double> totalother=0.0.obs;
+  final Rx<double> num=0.0.obs;
+
+  var lista= <Data>[].obs;
+
 
 
   final Rx<double> totalexpense=0.0.obs;
+
+
 
   final Rx<List<TransactionModel>> _myTransactions =
   Rx<List<TransactionModel>>([]);
@@ -34,7 +43,7 @@ class ChartController extends GetxController {
     }
     double total = 0;
     for (TransactionModel transactionModel in tm) {
-      if (transactionModel.category == 'Internet') {
+      if (transactionModel.category == 'Income') {
         total += double.parse(transactionModel.amount!);
       } else {
         total -= double.parse(transactionModel.amount!);
@@ -102,6 +111,16 @@ class ChartController extends GetxController {
         totalothers += double.parse(transactionModel.amount!);
         totalother.value=totalothers;
       }
+
+      List chartData = [
+        Data(units: totalgrocery.value, color: const Color(0xFF8A5426)),
+        Data(units: totalInternts.value, color: const Color(0xFF00BCD5)),
+        Data(units: totaltrans.value, color: const Color(0xFF7B8700)),
+        Data(units:totalother.value, color: const Color(0xFFDD8B11)),
+        Data(units: totalHealth.value, color: const Color(0xFF673BB7)),
+        Data(units: 0, color: const Color(
+            0xFFC7C3CE)),
+      ].obs;
 
 
     }
