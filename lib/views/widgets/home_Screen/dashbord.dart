@@ -54,7 +54,7 @@ class DashBord extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Obx(
                 () => Text(
-                    'SAR ${_goalsController.totalSaved.value.toStringAsFixed(2)}',
+                    'SAR ${_goalsController.totalSaved.toStringAsFixed(2)}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,

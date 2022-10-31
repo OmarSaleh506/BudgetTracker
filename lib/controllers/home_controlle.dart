@@ -3,11 +3,16 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import '../models/transactionModel.dart';
 import '../providers/db_provider.dart';
+import 'add_goal_controller.dart';
+//saved += double.parse(saved.toString());
+
+final GoalsController _goalController = Get.put(GoalsController());
 
 class HomeController extends GetxController {
   final Rx<double> totalIncome = 0.0.obs;
   final Rx<double> totalExpense = 0.0.obs;
   final Rx<double> totalBalance = 0.0.obs;
+  final Rx<double> totalSaved = 0.0.obs;
 
   final Rx<List<TransactionModel>> _myTransactions =
       Rx<List<TransactionModel>>([]);
@@ -40,7 +45,6 @@ class HomeController extends GetxController {
     return await DatabaseProvider.updateTransaction(transactionModel);
   }
 
-
   getTotalAmount(List<TransactionModel> tm) {
     if (tm.isEmpty) {
       return;
@@ -64,6 +68,7 @@ class HomeController extends GetxController {
     double expense = 0;
     double income = 0;
     double balance = 0;
+    double saved = _goalController.totalSaved.value;
 
     for (TransactionModel transactionModel in tm) {
       if (transactionModel.type == 'Income') {
@@ -72,12 +77,10 @@ class HomeController extends GetxController {
         expense += double.parse(transactionModel.amount!);
       }
     }
+
     balance = income - expense;
     totalIncome.value = income;
     totalExpense.value = expense;
-    totalBalance.value = balance;
-   
+    totalBalance.value = balance - saved;
   }
-
 }
-

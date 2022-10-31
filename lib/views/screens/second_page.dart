@@ -21,7 +21,7 @@ class SecondPage extends StatelessWidget {
               height: 30,
             ),
             const Text(
-              'Set The Bigger Picture of Your Money',
+              'شاهد الصورة الأكبر لأموالك',
               style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
@@ -34,12 +34,12 @@ class SecondPage extends StatelessWidget {
               width: 283,
               height: 84,
               child: Text(
-                "Get a clear view fo your finances, with easy-to-read summarise and insights. You can see your cridit score, account balances,spending, and more - all in one place",
+                "احصل على رؤية واضحة لأموالك. مع تقارير ورؤى سهلة القراءة يمكنك رؤية درجة الائتمان وارصدة الحسابات والأنفاق والمزيد- كل ذالك في مكان واحد",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(160, 43, 0, 0),
+              padding: const EdgeInsets.fromLTRB(175, 40, 0, 0),
               child: Stack(
                 children: [
                   Image(
