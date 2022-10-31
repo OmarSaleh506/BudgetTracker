@@ -1,5 +1,6 @@
 import 'package:budget_tracker/views/screens/addTransaction.dart';
 import 'package:budget_tracker/views/screens/add_goals.dart';
+import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

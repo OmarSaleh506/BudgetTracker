@@ -72,10 +72,10 @@ class Budget extends StatelessWidget {
                        ),
                      ),
                    ),
-                    Obx(() => Text("${_chartController.totalexpense.value}")),
+                    SizedBox(height: 3),
 
                     Padding(
-                      padding: const EdgeInsets.only(left: 100),
+                      padding: const EdgeInsets.only(left: 80),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
