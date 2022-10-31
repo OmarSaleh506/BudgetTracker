@@ -31,7 +31,7 @@ class _AddGoalsState extends State<AddGoals> {
 
     final DateTime now = DateTime.now();
 
-    _addTransaction() async {
+    _addGoalsTransaction() async {
       if (_goalAmountController.text.isEmpty ||
           _goalAmountController.text.isEmpty) {
         Get.snackbar(
@@ -42,6 +42,7 @@ class _AddGoalsState extends State<AddGoals> {
         final GoalModel transactionModel = GoalModel(
             id: DateTime.now().toString(),
             goalAmount: _goalAmountController.text,
+            goalAmountLeft: '0.0',
             savedAmount: _savedAmountController.text,
             date: _addTransactionController.selectedDate.isNotEmpty
                 ? _addTransactionController.selectedDate
@@ -57,7 +58,6 @@ class _AddGoalsState extends State<AddGoals> {
         print("this is category ${transactionModel.category}");
         print("this is date ${transactionModel.date}");
         print("this is time ${transactionModel.time}");
-
       }
     }
 
@@ -205,7 +205,12 @@ class _AddGoalsState extends State<AddGoals> {
               height: 60,
               width: 311,
               child: ElevatedButton(
-                onPressed: () => _addTransaction(),
+                onPressed: () async {
+                  await DatabaseProviderGoals();
+                  _addGoalsTransaction();
+
+                  Get.back();
+                },
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(primaryColor),

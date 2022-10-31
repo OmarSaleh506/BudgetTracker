@@ -144,7 +144,7 @@ class Goals extends StatelessWidget {
                                 )),
                           ),
                           Text(
-                            'SAR ${_goalController.totalGoalAmount.value} Left',
+                            'SAR ${_goalController.totalGoalAmountLeft.value} Left',
                             style: TextStyle(
                               color: detailColor,
                               fontWeight: FontWeight.w600,
