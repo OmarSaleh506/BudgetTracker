@@ -13,34 +13,43 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Stack(
-            alignment: Alignment(0, 54),
-            children: <Widget>[Header(), DashBord()],
-          ),
-          SizedBox(
-            height: 150,
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 210, 5),
-            child: Text(
-              'Current Month`s Overview',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                  color: detailColor),
-            ),
-          ),
-          CurrentOverview(),
-          const SizedBox(
-            height: 20,
-          ),
-          Budget(),
-          Goals(),
-          AddGoal()
-        ],
-      ),
+      resizeToAvoidBottomInset: false,
+      body:
+
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child:
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Stack(
+                    alignment: Alignment(0, 54),
+                    children: <Widget>[Header(), DashBord()],
+                  ),
+                  SizedBox(
+                    height: 150,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 210, 5),
+                    child: Text(
+                      'Current Month`s Overview',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700 ,
+                          fontSize: 14,
+                          color: detailColor),
+                    ),
+                  ),
+                  CurrentOverview(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Budget(),
+                  Goals(),
+                  AddGoal()
+                ],
+              )
+
+        ),
     );
   }
 }

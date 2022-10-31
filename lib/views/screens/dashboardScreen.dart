@@ -20,27 +20,14 @@ class DashboardScreen extends StatelessWidget {
 
 
   List<Color> colorList = [
-    const Color(0xff1E9984),
-    const Color(0xff63C3B3),
-    const Color(0xff268AFF),
-    const Color(0xffFA4A42),
-    const Color(0xffFF5678)
+    warningColor,
+    darkBlueColor,
+    primaryColor,
+    expenseColor,
+    lightpinkColor
   ];
 
-  final gradientList = <List<Color>>[
-    [
-      Color.fromRGBO(223, 250, 92, 1),
-      Color.fromRGBO(129, 250, 112, 1),
-    ],
-    [
-      Color.fromRGBO(129, 182, 205, 1),
-      Color.fromRGBO(91, 253, 199, 1),
-    ],
-    [
-      Color.fromRGBO(175, 63, 62, 1.0),
-      Color.fromRGBO(254, 154, 92, 1),
-    ]
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +36,17 @@ class DashboardScreen extends StatelessWidget {
     print("Health ${ _chartController.totalHealth}");
 
     Map<String, double> dataMap = {
-      "Health & Care": _chartController.totalHealth.value,
-      "Transportation": _chartController.totaltrans.value,
-      "Internet": _chartController.totalInternts.value,
-      "Grocery": _chartController.totalgrocery.value,
-      "Other": _chartController.totalother.value,
+      "الصحة": _chartController.totalHealth.value,
+      "النقل": _chartController.totaltrans.value,
+      "انترنت": _chartController.totalInternts.value,
+      "مقاضي": _chartController.totalgrocery.value,
+      "أخرى": _chartController.totalother.value,
     };
 
 
     int touchedIndex=1;
     return Obx(() => Scaffold(
-        appBar: AppBar(title: Text("Reoprt",), backgroundColor: Colors.transparent, elevation: 0,),
+        appBar: AppBar(title: Text("وضعك المالي",), backgroundColor: Colors.transparent, elevation: 0,),
         body: ListView(
 
             children: <Widget>[
@@ -70,7 +57,7 @@ class DashboardScreen extends StatelessWidget {
                     dataMap:dataMap,
                     colorList:colorList,
                     chartRadius: MediaQuery.of(context).size.width /2,
-                    centerText: "${_homeController.totalExpense.value} SR \n Total" ,
+                    centerText: "${_homeController.totalBalance.value} SR \n المجموع" ,
                     centerTextStyle: TextStyle(fontSize: 25, color: textColor,),
                     ringStrokeWidth: 27,
                     animationDuration: const Duration(seconds: 3),
@@ -79,11 +66,11 @@ class DashboardScreen extends StatelessWidget {
                         showChartValues: true,
                         showChartValuesOutside: true,
                         showChartValuesInPercentage: true,
-                        showChartValueBackground: false
+                        showChartValueBackground: false,
                     ),
                     legendOptions: const LegendOptions(
                         showLegends: true,
-                        legendShape: BoxShape.rectangle,
+                        legendShape:BoxShape.rectangle,
                         legendTextStyle: TextStyle(fontSize: 15, letterSpacing: 2, fontWeight: FontWeight.w400,),
                       legendPosition: LegendPosition.bottom,
 
@@ -101,16 +88,16 @@ class DashboardScreen extends StatelessWidget {
                         height: 30,
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(15),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.end,
                           children:  const [
                             Text(
-                              "Recent Transactions",
+                              "آخر العمليات",
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black ,letterSpacing: 0.5,
+                                color: detailColor ,letterSpacing: 0.5,
                               ),),
                             // Text(
                             // "View Detail",
@@ -125,7 +112,7 @@ class DashboardScreen extends StatelessWidget {
 
                       ),
                       Container(
-                        child: _homeController.myTransactions.length == 0?Text("No Transactions to show."): //show message if there is no any transaction
+                        child: _homeController.myTransactions.length == 0?Text("لا توجد عمليات لعرضها",style: TextStyle(fontSize:18),): //show message if there is no any transaction
                         Column(  //or populate list to Column children if there is transaction data.
                           children:
 
