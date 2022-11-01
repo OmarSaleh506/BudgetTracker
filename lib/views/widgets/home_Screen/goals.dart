@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
@@ -13,12 +14,16 @@ class Goals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Text(
-          'Goals',
+          'أهداف',
           style: TextStyle(
-              color: detailColor, fontWeight: FontWeight.w700, fontSize: 14),
+            color: detailColor,
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
+            letterSpacing: 2,
+          ),
         ),
         SizedBox(
           height: 10,
@@ -29,21 +34,17 @@ class Goals extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Container(
-            width: 354,
-            height: 144,
+            width: 357,
+            height: 172,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text('New House',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18,
-                              letterSpacing: 3)),
                       Container(
                         width: 98,
                         height: 41,
@@ -70,32 +71,34 @@ class Goals extends StatelessWidget {
                                   fontWeight: FontWeight.w700),
                             ),
                             SizedBox(
-                              width: 6,
-                            ),
+                              width: 10,
+                            ), //'lib/constants/goalsIcons/house.svg'
                             Expanded(
                               child: CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: Color(0xff1C6DD0),
-                                  child: Image(
-                                    image: AssetImage(
-                                        'lib/constants/goalsIcons/house.png'),
-                                    color: Colors.white,
-                                  )),
+                                radius: 20,
+                                backgroundColor: Color(0xff1C6DD0),
+                                child: SvgPicture.asset(
+                                    'lib/constants/goalsIcons/house.svg'),
+                              ),
                             )
                           ],
                         ),
-                      )
+                      ),
+                      Text(
+                        'بيت',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          letterSpacing: 3,
+                        ),
+                      ),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Dec 10 , 2032',
-                        style: TextStyle(color: detailColor),
-                      ),
                       SizedBox(
-                        height: 15,
+                        height: 20,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -123,13 +126,13 @@ class Goals extends StatelessWidget {
                                 bottomLeft: Radius.circular(0.0),
                               ),
                             ),
-                            width: 213,
+                            width: 240,
                             height: 12,
                           ),
                         ],
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -137,18 +140,20 @@ class Goals extends StatelessWidget {
                         children: [
                           Obx(
                             (() => Text(
-                                  'SAR ${_goalController.totalSaved.value} / ${_goalController.totalGoalAmount.value}',
+                                  '${_goalController.totalSaved.value} / ${_goalController.totalGoalAmount.value} ريال',
                                   style: TextStyle(
                                       color: detailColor,
                                       fontWeight: FontWeight.w400),
                                 )),
                           ),
-                          Text(
-                            'SAR ${_goalController.totalGoalAmountLeft.value} Left',
-                            style: TextStyle(
-                              color: detailColor,
-                              fontWeight: FontWeight.w600,
-                              letterSpacing: 1,
+                          Obx(
+                            () => Text(
+                              'الباقي ${_goalController.totalGoalAmountLeft.value} ريال',
+                              style: TextStyle(
+                                color: detailColor,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1,
+                              ),
                             ),
                           )
                         ],

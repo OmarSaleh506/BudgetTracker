@@ -1,6 +1,6 @@
 import 'package:budget_tracker/views/screens/addTransaction.dart';
 import 'package:budget_tracker/views/screens/add_goals.dart';
-import 'package:budget_tracker/views/screens/home.dart';
+import 'package:budget_tracker/views/screens/goal_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,47 +14,66 @@ class AddGoal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 18),
-          child: TextButton.icon(
-            onPressed: () {
-              Scaffold.of(context)
-                  .showBottomSheet<void>(((BuildContext context) {
-                return Card(child: Container(height: 570, child: AddGoals()));
-              }));
-            },
-            icon: Icon(
-              Icons.add,
-              size: 19,
-              color: Color(0xff797979),
-            ),
-            label: Text(
-              'Add Goal',
-              style: TextStyle(
-                fontSize: 13,
-                color: Color(0xff797979),
-                fontWeight: FontWeight.w700,
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            children: [
+              TextButton.icon(
+                onPressed: () {
+                  Scaffold.of(context)
+                      .showBottomSheet<void>(((BuildContext context) {
+                    return Card(
+                        child: Container(height: 570, child: AddGoals()));
+                  }));
+                },
+                label: Text(
+                  'أضف هدف',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xff797979),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                icon: Icon(
+                  Icons.add,
+                  size: 19,
+                  color: Color(0xff797979),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.only(left: 250),
+                child: SizedBox(
+                  width: 84,
+                  height: 84,
+                  child: FloatingActionButton.large(
+                    onPressed: () {
+                      Get.to(AddTransaction());
+                    },
+                    child: const Icon(
+                      Icons.add,
+                      color: lightModeScaffoldBgCle,
+                      size: 35,
+                    ),
+                    backgroundColor: primaryColor,
+                  ),
+                ),
+              ),
+              Row(
+                children: [
+                  TextButton.icon(
+                      onPressed: (() {
+                        Get.to(GoalPage());
+                      }),
+                      icon: Icon(Icons.chevron_left),
+                      label: Text('جميع الأهداف'))
+                ],
+              )
+            ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(right: 25),
-          child: FloatingActionButton(
-            onPressed: () {
-              Get.to(AddTransaction());
-            },
-            child: const Icon(
-              Icons.add,
-              color: lightModeScaffoldBgCle,
-              size: 35,
-            ),
-            backgroundColor: primaryColor,
-          ),
-        )
       ],
     );
   }
