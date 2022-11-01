@@ -12,11 +12,11 @@ import '../widgets/transaction.dart';
 import 'file.dart';
 import 'package:pie_chart/pie_chart.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends GetView {
 
 
-  final HomeController _homeController = Get.put(HomeController());
   final ChartController _chartController=Get.put(ChartController());
+  final HomeController _homeController = Get.find<HomeController>();
 
 
   List<Color> colorList = [
@@ -57,15 +57,14 @@ class DashboardScreen extends StatelessWidget {
                     dataMap:dataMap,
                     colorList:colorList,
                     chartRadius: MediaQuery.of(context).size.width /2,
-                    centerText: "${_homeController.totalBalance.value} SR \n المجموع" ,
+                    centerText: "${_homeController.totalExpense.value} SR \n المجموع" ,
                     centerTextStyle: TextStyle(fontSize: 25, color: textColor,),
                     ringStrokeWidth: 27,
                     animationDuration: const Duration(seconds: 3),
                     chartType: ChartType.ring,
                     chartValuesOptions: const ChartValuesOptions(
-                        showChartValues: true,
+
                         showChartValuesOutside: true,
-                        showChartValuesInPercentage: true,
                         showChartValueBackground: false,
                     ),
                     legendOptions: const LegendOptions(
