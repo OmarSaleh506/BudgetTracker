@@ -21,6 +21,7 @@ class AddTransaction extends StatefulWidget {
 
 class _AddTransactionState extends State<AddTransaction> {
   List<bool> isCardEnabled = [];
+  bool _isloading=false;
   @override
   Widget build(BuildContext context) {
     final AddTransactionController _addTransactionController =

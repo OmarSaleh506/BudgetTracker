@@ -23,8 +23,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      defaultTransition: Transition.rightToLeftWithFade,
-      transitionDuration: Duration(milliseconds: 500),
       debugShowCheckedModeBanner: false,
       theme: Themes.lightTheme,
       home: FirstPage(),
