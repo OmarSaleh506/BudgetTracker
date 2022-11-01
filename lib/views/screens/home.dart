@@ -13,8 +13,16 @@ class HomeScreen extends StatelessWidget {
     BuildContext context,
   ) {
     return Scaffold(
-      body: Column(
-        children: [
+
+      resizeToAvoidBottomInset: false,
+      body:
+
+        SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child:
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
           Stack(
             alignment: Alignment(0, 54),
             children: <Widget>[Header(), DashBord()],
@@ -40,7 +48,9 @@ class HomeScreen extends StatelessWidget {
           Goals(),
           AddGoal()
         ],
-      ),
+              )
+
+        ),
     );
   }
 }
