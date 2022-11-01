@@ -1,5 +1,3 @@
-import 'package:budget_tracker/views/screens/add_transaction/add_transaction_amount.dart';
-import 'package:budget_tracker/views/screens/add_transaction/add_transaction_catgory.dart';
 import 'package:budget_tracker/views/screens/home.dart';
 import 'package:budget_tracker/views/widgets/customTextField.dart';
 import 'package:budget_tracker/views/widgets/number_pad.dart';
@@ -32,7 +30,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Themes.lightTheme,
-      home: AddTransactionCatgory(),
+      home: HomeScreen(),
     );
   }
 }
