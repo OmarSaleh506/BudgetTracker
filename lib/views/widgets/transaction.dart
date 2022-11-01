@@ -26,7 +26,8 @@ class TransactionWidget extends StatelessWidget {
         Card(
             elevation: 0.4,
             child: ListTile(
-              leading: CircleAvatar(
+              leading:
+              CircleAvatar(
                 backgroundColor: isIncome
                   ? primaryColor
                 : expenseColor,

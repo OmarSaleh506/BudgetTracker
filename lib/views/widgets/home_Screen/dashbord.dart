@@ -12,6 +12,7 @@ class DashBord extends StatelessWidget {
 
   final HomeController _homeController = Get.put(HomeController());
   final GoalsController _goalsController = Get.put(GoalsController());
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -28,24 +29,24 @@ class DashBord extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 150, 0),
+              padding: EdgeInsets.fromLTRB(180, 0, 0, 0),
               child: Text(
-                'you current Ballance',
+                'إجمالي الرصيد',
                 style: TextStyle(
                     color: detailColor, fontSize: 14, letterSpacing: 1),
               ),
             ),
             Obx(() => Text(
-                  "SAR ${_homeController.totalBalance.value.toStringAsFixed(2)}",
+                  "+${_homeController.totalBalance.value.toStringAsFixed(2)}",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
                       letterSpacing: 3),
                 )),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 210, 0),
+              padding: EdgeInsets.fromLTRB(200, 0, 0, 0),
               child: Text(
-                "you Saved",
+                "أدخرت",
                 style: TextStyle(
                     color: detailColor, fontSize: 14, letterSpacing: 3),
               ),
@@ -53,8 +54,7 @@ class DashBord extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Obx(
-                () => Text(
-                    'SAR ${_goalsController.totalSaved.value.toStringAsFixed(2)}',
+                () => Text('${_goalsController.totalSaved.toStringAsFixed(2)}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,

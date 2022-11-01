@@ -13,7 +13,7 @@ class ThirdPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-             SizedBox(
+            SizedBox(
               height: 67,
             ),
             Image(image: AssetImage('images/third.png')),
@@ -21,9 +21,9 @@ class ThirdPage extends StatelessWidget {
               height: 30,
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 146),
+              padding: const EdgeInsets.only(left: 140),
               child: const Text(
-                'Finance Planner',
+                'مخطط التمويل',
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
@@ -37,12 +37,15 @@ class ThirdPage extends StatelessWidget {
               width: 283,
               height: 84,
               child: Text(
-                "See how you`re financially situated depeniding on curated information from your bank accounts.",
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+                "تعرف على وضعك المالي بناءً على المعلومات المنظمة من حساباتك المصرفية",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(260, 40, 0, 0),
+              padding: const EdgeInsets.fromLTRB(280, 37, 0, 0),
               child: Stack(
                 children: [
                   Image(
@@ -59,7 +62,7 @@ class ThirdPage extends StatelessWidget {
                           Get.to(HomeScreen());
                         },
                         child: Text(
-                          'Start',
+                          'أبدأ',
                           style: TextStyle(
                               color: lightModeScaffoldBgCle,
                               fontSize: 20,

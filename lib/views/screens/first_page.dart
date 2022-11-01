@@ -13,36 +13,36 @@ class FirstPage extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-             SizedBox(
+            SizedBox(
               height: 67,
             ),
             Image(image: AssetImage('images/first.png')),
-             SizedBox(
+            SizedBox(
               height: 30,
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 85),
-              child:  Text(
-                'Set Your Financial Goals',
+              padding: const EdgeInsets.only(left: 120),
+              child: Text(
+                'حدد اهدافك المالية',
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,
                     fontStyle: FontStyle.normal),
               ),
             ),
-             SizedBox(
+            SizedBox(
               height: 15,
             ),
             Container(
               width: 283,
               height: 84,
               child: Text(
-                'Simply add all of the financial goals that steer you`ve toward your dreams. You can see how far you`ve come and what milestones are lift for you ti succeed!',
+                "ماعليك سوى إظافة جميع اهدافك المالية التي توجهك نحو احلامك يمكنك ان ترى الى اي مدى وصلت وماهي المعالم المتبقية لك لتحقق النجاح!",
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(120, 62, 0, 0),
+              padding: EdgeInsets.fromLTRB(140, 55, 0, 0),
               child: Stack(
                 children: [
                   Image(

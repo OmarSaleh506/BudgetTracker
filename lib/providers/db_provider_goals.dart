@@ -22,7 +22,7 @@ class DatabaseProviderGoals {
          CREATE TABLE $_tableName(
           id STRING PRIMARY KEY,
            goalAmount TEXT, savedAmount TEXT, time TEXT,
-          date TEXT, category TEXT)
+          date TEXT, category TEXT, goalAmountLeft TEXT)
         '''));
     } catch (e) {
       Get.snackbar(
@@ -46,6 +46,7 @@ class DatabaseProviderGoals {
     return await _db!.rawUpdate('''
       UPDATE $_tableName 
       goalAmount = ?,
+      goalAmountLeft = ?,
       savedAmount = ?,
       date = ?,
       time = ?,
@@ -58,6 +59,7 @@ class DatabaseProviderGoals {
       tm.time,
       tm.category,
       tm.id,
+      tm.goalAmountLeft,
     ]);
   }
 
