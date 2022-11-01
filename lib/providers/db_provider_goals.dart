@@ -22,8 +22,8 @@ class DatabaseProviderGoals {
          CREATE TABLE $_tableName(
           id STRING PRIMARY KEY,
            goalAmount TEXT, savedAmount TEXT, time TEXT,
-          date TEXT, category TEXT, goalAmountLeft TEXT)
-        '''));
+          date TEXT, category TEXT, goalAmountLeft TEXT,image TEXT)
+        ''')); //,color TEXT
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -51,6 +51,7 @@ class DatabaseProviderGoals {
       date = ?,
       time = ?,
       category = ?,
+      image = ?,
       WHERE id = ? 
 ''', [
       tm.goalAmount,
@@ -60,7 +61,8 @@ class DatabaseProviderGoals {
       tm.category,
       tm.id,
       tm.goalAmountLeft,
-    ]);
+      tm.image,
+    ]); // tm.color
   }
 
   static Future<List<Map<String, dynamic>>> queryGoal() async {
