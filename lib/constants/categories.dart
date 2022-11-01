@@ -11,12 +11,21 @@ import 'package:flutter/material.dart';
 
 
 
+
 final List<Category> categories =[
-Category(name: 'Health' , icon: Image.asset("lib/constants/icons/health.png", height: 24, color: Colors.black)),
+Category(name: 'Health' , icon: Image.asset("lib/constants/icons/health.png", height: 24, )),
 Category(name: 'Internet' , icon: Image.asset("lib/constants/icons/wifi.png",height: 24,)),
 Category(name: 'Transportation' , icon: Image.asset("lib/constants/icons/transportation.png",height: 24,)),
 Category(name: 'Grocery' , icon: Image.asset("lib/constants/icons/grocery.png",height: 24,)),
-// Category(name: 'Savings' , icon: Icon(Icons.wifi)),
+Category(name: 'other' , icon: Image.asset("lib/constants/icons/plus.png",height: 24,)),
+
+Category(name: 'other' , icon: Image.asset("lib/constants/icons/plus.png",height: 24,)),
+
+Category(name: 'Health' , icon: Image.asset("lib/constants/icons/health.png", height: 24, )),
+Category(name: 'Internet' , icon: Image.asset("lib/constants/icons/wifi.png",height: 24,)),
+Category(name: 'Transportation' , icon: Image.asset("lib/constants/icons/transportation.png",height: 24,)),
+Category(name: 'Grocery' , icon: Image.asset("lib/constants/icons/grocery.png",height: 24,)),
+Category(name: 'other' , icon: Image.asset("lib/constants/icons/plus.png",height: 24,)),
 Category(name: 'other' , icon: Image.asset("lib/constants/icons/plus.png",height: 24,)),
 ];
 
