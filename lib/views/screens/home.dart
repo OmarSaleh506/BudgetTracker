@@ -1,5 +1,6 @@
 import 'package:budget_tracker/constants/colors.dart';
 import 'package:flutter/material.dart';
+import '../../models/goalModel.dart';
 import '../widgets/home_Screen/add_goal.dart';
 import '../widgets/home_Screen/budget.dart';
 import '../widgets/home_Screen/current_overview.dart';
@@ -13,44 +14,37 @@ class HomeScreen extends StatelessWidget {
     BuildContext context,
   ) {
     return Scaffold(
-
       resizeToAvoidBottomInset: false,
-      body:
-
-        SingleChildScrollView(
+      body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-          child:
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-          Stack(
-            alignment: Alignment(0, 54),
-            children: <Widget>[Header(), DashBord()],
-          ),
-          SizedBox(
-            height: 150,
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(270, 0, 0, 10),
-            child: Text(
-              'معدل صرفك',
-              style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18,
-                  color: detailColor),
-            ),
-          ),
-          CurrentOverview(),
-          const SizedBox(
-            height: 20,
-          ),
-          Budget(),
-          Goals(),
-          AddGoal()
-        ],
-              )
-
-        ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Stack(
+                alignment: Alignment(0, 54),
+                children: <Widget>[Header(), DashBord()],
+              ),
+              SizedBox(
+                height: 150,
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(270, 0, 0, 10),
+                child: Text(
+                  'معدل صرفك',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18,
+                      color: detailColor),
+                ),
+              ),
+              CurrentOverview(),
+              const SizedBox(
+                height: 20,
+              ),
+              Budget(),
+              AddGoal()
+            ],
+          )),
     );
   }
 }
