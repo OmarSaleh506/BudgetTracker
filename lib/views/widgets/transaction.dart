@@ -47,13 +47,7 @@ class TransactionWidget extends StatelessWidget {
                   letterSpacing: 2
                 ),
               ),
-              subtitle: Text(
-                transactionModel.date!,
-                style: TextStyle(
-                  color: detailColor,
-                  fontSize: 11,
-                ),
-              ),
+              
               trailing:SizedBox(height: 100,width: 120, child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

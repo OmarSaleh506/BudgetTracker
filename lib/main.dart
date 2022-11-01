@@ -1,10 +1,12 @@
-import 'package:budget_tracker/views/screens/first_page.dart';
-import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'constants/colors.dart';
 import 'constants/theme.dart';
 import '../../providers/db_provider.dart';
+import 'controllers/addTransactionController.dart';
+import 'models/transactionModel.dart';
 import 'providers/db_provider_goals.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +18,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -25,3 +28,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
