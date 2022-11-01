@@ -58,7 +58,7 @@ class GoalsController extends GetxController {
     if (gm.isEmpty) {
       return;
     }
-    double goalAmount = 0; //gg
+    double goalAmount = 0;
     double goalAmountLeft = 0;
     double saved = 0;
 
@@ -67,14 +67,9 @@ class GoalsController extends GetxController {
       goalAmount += double.parse(transactionGoalModel.goalAmount!);
       goalAmountLeft += double.parse(transactionGoalModel.goalAmountLeft!);
     }
-    // saved = saved - b;
-    // goalAmount = goalAmount - saved;
-    // totalGoalAmount.value = goalAmount;
-    // totalSaved.value = saved;
-    // totalBalance.value = b;
 
-    totalSaved.value = saved; //on dash board and on goal
-    goalAmountLeft = goalAmount - saved; //on total goal amount left
+    totalSaved.value = saved;
+    goalAmountLeft = goalAmount - saved;
     totalGoalAmountLeft.value = goalAmountLeft;
     totalGoalAmount.value = goalAmount;
   }

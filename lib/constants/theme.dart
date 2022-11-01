@@ -6,7 +6,7 @@ import 'colors.dart';
 
 class Themes {
   static final lightTheme = ThemeData(
-    textTheme: GoogleFonts.almaraiTextTheme(),
+    textTheme: GoogleFonts.k2dTextTheme(),
     primarySwatch: Colors.grey,
     brightness: Brightness.light,
     scaffoldBackgroundColor: lightModeScaffoldBgCle,

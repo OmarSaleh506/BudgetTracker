@@ -29,19 +29,34 @@ class CurrentOverview extends StatelessWidget {
               padding: EdgeInsets.only(left: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'Income',
-                    style: TextStyle(
-                        color: detailColor, fontSize: 12, letterSpacing: 1),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(
+                          Icons.call_made,
+                          color: primaryColor,
+                        ),
+                        Text(
+                          'دخلك',
+                          style: TextStyle(
+                              color: detailColor,
+                              fontSize: 12,
+                              letterSpacing: 1),
+                        ),
+                      ],
+                    ),
                   ),
                   Obx(() => Text(
-                        'SAR ${_homeController.totalIncome.value}',
+                        'ريال ${_homeController.totalIncome.value}',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            letterSpacing: 3),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          letterSpacing: 3,
+                        ),
                       )),
                 ],
               ),
@@ -60,15 +75,29 @@ class CurrentOverview extends StatelessWidget {
               padding: EdgeInsets.only(left: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'Spending ',
-                    style: TextStyle(
-                        color: detailColor, fontSize: 12, letterSpacing: 1),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(
+                          Icons.call_received,
+                          color: expenseColor,
+                        ),
+                        Text(
+                          'صرفك',
+                          style: TextStyle(
+                              color: detailColor,
+                              fontSize: 12,
+                              letterSpacing: 1),
+                        ),
+                      ],
+                    ),
                   ),
                   Obx(() => Text(
-                        'SAR ${_homeController.totalExpense.value}',
+                        'ريال ${_homeController.totalExpense.value}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,

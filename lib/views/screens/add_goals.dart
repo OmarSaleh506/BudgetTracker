@@ -11,6 +11,8 @@ import '../../constants/colors.dart';
 import '../widgets/customTextField.dart';
 
 import '../widgets/add_goals/input_field.dart';
+import '../widgets/home_Screen/custom_TextField.dart';
+import '../widgets/home_Screen/custom_text.dart';
 
 class AddGoals extends StatefulWidget {
   AddGoals({super.key});
@@ -33,7 +35,7 @@ class _AddGoalsState extends State<AddGoals> {
 
     _addGoalsTransaction() async {
       if (_goalAmountController.text.isEmpty ||
-          _goalAmountController.text.isEmpty) {
+          _savedAmountController.text.isEmpty) {
         Get.snackbar(
           'Required',
           'All fields are requried',
@@ -53,11 +55,6 @@ class _AddGoalsState extends State<AddGoals> {
             category: _addTransactionController.selectedCategory);
         await DatabaseProviderGoals.insertGoal(transactionModel);
         Get.to(HomeScreen());
-        print("this is goal amount ${transactionModel.goalAmount}");
-        print("this is saved amount ${transactionModel.savedAmount}");
-        print("this is category ${transactionModel.category}");
-        print("this is date ${transactionModel.date}");
-        print("this is time ${transactionModel.time}");
       }
     }
 
@@ -94,142 +91,144 @@ class _AddGoalsState extends State<AddGoals> {
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Container(
-          child: Column(children: [
-            Icon(
-              Icons.expand_less,
-              color: Colors.black,
-            ),
-            CustomText(text: 'Category'),
-            Expanded(
-              child: GridView.builder(
-                  padding: const EdgeInsets.all(15),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
-                  ),
-                  itemCount: categoriesGoals.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    isCardEnabled.add(false);
-                    final data = categoriesGoals[index];
-                    return GestureDetector(
-                      onTap: () {
-                        _addTransactionController
-                            .updateSelectedCategory(data.name ?? '');
-                        isCardEnabled.replaceRange(0, isCardEnabled.length, [
-                          for (int i = 0; i < isCardEnabled.length; i++) false
-                        ]);
-                        isCardEnabled[index] = true;
-                        setState(() {});
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            height: 50,
-                            width: 50,
-                            child: Card(
-                              color: isCardEnabled[index]
-                                  ? Color(0xffFF5678)
-                                  : Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              child: Center(child: data.icon),
+          child: Column(
+            children: [
+              Icon(
+                Icons.expand_less,
+                color: Colors.black,
+              ),
+              CustomTextGoal(text: 'هدفك'),
+              Expanded(
+                child: GridView.builder(
+                    padding: const EdgeInsets.all(15),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5,
+                    ),
+                    itemCount: categoriesGoals.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      isCardEnabled.add(false);
+                      final data = categoriesGoals[index];
+                      return GestureDetector(
+                        onTap: () {
+                          _addTransactionController
+                              .updateSelectedCategory(data.name ?? '');
+                          isCardEnabled.replaceRange(0, isCardEnabled.length, [
+                            for (int i = 0; i < isCardEnabled.length; i++) false
+                          ]);
+                          isCardEnabled[index] = true;
+                          setState(() {});
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 50,
+                              width: 50,
+                              child: Card(
+                                color: isCardEnabled[index]
+                                    ? Color(0xffFF5678)
+                                    : Colors.white,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8)),
+                                child: Center(child: data.image),
+                              ),
                             ),
-                          ),
-                          CustomText(
-                            text: data.name ?? '',
-                            fontSize: 10,
-                            fontWeight: FontWeight.normal,
-                            alignment: Alignment.center,
-                          )
-                        ],
-                      ),
-                    );
-                  }),
-            ),
-            CustomTextField(
-              controller: _goalAmountController,
-              text: 'Amount',
-              hint: '200,000...',
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CustomTextField(
-              controller: _savedAmountController,
-              text: 'Saved',
-              hint: '50...',
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: InputField(
-                    hint: _addTransactionController.selectedDate.isNotEmpty
-                        ? _addTransactionController.selectedDate
-                        : DateFormat.yMd().format(now),
-                    label: 'Date',
-                    widget: IconButton(
-                      onPressed: () => _getDateFromUser(context),
-                      icon: Icon(
-                        Icons.expand_more,
-                        color: Colors.black,
-                      ),
-                    ),
+                            CustomTextGoal(
+                              text: data.name ?? '',
+                              fontSize: 10,
+                              fontWeight: FontWeight.normal,
+                              alignment: Alignment.center,
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+              ),
+              CustomTextFieldGoal(
+                controller: _goalAmountController,
+                text: 'المبلغ',
+                hint: '200,000...',
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              CustomTextFieldGoal(
+                controller: _savedAmountController,
+                text: 'أدخرت',
+                hint: '200,000...',
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: InputField(
+              //         hint: _addTransactionController.selectedDate.isNotEmpty
+              //             ? _addTransactionController.selectedDate
+              //             : DateFormat.yMd().format(now),
+              //         label: 'Date',
+              //         widget: IconButton(
+              //           onPressed: () => _getDateFromUser(context),
+              //           icon: Icon(
+              //             Icons.expand_more,
+              //             color: Colors.black,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(
+              //       width: 12,
+              //     ),
+              //     Expanded(
+              //       child: InputField(
+              //         hint: _addTransactionController.selectedTime.isNotEmpty
+              //             ? _addTransactionController.selectedTime
+              //             : DateFormat('hh:mm a').format(now),
+              //         label: 'Time',
+              //         widget: IconButton(
+              //           onPressed: () => _getTimeFromUser(context),
+              //           icon: Icon(
+              //             Icons.expand_more,
+              //             color: Colors.black,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                height: 60,
+                width: 311,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    await DatabaseProviderGoals();
+                    _addGoalsTransaction();
+                    Get.back();
+                  },
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll<Color>(primaryColor),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ))),
+                  child: CustomTextGoal(
+                    text: 'أضف',
+                    fontSize: 18,
+                    color: Colors.white,
+                    alignment: Alignment.center,
                   ),
-                ),
-                SizedBox(
-                  width: 12,
-                ),
-                Expanded(
-                  child: InputField(
-                    hint: _addTransactionController.selectedTime.isNotEmpty
-                        ? _addTransactionController.selectedTime
-                        : DateFormat('hh:mm a').format(now),
-                    label: 'Time',
-                    widget: IconButton(
-                      onPressed: () => _getTimeFromUser(context),
-                      icon: Icon(
-                        Icons.expand_more,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 60,
-              width: 311,
-              child: ElevatedButton(
-                onPressed: () async {
-                  await DatabaseProviderGoals();
-                  _addGoalsTransaction();
-
-                  Get.back();
-                },
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll<Color>(primaryColor),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ))),
-                child: CustomText(
-                  text: 'Add Goal',
-                  fontSize: 18,
-                  color: Colors.white,
-                  alignment: Alignment.center,
                 ),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            )
-          ]),
+              SizedBox(
+                height: 10,
+              )
+            ],
+          ),
         ),
       ),
     );
