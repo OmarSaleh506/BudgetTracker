@@ -13,6 +13,15 @@ class HomeController extends GetxController {
   final Rx<double> totalExpense = 0.0.obs;
   final Rx<double> totalBalance = 0.0.obs;
   final Rx<double> totalSaved = 0.0.obs;
+  final Rx<double> totalInternts=0.0.obs;
+  final Rx<double> totalHealth=0.0.obs;
+  final Rx<double> totaltrans=0.0.obs;
+  final Rx<double> totalgrocery=0.0.obs;
+  final Rx<double> totalother=0.0.obs;
+  final Rx<double> num=0.0.obs;
+
+
+  final _box = GetStorage();
 
   final Rx<List<TransactionModel>> _myTransactions =
       Rx<List<TransactionModel>>([]);
@@ -35,6 +44,7 @@ class HomeController extends GetxController {
     _myTransactions.value = transactionsFromDB;
     getTotalAmount(transactionsFromDB);
     tracker(transactionsFromDB);
+    getTotalCategoryInternet(transactionsFromDB);
   }
 
   Future<int?> deleteTransaction(String id) async {
@@ -83,5 +93,43 @@ class HomeController extends GetxController {
     totalIncome.value = income;
     totalExpense.value = expense;
     totalBalance.value = balance - saved;
+  }
+
+  getTotalCategoryInternet(List<TransactionModel> tm) async{
+    if (tm.isEmpty) {
+      return;
+    }
+    double totalInternt = 0;
+    double totalhealth = 0;
+    double totaltranspo = 0;
+    double totalgroceries=0;
+    double totalothers=0;
+    for (TransactionModel transactionModel in tm) {
+      if(transactionModel.type=="Spending"){
+
+        if (transactionModel.category == 'Internet') {
+
+          totalInternt += double.parse(transactionModel.amount!);
+          await _box.write("Internet",totalInternts.value=totalInternt );
+        }else if (transactionModel.category == 'Health'){
+          totalhealth += double.parse(transactionModel.amount!);
+          totalHealth.value=totalhealth;
+        }else if (transactionModel.category == 'Transportation'){
+          totaltranspo += double.parse(transactionModel.amount!);
+          totaltrans.value=totaltranspo;
+        } else if(transactionModel.category== 'Grocery'){
+          totalgroceries += double.parse(transactionModel.amount!);
+          totalgrocery.value=totalgroceries;
+        }else if(transactionModel.category== 'other'){
+          totalothers += double.parse(transactionModel.amount!);
+          totalother.value=totalothers;
+        }
+
+      }
+
+
+    }
+
+    // _totalForSelectedDate.value = total;
   }
 }

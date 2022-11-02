@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import 'package:get_storage/get_storage.dart';
+
 import 'constants/colors.dart';
+
 import 'constants/theme.dart';
 import '../../providers/db_provider.dart';
 import 'controllers/addTransactionController.dart';
@@ -13,6 +18,8 @@ void main() async {
 
   await DatabaseProvider.initDb();
   await DatabaseProviderGoals.initDb();
+  await GetStorage.init();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(MyApp());
 }
@@ -24,7 +31,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Themes.lightTheme,
-      home: HomeScreen(),
+      home: FirstPage(),
     );
   }
 }
