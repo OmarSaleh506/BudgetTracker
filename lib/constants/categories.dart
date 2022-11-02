@@ -7,8 +7,8 @@ final List<Category> categories = [
     icon: "lib/constants/icons/health.svg",
   ),
   Category(
-    name: 'اتصالات',
-    icon: "lib/constants/icons/internet.svg",
+    name: 'سفر',
+    icon: "lib/constants/icons/Airplane.svg",
   ),
   Category(
     name: 'نقل',

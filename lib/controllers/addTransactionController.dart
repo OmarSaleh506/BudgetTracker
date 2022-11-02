@@ -11,5 +11,5 @@ class AddTransactionController extends GetxController {
 
   changeTransactionType(String transtype) => _transactionType.value = transtype;
   updateSelectedCategory(String category) => _selectedCategory.value = category;
-  updateSelectedImage(String image) => _selectedCategory.value = image;
+  updateSelectedImage(String image) => _selectedImage.value = image;
 }

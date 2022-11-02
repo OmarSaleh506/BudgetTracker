@@ -88,8 +88,9 @@ class ChartController extends GetxController {
     double totalothers = 0;
     for (TransactionModel transactionModel in tm) {
       if (transactionModel.type == "صرف") {
-        if (transactionModel.category == 'اتصالات') {
+        if (transactionModel.category == 'سفر') {
           totalInternt += double.parse(transactionModel.amount!);
+          totalInternts.value=totalInternt;
         } else if (transactionModel.category == 'صحه') {
           totalhealth += double.parse(transactionModel.amount!);
           totalHealth.value = totalhealth;

@@ -117,7 +117,7 @@ class DashboardScreen extends GetView {
 
                           _homeController.myTransactions.map((transaction){
                             final text = transaction.amount;
-                            final bool isIncome = transaction.type == 'Income' ? true : false;
+                            final bool isIncome = transaction.type == 'دخل' ? true : false;
                             final formatAmount = isIncome ? '+ $text' : '- $text';
                             return TransactionWidget(transactionModel: transaction,
                               formatAmount: formatAmount,
