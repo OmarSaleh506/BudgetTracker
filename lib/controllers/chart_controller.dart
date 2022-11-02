@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:budget_tracker/views/widgets/home_Screen/barchart.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../models/transactionModel.dart';
 import '../providers/db_provider.dart';
@@ -17,7 +18,9 @@ class ChartController extends GetxController {
   final Rx<double> totalother=0.0.obs;
   final Rx<double> num=0.0.obs;
 
-  var lista= <Data>[].obs;
+  // var lista= <Data>[].obs;
+
+  final _box = GetStorage();
 
 
 
@@ -33,6 +36,7 @@ class ChartController extends GetxController {
 
   @override
   void onInit(){
+
     getTransactions();
     super.onInit();
   }
@@ -75,7 +79,7 @@ class ChartController extends GetxController {
     double balance = 0;
 
     for (TransactionModel transactionModel in tm) {
-      if (transactionModel.type == 'Expense') {
+      if (transactionModel.type == 'Income') {
         income += double.parse(transactionModel.amount!);
       } else {
         expense += double.parse(transactionModel.amount!);
@@ -84,7 +88,7 @@ class ChartController extends GetxController {
     totalexpense.value = expense;
   }
 
-  getTotalCategoryInternet(List<TransactionModel> tm) {
+  getTotalCategoryInternet(List<TransactionModel> tm) async{
     if (tm.isEmpty) {
       return;
     }
@@ -94,36 +98,31 @@ class ChartController extends GetxController {
     double totalgroceries=0;
     double totalothers=0;
     for (TransactionModel transactionModel in tm) {
+      if(transactionModel.type=="Spending"){
 
-      if (transactionModel.category == 'Internet') {
-        totalInternt += double.parse(transactionModel.amount!);
-        totalInternts.value=totalInternt;
-      }else if (transactionModel.category == 'Health'){
-        totalhealth += double.parse(transactionModel.amount!);
-        totalHealth.value=totalhealth;
-      }else if (transactionModel.category == 'Transportation'){
-        totaltranspo += double.parse(transactionModel.amount!);
-        totaltrans.value=totaltranspo;
-      } else if(transactionModel.category== 'Grocery'){
-        totalgroceries += double.parse(transactionModel.amount!);
-        totalgrocery.value=totalgroceries;
-      }else if(transactionModel.category== 'other'){
-        totalothers += double.parse(transactionModel.amount!);
-        totalother.value=totalothers;
+        if (transactionModel.category == 'Internet') {
+
+          totalInternt += double.parse(transactionModel.amount!);
+          await _box.write("Internet",totalInternts.value=totalInternt );
+        }else if (transactionModel.category == 'Health'){
+          totalhealth += double.parse(transactionModel.amount!);
+          totalHealth.value=totalhealth;
+        }else if (transactionModel.category == 'Transportation'){
+          totaltranspo += double.parse(transactionModel.amount!);
+          totaltrans.value=totaltranspo;
+        } else if(transactionModel.category== 'Grocery'){
+          totalgroceries += double.parse(transactionModel.amount!);
+          totalgrocery.value=totalgroceries;
+        }else if(transactionModel.category== 'other'){
+          totalothers += double.parse(transactionModel.amount!);
+          totalother.value=totalothers;
+        }
+
       }
-
-      List chartData = [
-        Data(units: totalgrocery.value, color: const Color(0xFF8A5426)),
-        Data(units: totalInternts.value, color: const Color(0xFF00BCD5)),
-        Data(units: totaltrans.value, color: const Color(0xFF7B8700)),
-        Data(units:totalother.value, color: const Color(0xFFDD8B11)),
-        Data(units: totalHealth.value, color: const Color(0xFF673BB7)),
-        Data(units: 0, color: const Color(
-            0xFFC7C3CE)),
-      ].obs;
 
 
     }
+
     getTransactions();
     // _totalForSelectedDate.value = total;
   }

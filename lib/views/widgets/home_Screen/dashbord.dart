@@ -37,7 +37,9 @@ class DashBord extends StatelessWidget {
               ),
             ),
             Obx(() => Text(
-                  "${_homeController.totalBalance.value.toStringAsFixed(2)}",
+
+
+                  " ${_homeController.totalBalance.value.toStringAsFixed(2)} ريال ",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -61,7 +63,8 @@ class DashBord extends StatelessWidget {
                         letterSpacing: 3,
                         color: primaryColor)),
               ),
-            )
+            ),
+
           ],
         ),
       ),

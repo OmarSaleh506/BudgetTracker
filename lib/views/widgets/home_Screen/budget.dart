@@ -1,3 +1,4 @@
+import 'package:budget_tracker/controllers/home_controlle.dart';
 import 'package:budget_tracker/views/screens/dashboardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,9 @@ import '../../../constants/colors.dart';
 import '../../../controllers/chart_controller.dart';
 
 class Budget extends StatelessWidget {
-  final ChartController _chartController = Get.put(ChartController());
+  final HomeController _homeController = Get.put(HomeController());
+
+
 
   Budget({
     Key? key,
@@ -18,14 +21,14 @@ class Budget extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final chartData = [
-      Data(units: _chartController.totalgrocery.value, color: expenseColor),
-      Data(units: _chartController.totalInternts.value, color: primaryColor),
-      Data(units: _chartController.totaltrans.value, color: darkBlueColor),
-      Data(units: _chartController.totalother.value, color: lightpinkColor),
-      Data(units: _chartController.totalHealth.value, color: warningColor),
+      Data(units: _homeController.totalgrocery.value, color: expenseColor),
+      Data(units: _homeController.totalInternts.value, color: primaryColor),
+      Data(units: _homeController.totaltrans.value, color: darkBlueColor),
+      Data(units: _homeController.totalother.value, color: lightpinkColor),
+      Data(units: _homeController.totalHealth.value, color: warningColor),
       Data(units: 0, color: const Color(
           0xFFC7C3CE)),
-    ];
+    ].obs;
     print(chartData[1]);
 
     return  Column(
@@ -67,9 +70,10 @@ class Budget extends StatelessWidget {
                     Center(
                      child: SizedBox(
                        height: 18,
-                       child:   HorizontalBarChart(
-                         data: chartData,
-                       ),
+                       child:  Obx(()=>
+                           HorizontalBarChart(
+                             data: chartData.value,
+                           ),)
                      ),
                    ),
                     SizedBox(height: 3),
