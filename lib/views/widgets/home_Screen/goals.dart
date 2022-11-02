@@ -79,7 +79,7 @@ class Goals extends StatelessWidget {
                                 ),
                                 SizedBox(
                                   width: 10,
-                                ), 
+                                ),
                                 Obx(
                                   (() => Expanded(
                                         child: CircleAvatar(

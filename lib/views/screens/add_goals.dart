@@ -53,8 +53,12 @@ class _AddGoalsState extends State<AddGoals> {
           time: _addTransactionController.selectedTime.isNotEmpty
               ? _addTransactionController.selectedTime
               : DateFormat('hh:mm a').format(now),
-          category: _addTransactionController.selectedCategory,
-          image: _addTransactionController.selectedImage,
+          category: _addTransactionController.selectedCategory.isNotEmpty
+              ? 'أخرى'
+              : _addTransactionController.selectedCategory,
+          image: _addTransactionController.selectedImage.isNotEmpty
+              ? "lib/constants/goalsIcons/plus.svg"
+              : _addTransactionController.selectedImage,
         );
         await DatabaseProviderGoals.insertGoal(transactionModel);
         Get.to(HomeScreen());
