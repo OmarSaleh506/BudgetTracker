@@ -1,5 +1,6 @@
 import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import '../../constants/goal_categories.dart';
@@ -42,17 +43,19 @@ class _AddGoalsState extends State<AddGoals> {
         );
       } else {
         final GoalModel transactionModel = GoalModel(
-            id: DateTime.now().toString(),
-            goalAmount: _goalAmountController.text,
-            goalAmountLeft: '0.0',
-            savedAmount: _savedAmountController.text,
-            date: _addTransactionController.selectedDate.isNotEmpty
-                ? _addTransactionController.selectedDate
-                : DateFormat.yMd().format(now),
-            time: _addTransactionController.selectedTime.isNotEmpty
-                ? _addTransactionController.selectedTime
-                : DateFormat('hh:mm a').format(now),
-            category: _addTransactionController.selectedCategory);
+          id: DateTime.now().toString(),
+          goalAmount: _goalAmountController.text,
+          goalAmountLeft: '0.0',
+          savedAmount: _savedAmountController.text,
+          date: _addTransactionController.selectedDate.isNotEmpty
+              ? _addTransactionController.selectedDate
+              : DateFormat.yMd().format(now),
+          time: _addTransactionController.selectedTime.isNotEmpty
+              ? _addTransactionController.selectedTime
+              : DateFormat('hh:mm a').format(now),
+          category: _addTransactionController.selectedCategory,
+          image: _addTransactionController.selectedImage,
+        );
         await DatabaseProviderGoals.insertGoal(transactionModel);
         Get.to(HomeScreen());
       }
@@ -113,6 +116,8 @@ class _AddGoalsState extends State<AddGoals> {
                         onTap: () {
                           _addTransactionController
                               .updateSelectedCategory(data.name ?? '');
+                          _addTransactionController
+                              .updateSelectedImage(data.image ?? '');
                           isCardEnabled.replaceRange(0, isCardEnabled.length, [
                             for (int i = 0; i < isCardEnabled.length; i++) false
                           ]);
@@ -130,7 +135,9 @@ class _AddGoalsState extends State<AddGoals> {
                                     : Colors.white,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)),
-                                child: Center(child: data.image),
+                                child: Center(
+                                  child: SvgPicture.asset(data.image ?? ''),
+                                ),
                               ),
                             ),
                             CustomTextGoal(
@@ -160,43 +167,6 @@ class _AddGoalsState extends State<AddGoals> {
               SizedBox(
                 height: 20,
               ),
-              // Row(
-              //   children: [
-              //     Expanded(
-              //       child: InputField(
-              //         hint: _addTransactionController.selectedDate.isNotEmpty
-              //             ? _addTransactionController.selectedDate
-              //             : DateFormat.yMd().format(now),
-              //         label: 'Date',
-              //         widget: IconButton(
-              //           onPressed: () => _getDateFromUser(context),
-              //           icon: Icon(
-              //             Icons.expand_more,
-              //             color: Colors.black,
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     SizedBox(
-              //       width: 12,
-              //     ),
-              //     Expanded(
-              //       child: InputField(
-              //         hint: _addTransactionController.selectedTime.isNotEmpty
-              //             ? _addTransactionController.selectedTime
-              //             : DateFormat('hh:mm a').format(now),
-              //         label: 'Time',
-              //         widget: IconButton(
-              //           onPressed: () => _getTimeFromUser(context),
-              //           icon: Icon(
-              //             Icons.expand_more,
-              //             color: Colors.black,
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
               SizedBox(
                 height: 20,
               ),

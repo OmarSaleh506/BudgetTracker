@@ -68,7 +68,8 @@ class HomeController extends GetxController {
       }
     }
 
-    getTransactions();
+   totalBalance.value =total;
+   print("this is total in getTotalAmonut ${total}");
   }
 
   tracker(List<TransactionModel> tm) {

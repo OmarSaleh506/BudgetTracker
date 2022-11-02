@@ -1,8 +1,10 @@
+import 'package:budget_tracker/models/goalModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
+import '../../../controllers/addTrans_goal_controller.dart';
 import '../../../controllers/add_goal_controller.dart';
 
 class Goals extends StatelessWidget {
@@ -10,6 +12,7 @@ class Goals extends StatelessWidget {
     Key? key,
   }) : super(key: key);
   final GoalsController _goalController = Get.put(GoalsController());
+  final AddGoalController _addGoalController = Get.put(AddGoalController());
 
   @override
   Widget build(BuildContext context) {
@@ -28,139 +31,146 @@ class Goals extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        Card(
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.white70, width: 1),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Container(
-            width: 357,
-            height: 172,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 98,
-                        height: 41,
-                        decoration: BoxDecoration(
-                          color: Color(0xffEEEEEE),
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(40.0),
-                            bottomRight: Radius.circular(40.0),
-                            topLeft: Radius.circular(40.0),
-                            bottomLeft: Radius.circular(40.0),
+        TextButton(
+          onPressed: () {
+            print('gg');
+          },
+          child: Card(
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: Colors.white70, width: 1),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Container(
+              width: 357,
+              height: 172,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 98,
+                          height: 41,
+                          decoration: BoxDecoration(
+                            color: Color(0xffEEEEEE),
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(40.0),
+                              bottomRight: Radius.circular(40.0),
+                              topLeft: Radius.circular(40.0),
+                              bottomLeft: Radius.circular(40.0),
+                            ),
                           ),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  '% 12',
+                                  style: TextStyle(
+                                      color: detailColor,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ), 
+                                Obx(
+                                  (() => Expanded(
+                                        child: CircleAvatar(
+                                          radius: 20,
+                                          backgroundColor: Color(0xff1C6DD0),
+                                          child: SvgPicture.asset(
+                                            "${_addGoalController.selectedImage}",
+                                          ),
+                                        ),
+                                      )),
+                                ),
+                              ]),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              '% 12',
+                        Obx((() => Text(
+                              '${_addGoalController.selectedCategory}',
                               style: TextStyle(
-                                  color: detailColor,
-                                  fontWeight: FontWeight.w700),
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18,
+                                letterSpacing: 3,
+                              ),
+                            )))
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              decoration: const BoxDecoration(
+                                color: Color(0xff1C6DD0),
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(0.0),
+                                  bottomRight: Radius.circular(0.0),
+                                  topLeft: Radius.circular(40.0),
+                                  bottomLeft: Radius.circular(40.0),
+                                ),
+                              ),
+                              width: 74,
+                              height: 12,
                             ),
-                            SizedBox(
-                              width: 10,
-                            ), //'lib/constants/goalsIcons/house.svg'
-                            Expanded(
-                              child: CircleAvatar(
-                                radius: 20,
-                                backgroundColor: Color(0xff1C6DD0),
-                                child: SvgPicture.asset(
-                                    'lib/constants/goalsIcons/house.svg'),
+                            Container(
+                              decoration: const BoxDecoration(
+                                color: Color(0xffEEEEEE),
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(40.0),
+                                  bottomRight: Radius.circular(40.0),
+                                  topLeft: Radius.circular(00.0),
+                                  bottomLeft: Radius.circular(0.0),
+                                ),
+                              ),
+                              width: 240,
+                              height: 12,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Obx(
+                              (() => Text(
+                                    '${_goalController.totalSaved.value} / ${_goalController.totalGoalAmount.value} ريال',
+                                    style: TextStyle(
+                                        color: detailColor,
+                                        fontWeight: FontWeight.w400),
+                                  )),
+                            ),
+                            Obx(
+                              () => Text(
+                                'الباقي ${_goalController.totalGoalAmountLeft.value} ريال',
+                                style: TextStyle(
+                                  color: detailColor,
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 1,
+                                ),
                               ),
                             )
                           ],
-                        ),
-                      ),
-                      Text(
-                        'بيت',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                          letterSpacing: 3,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Color(0xff1C6DD0),
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(0.0),
-                                bottomRight: Radius.circular(0.0),
-                                topLeft: Radius.circular(40.0),
-                                bottomLeft: Radius.circular(40.0),
-                              ),
-                            ),
-                            width: 74,
-                            height: 12,
-                          ),
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Color(0xffEEEEEE),
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(40.0),
-                                bottomRight: Radius.circular(40.0),
-                                topLeft: Radius.circular(00.0),
-                                bottomLeft: Radius.circular(0.0),
-                              ),
-                            ),
-                            width: 240,
-                            height: 12,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Obx(
-                            (() => Text(
-                                  '${_goalController.totalSaved.value} / ${_goalController.totalGoalAmount.value} ريال',
-                                  style: TextStyle(
-                                      color: detailColor,
-                                      fontWeight: FontWeight.w400),
-                                )),
-                          ),
-                          Obx(
-                            () => Text(
-                              'الباقي ${_goalController.totalGoalAmountLeft.value} ريال',
-                              style: TextStyle(
-                                color: detailColor,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 1,
-                              ),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),

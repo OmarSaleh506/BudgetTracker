@@ -10,9 +10,9 @@ class GoalsController extends GetxController {
 
   final HomeController _homeController = Get.put(HomeController());
 
-  final Rx<List<GoalModel>> _myTransactions = Rx<List<GoalModel>>([]);
+  final Rx<List<GoalModel>> _myGoal = Rx<List<GoalModel>>([]);
 
-  List<GoalModel> get myTransactions => _myTransactions.value;
+  List<GoalModel> get myGoal => _myGoal.value;
 
   @override
   void onInit() {
@@ -27,7 +27,7 @@ class GoalsController extends GetxController {
     transactionsFromDB.assignAll(transactions.reversed
         .map((data) => GoalModel().fromJson(data))
         .toList());
-    _myTransactions.value = transactionsFromDB;
+    _myGoal.value = transactionsFromDB;
     getTotalAmount(transactionsFromDB);
     tracker(transactionsFromDB);
   }

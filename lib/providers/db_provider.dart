@@ -20,8 +20,8 @@ class DatabaseProvider {
           version: _version, onCreate: (db, version) => db.execute('''
          CREATE TABLE $_tableName(
           id STRING PRIMARY KEY,
-          type TEXT, name TEXT, amount TEXT, time TEXT,
-          date TEXT, category TEXT)
+          type TEXT, name TEXT, amount TEXT, 
+         category TEXT)
         '''));
     } catch (e) {
       Get.snackbar(
@@ -47,16 +47,12 @@ class DatabaseProvider {
       SET type = ?,
       name = ?,
       amount = ?,
-      date = ?,
-      time = ?,
       category = ?,
       WHERE id = ? 
 ''', [
       tm.type,
       tm.name,
       tm.amount,
-      tm.date,
-      tm.time,
       tm.category,
       tm.id,
     ]);
@@ -66,8 +62,8 @@ class DatabaseProvider {
     return await _db!.query(_tableName);
   }
 
-  _qCategoryInter() async{
-    List<Map> result = await _db!.rawQuery('SELECT amount FROM transactions WHERE category=?', ['Internet']);
+  _qCategoryInter() async {
+    List<Map> result = await _db!.rawQuery(
+        'SELECT amount FROM transactions WHERE category=?', ['Internet']);
   }
-
 }
