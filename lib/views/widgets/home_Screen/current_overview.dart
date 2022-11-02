@@ -5,10 +5,6 @@ import '../../../constants/colors.dart';
 import '../../../controllers/home_controlle.dart';
 
 class CurrentOverview extends StatelessWidget {
-  // const CurrentOverview({
-  //   Key? key,
-  // }) : super(key: key);
-
   final HomeController _homeController = Get.put(HomeController());
 
   @override
@@ -51,7 +47,7 @@ class CurrentOverview extends StatelessWidget {
                     ),
                   ),
                   Obx(() => Text(
-                        'ريال ${_homeController.totalIncome.value}',
+                        'SAR ${_homeController.totalIncome.value}',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -97,7 +93,7 @@ class CurrentOverview extends StatelessWidget {
                     ),
                   ),
                   Obx(() => Text(
-                        'ريال ${_homeController.totalExpense.value}',
+                        'SAR ${_homeController.totalExpense.value}',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,

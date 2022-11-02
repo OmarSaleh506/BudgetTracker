@@ -37,9 +37,7 @@ class DashBord extends StatelessWidget {
               ),
             ),
             Obx(() => Text(
-
-
-                  " ${_homeController.totalBalance.value.toStringAsFixed(2)} ريال ",
+                  "SAR ${_homeController.totalBalance.value.toStringAsFixed(2)}",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -56,7 +54,8 @@ class DashBord extends StatelessWidget {
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Obx(
-                () => Text('${_goalsController.totalSaved.toStringAsFixed(2)}',
+                () => Text(
+                    'SAR ${_goalsController.totalSaved.toStringAsFixed(2)}',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -64,7 +63,6 @@ class DashBord extends StatelessWidget {
                         color: primaryColor)),
               ),
             ),
-
           ],
         ),
       ),

@@ -1,14 +1,13 @@
 import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import '../../constants/categories.dart';
 import '../../controllers/addTransactionController.dart';
 import '../../models/transactionModel.dart';
 import '../../providers/db_provider.dart';
 import '../../views/widgets/customText.dart';
 import '../../constants/colors.dart';
-import '../widgets/add_goals/input_field.dart';
 import '../widgets/customTextField.dart';
 import 'package:fk_toggle/fk_toggle.dart';
 
@@ -21,7 +20,7 @@ class AddTransaction extends StatefulWidget {
 
 class _AddTransactionState extends State<AddTransaction> {
   List<bool> isCardEnabled = [];
-  bool _isloading=false;
+  bool _isloading = false;
   @override
   Widget build(BuildContext context) {
     final AddTransactionController _addTransactionController =
@@ -29,9 +28,6 @@ class _AddTransactionState extends State<AddTransaction> {
     final TextEditingController _nameController = TextEditingController();
     final TextEditingController _amountController = TextEditingController();
     final List<String> _transactionTypes = ['Income', 'Spending'];
-
-    // bool ispressed = false;
-    // final List<bool> ispressed = List.generate(5, (i) => false);
 
     final DateTime now = DateTime.now();
 
@@ -43,27 +39,25 @@ class _AddTransactionState extends State<AddTransaction> {
         );
       } else {
         final TransactionModel transactionModel = TransactionModel(
-            id: DateTime.now().toString(),
-            type: _addTransactionController.transactionType.isNotEmpty
-                ? _addTransactionController.transactionType
-                : _transactionTypes[0],
-            name: _nameController.text,
-            amount: _amountController.text,
-            date: _addTransactionController.selectedDate.isNotEmpty
-                ? _addTransactionController.selectedDate
-                : DateFormat.yMd().format(now),
-            time: _addTransactionController.selectedTime.isNotEmpty
-                ? _addTransactionController.selectedTime
-                : DateFormat('hh:mm a').format(now),
-            category: _addTransactionController.selectedCategory);
+          id: DateTime.now().toString(),
+          type: _addTransactionController.transactionType.isNotEmpty
+              ? _addTransactionController.transactionType
+              : _transactionTypes[0],
+          name: _nameController.text,
+          amount: _amountController.text,
+          category: _addTransactionController.selectedCategory.isNotEmpty
+              ? 'أخرى'
+              : _addTransactionController.selectedCategory,
+          image: _addTransactionController.selectedImage.isNotEmpty
+              ? "lib/constants/goalsIcons/plus.svg"
+              : _addTransactionController.selectedImage,
+        );
         await DatabaseProvider.insertTransaction(transactionModel);
         Get.to(() => HomeScreen());
         print("this is amount ${transactionModel.amount}");
         print("this is name ${transactionModel.name}");
         print("this is type ${transactionModel.type}");
         print("this is category ${transactionModel.category}");
-        print("this is date ${transactionModel.date}");
-        print("this is time ${transactionModel.time}");
       }
     }
 
@@ -79,8 +73,6 @@ class _AddTransactionState extends State<AddTransaction> {
           minute: DateTime.now().minute,
         ),
       ).then((value) => formatedTime = value!.format(context));
-
-      _addTransactionController.updateSelectedTime(formatedTime!);
     }
 
     _getDateFromUser(BuildContext context) async {
@@ -89,17 +81,9 @@ class _AddTransactionState extends State<AddTransaction> {
           firstDate: DateTime(2012),
           initialDate: DateTime.now(),
           lastDate: DateTime(2122));
-
-      if (pickerDate != null) {
-        _addTransactionController
-            .updateSelectedDate(DateFormat.yMd().format(pickerDate));
-      }
     }
 
     final OnSelected selected = ((index, instance) {
-      // ScaffoldMessenger.of(context).hideCurrentSnackBar();
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //     content: Text('Select $index, toggle ${instance.labels[index]}')));
       _addTransactionController.changeTransactionType((instance.labels[index]));
     });
 
@@ -160,8 +144,6 @@ class _AddTransactionState extends State<AddTransaction> {
                   padding: const EdgeInsets.all(15),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 5,
-                    // childAspectRatio: 1,
-                    // crossAxisSpacing: 10,
                   ),
                   itemCount: categories.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -171,6 +153,8 @@ class _AddTransactionState extends State<AddTransaction> {
                         onTap: () {
                           _addTransactionController
                               .updateSelectedCategory(data.name ?? '');
+                          _addTransactionController
+                              .updateSelectedImage(data.icon ?? '');
                           isCardEnabled.replaceRange(0, isCardEnabled.length, [
                             for (int i = 0; i < isCardEnabled.length; i++) false
                           ]);
@@ -189,7 +173,7 @@ class _AddTransactionState extends State<AddTransaction> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Center(
-                                  child: data.icon,
+                                  child: SvgPicture.asset(data.icon ?? ""),
                                 ),
                               ),
                             ),
@@ -219,46 +203,8 @@ class _AddTransactionState extends State<AddTransaction> {
             SizedBox(
               height: 30,
             ),
-            CustomText(text: 'Date'),
             SizedBox(
               height: 20,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: InputField(
-                    hint: _addTransactionController.selectedDate.isNotEmpty
-                        ? _addTransactionController.selectedDate
-                        : DateFormat.yMd().format(now),
-                    label: 'Date',
-                    widget: IconButton(
-                      onPressed: () => _getDateFromUser(context),
-                      icon: Icon(
-                        Icons.expand_more,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 12,
-                ),
-                Expanded(
-                  child: InputField(
-                    hint: _addTransactionController.selectedTime.isNotEmpty
-                        ? _addTransactionController.selectedTime
-                        : DateFormat('hh:mm a').format(now),
-                    label: 'Time',
-                    widget: IconButton(
-                      onPressed: () => _getTimeFromUser(context),
-                      icon: Icon(
-                        Icons.expand_more,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
             ),
             SizedBox(
               height: 50,
