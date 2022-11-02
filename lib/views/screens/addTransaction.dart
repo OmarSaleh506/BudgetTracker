@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../constants/categories.dart';
+import '../../constants/input_formatter.dart';
 import '../../controllers/addTransactionController.dart';
 import '../../models/transactionModel.dart';
 import '../../providers/db_provider.dart';
@@ -27,7 +28,7 @@ class _AddTransactionState extends State<AddTransaction> {
         Get.put(AddTransactionController());
     final TextEditingController _nameController = TextEditingController();
     final TextEditingController _amountController = TextEditingController();
-    final List<String> _transactionTypes = ['Income', 'Spending'];
+    final List<String> _transactionTypes = ['دخل', 'صرف'];
 
     final DateTime now = DateTime.now();
 
@@ -61,28 +62,6 @@ class _AddTransactionState extends State<AddTransaction> {
       }
     }
 
-    _getTimeFromUser(
-      BuildContext context,
-    ) async {
-      String? formatedTime;
-      await showTimePicker(
-        initialEntryMode: TimePickerEntryMode.input,
-        context: context,
-        initialTime: TimeOfDay(
-          hour: DateTime.now().hour,
-          minute: DateTime.now().minute,
-        ),
-      ).then((value) => formatedTime = value!.format(context));
-    }
-
-    _getDateFromUser(BuildContext context) async {
-      DateTime? pickerDate = await showDatePicker(
-          context: context,
-          firstDate: DateTime(2012),
-          initialDate: DateTime.now(),
-          lastDate: DateTime(2122));
-    }
-
     final OnSelected selected = ((index, instance) {
       _addTransactionController.changeTransactionType((instance.labels[index]));
     });
@@ -101,9 +80,9 @@ class _AddTransactionState extends State<AddTransaction> {
             ),
           ),
           title: Text(
-            'Add',
+            'إضافة',
             style: TextStyle(
-                color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
           )),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -135,7 +114,7 @@ class _AddTransactionState extends State<AddTransaction> {
             SizedBox(
               height: 30,
             ),
-            CustomText(text: 'Category'),
+            CustomText(text: 'تصنيف'),
             SizedBox(
               height: 8,
             ),
@@ -168,7 +147,7 @@ class _AddTransactionState extends State<AddTransaction> {
                               width: 55,
                               child: Card(
                                 color: isCardEnabled[index]
-                                    ? Color(0xffFF5678)
+                                    ? darkBlueColor
                                     : Colors.white,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)),
@@ -179,7 +158,7 @@ class _AddTransactionState extends State<AddTransaction> {
                             ),
                             CustomText(
                               text: data.name ?? '',
-                              fontSize: 10,
+                              fontSize: 14,
                               fontWeight: FontWeight.normal,
                               alignment: Alignment.center,
                             )
@@ -187,27 +166,40 @@ class _AddTransactionState extends State<AddTransaction> {
                         ));
                   }),
             ),
-            CustomTextField(
-              controller: _amountController,
-              text: 'Amount',
-              hint: '2000',
+            Column(
+              children: [
+                CustomText(
+                  text: 'إضافة عملية',
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  controller: _amountController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    hintText: '00.00',
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 20,
             ),
             CustomTextField(
               controller: _nameController,
-              text: 'Transaction Name',
-              hint: 'Rent',
+              text: 'اسم العملية',
+              hint: 'كريم...',
             ),
             SizedBox(
               height: 30,
             ),
             SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 50,
+              height: 150,
             ),
             Container(
               height: 60,
@@ -222,7 +214,7 @@ class _AddTransactionState extends State<AddTransaction> {
                       borderRadius: BorderRadius.circular(10),
                     ))),
                 child: CustomText(
-                  text: 'Add Transaction',
+                  text: 'أضف',
                   fontSize: 18,
                   color: Colors.white,
                   alignment: Alignment.center,

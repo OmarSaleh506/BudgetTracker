@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../constants/colors.dart';
 
 class CustomText extends StatelessWidget {
   final String text;
@@ -9,25 +8,20 @@ class CustomText extends StatelessWidget {
   final Alignment alignment;
   final FontWeight fontWeight;
 
-
-  CustomText({
-    this.text = '',
-    this.fontSize = 14,
-    this.color = const Color(0xff0A1931),
-    this.alignment = Alignment.topLeft,
-    this.fontWeight = FontWeight.bold
-
-  });
+  CustomText(
+      {this.text = '',
+      this.fontSize = 14,
+      this.color = const Color(0xff0A1931),
+      this.alignment = Alignment.topRight,
+      this.fontWeight = FontWeight.bold});
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: alignment,
       child: Text(
         text,
-        style: TextStyle(
-          color:color, 
-          fontSize: fontSize,
-          fontWeight: fontWeight),
+        style:
+            TextStyle(color: color, fontSize: fontSize, fontWeight: fontWeight),
       ),
     );
   }

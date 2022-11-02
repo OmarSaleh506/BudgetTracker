@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import '../models/transactionModel.dart';
 import '../providers/db_provider.dart';
 import 'add_goal_controller.dart';
-//saved += double.parse(saved.toString());
 
 final GoalsController _goalController = Get.put(GoalsController());
 
@@ -13,13 +12,12 @@ class HomeController extends GetxController {
   final Rx<double> totalExpense = 0.0.obs;
   final Rx<double> totalBalance = 0.0.obs;
   final Rx<double> totalSaved = 0.0.obs;
-  final Rx<double> totalInternts=0.0.obs;
-  final Rx<double> totalHealth=0.0.obs;
-  final Rx<double> totaltrans=0.0.obs;
-  final Rx<double> totalgrocery=0.0.obs;
-  final Rx<double> totalother=0.0.obs;
-  final Rx<double> num=0.0.obs;
-
+  final Rx<double> totalInternts = 0.0.obs;
+  final Rx<double> totalHealth = 0.0.obs;
+  final Rx<double> totaltrans = 0.0.obs;
+  final Rx<double> totalgrocery = 0.0.obs;
+  final Rx<double> totalother = 0.0.obs;
+  final Rx<double> num = 0.0.obs;
 
   final _box = GetStorage();
 
@@ -61,15 +59,14 @@ class HomeController extends GetxController {
     }
     double total = 0;
     for (TransactionModel transactionModel in tm) {
-      if (transactionModel.type == 'Income') {
+      if (transactionModel.type == 'دخل') {
         total += double.parse(transactionModel.amount!);
       } else {
         total -= double.parse(transactionModel.amount!);
       }
     }
 
-   totalBalance.value =total;
-   print("this is total in getTotalAmonut ${total}");
+    getTransactions();
   }
 
   tracker(List<TransactionModel> tm) {
@@ -82,7 +79,7 @@ class HomeController extends GetxController {
     double saved = _goalController.totalSaved.value;
 
     for (TransactionModel transactionModel in tm) {
-      if (transactionModel.type == 'Income') {
+      if (transactionModel.type == 'دخل') {
         income += double.parse(transactionModel.amount!);
       } else {
         expense += double.parse(transactionModel.amount!);
@@ -95,41 +92,33 @@ class HomeController extends GetxController {
     totalBalance.value = balance - saved;
   }
 
-  getTotalCategoryInternet(List<TransactionModel> tm) async{
+  getTotalCategoryInternet(List<TransactionModel> tm) async {
     if (tm.isEmpty) {
       return;
     }
     double totalInternt = 0;
     double totalhealth = 0;
     double totaltranspo = 0;
-    double totalgroceries=0;
-    double totalothers=0;
+    double totalgroceries = 0;
+    double totalothers = 0;
     for (TransactionModel transactionModel in tm) {
-      if(transactionModel.type=="Spending"){
-
-        if (transactionModel.category == 'Internet') {
-
+      if (transactionModel.type == "صرف") {
+        if (transactionModel.category == 'اتصالات') {
           totalInternt += double.parse(transactionModel.amount!);
-          await _box.write("Internet",totalInternts.value=totalInternt );
-        }else if (transactionModel.category == 'Health'){
+        } else if (transactionModel.category == 'صحه') {
           totalhealth += double.parse(transactionModel.amount!);
-          totalHealth.value=totalhealth;
-        }else if (transactionModel.category == 'Transportation'){
+          totalHealth.value = totalhealth;
+        } else if (transactionModel.category == 'نقل') {
           totaltranspo += double.parse(transactionModel.amount!);
-          totaltrans.value=totaltranspo;
-        } else if(transactionModel.category== 'Grocery'){
+          totaltrans.value = totaltranspo;
+        } else if (transactionModel.category == 'مقاضي') {
           totalgroceries += double.parse(transactionModel.amount!);
-          totalgrocery.value=totalgroceries;
-        }else if(transactionModel.category== 'other'){
+          totalgrocery.value = totalgroceries;
+        } else if (transactionModel.category == 'سكن') {
           totalothers += double.parse(transactionModel.amount!);
-          totalother.value=totalothers;
+          totalother.value = totalothers;
         }
-
       }
-
-
     }
-
-    // _totalForSelectedDate.value = total;
   }
 }
