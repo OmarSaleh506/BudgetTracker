@@ -37,7 +37,7 @@ class DashBord extends StatelessWidget {
               ),
             ),
             Obx(() => Text(
-                  "+${_homeController.totalBalance.value.toStringAsFixed(2)}",
+                  "${_homeController.totalBalance.value.toStringAsFixed(2)}",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
