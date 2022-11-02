@@ -21,7 +21,7 @@ class DatabaseProvider {
          CREATE TABLE $_tableName(
           id STRING PRIMARY KEY,
           type TEXT, name TEXT, amount TEXT, 
-         category TEXT)
+         category TEXT,image TEXT)
         '''));
     } catch (e) {
       Get.snackbar(
@@ -49,6 +49,7 @@ class DatabaseProvider {
       amount = ?,
       category = ?,
       WHERE id = ? 
+      image = ?,
 ''', [
       tm.type,
       tm.name,

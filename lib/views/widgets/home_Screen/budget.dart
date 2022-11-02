@@ -11,28 +11,23 @@ import '../../../controllers/chart_controller.dart';
 class Budget extends StatelessWidget {
   final HomeController _homeController = Get.put(HomeController());
 
-
-
   Budget({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     final chartData = [
       Data(units: _homeController.totalgrocery.value, color: expenseColor),
       Data(units: _homeController.totalInternts.value, color: primaryColor),
       Data(units: _homeController.totaltrans.value, color: darkBlueColor),
       Data(units: _homeController.totalother.value, color: lightpinkColor),
       Data(units: _homeController.totalHealth.value, color: warningColor),
-      Data(units: 0, color: const Color(
-          0xFFC7C3CE)),
+      Data(units: 0, color: const Color(0xFFC7C3CE)),
     ].obs;
     print(chartData[1]);
 
-    return  Column(
-
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         const Text(
@@ -54,7 +49,6 @@ class Budget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Container(
-
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -66,18 +60,19 @@ class Budget extends StatelessWidget {
                         color: detailColor,
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Center(
-                     child: SizedBox(
-                       height: 18,
-                       child:  Obx(()=>
-                           HorizontalBarChart(
-                             data: chartData.value,
-                           ),)
-                     ),
-                   ),
+                      child: SizedBox(
+                          height: 18,
+                          child: Obx(
+                            () => HorizontalBarChart(
+                              data: chartData.value,
+                            ),
+                          )),
+                    ),
                     SizedBox(height: 3),
-
                     Padding(
                       padding: const EdgeInsets.only(left: 80),
                       child: Row(
@@ -138,8 +133,6 @@ class Budget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-
-
                               const Text(
                                 'الصحة',
                                 style: TextStyle(
@@ -152,7 +145,7 @@ class Budget extends StatelessWidget {
                                 decoration: const BoxDecoration(
                                   color: warningColor,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                                      BorderRadius.all(Radius.circular(20)),
                                 ),
                                 width: 7,
                                 height: 7,
@@ -166,8 +159,6 @@ class Budget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-
-
                               const Text(
                                 'انترنت',
                                 style: TextStyle(
@@ -180,27 +171,33 @@ class Budget extends StatelessWidget {
                                 decoration: const BoxDecoration(
                                   color: primaryColor,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
+                                      BorderRadius.all(Radius.circular(20)),
                                 ),
                                 width: 7,
                                 height: 7,
                               ),
                             ],
                           ),
-
                         ],
-
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 15.0),
-                      child: InkWell( onTap:(){
-                        Get.to(DashboardScreen());
-                      } , child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [Text("المزيد", style: TextStyle(color: detailColor),),],
-                      ), ),
+                      child: InkWell(
+                        onTap: () {
+                          Get.to(DashboardScreen());
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "المزيد",
+                              style: TextStyle(color: detailColor),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -208,9 +205,10 @@ class Budget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
       ],
     );
-
   }
 }
