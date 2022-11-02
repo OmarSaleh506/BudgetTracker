@@ -130,6 +130,8 @@ class _AddTransactionState extends State<AddTransaction> {
                         onTap: () {
                           _addTransactionController
                               .updateSelectedCategory(data.name ?? '');
+                          _addTransactionController
+                              .updateSelectedImage(data.icon ?? '');
                           isCardEnabled.replaceRange(0, isCardEnabled.length, [
                             for (int i = 0; i < isCardEnabled.length; i++) false
                           ]);

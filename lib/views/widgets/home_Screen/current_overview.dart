@@ -47,7 +47,7 @@ class CurrentOverview extends StatelessWidget {
                     ),
                   ),
                   Obx(() => Text(
-                        'SAR ${_homeController.totalIncome.value}',
+                        ' ${_homeController.totalIncome.value} SR',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -93,7 +93,7 @@ class CurrentOverview extends StatelessWidget {
                     ),
                   ),
                   Obx(() => Text(
-                        'SAR ${_homeController.totalExpense.value}',
+                        ' ${_homeController.totalExpense.value} SR',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,

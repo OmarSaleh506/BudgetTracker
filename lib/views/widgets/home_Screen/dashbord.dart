@@ -37,7 +37,7 @@ class DashBord extends StatelessWidget {
               ),
             ),
             Obx(() => Text(
-                  "SAR ${_homeController.totalBalance.value.toStringAsFixed(2)}",
+                  "${_homeController.totalBalance.value.toStringAsFixed(2)} SR",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -55,7 +55,7 @@ class DashBord extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
               child: Obx(
                 () => Text(
-                    'SAR ${_goalsController.totalSaved.toStringAsFixed(2)}',
+                    ' ${_goalsController.totalSaved.toStringAsFixed(2)} SR',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
