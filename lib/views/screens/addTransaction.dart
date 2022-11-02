@@ -46,9 +46,7 @@ class _AddTransactionState extends State<AddTransaction> {
               : _transactionTypes[0],
           name: _nameController.text,
           amount: _amountController.text,
-          category: _addTransactionController.selectedCategory.isNotEmpty
-              ? 'أخرى'
-              : _addTransactionController.selectedCategory,
+          category: _addTransactionController.selectedCategory,
           image: _addTransactionController.selectedImage.isNotEmpty
               ? "lib/constants/goalsIcons/plus.svg"
               : _addTransactionController.selectedImage,
@@ -132,8 +130,6 @@ class _AddTransactionState extends State<AddTransaction> {
                         onTap: () {
                           _addTransactionController
                               .updateSelectedCategory(data.name ?? '');
-                          _addTransactionController
-                              .updateSelectedImage(data.icon ?? '');
                           isCardEnabled.replaceRange(0, isCardEnabled.length, [
                             for (int i = 0; i < isCardEnabled.length; i++) false
                           ]);

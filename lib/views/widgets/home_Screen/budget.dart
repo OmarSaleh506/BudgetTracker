@@ -74,7 +74,7 @@ class Budget extends StatelessWidget {
                     ),
                     SizedBox(height: 3),
                     Padding(
-                      padding: const EdgeInsets.only(left: 80),
+                      padding: const EdgeInsets.only(left: 100),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -108,7 +108,7 @@ class Budget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               const Text(
-                                'النقل',
+                                'نقل',
                                 style: TextStyle(
                                     color: detailColor, letterSpacing: 1),
                               ),
@@ -134,7 +134,7 @@ class Budget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               const Text(
-                                'الصحة',
+                                'صحة',
                                 style: TextStyle(
                                     color: detailColor, letterSpacing: 1),
                               ),
@@ -160,7 +160,7 @@ class Budget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               const Text(
-                                'انترنت',
+                                'اتصالات',
                                 style: TextStyle(
                                     color: detailColor, letterSpacing: 1),
                               ),
