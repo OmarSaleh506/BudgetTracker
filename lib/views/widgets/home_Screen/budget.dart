@@ -74,7 +74,7 @@ class Budget extends StatelessWidget {
                     ),
                     SizedBox(height: 3),
                     Padding(
-                      padding: const EdgeInsets.only(left: 120),
+                      padding: const EdgeInsets.only(left: 105),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
