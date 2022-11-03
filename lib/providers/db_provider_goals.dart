@@ -19,11 +19,11 @@ class DatabaseProviderGoals {
       String path = await getDatabasesPath() + _path;
       _db = await openDatabase(path,
           version: _version, onCreate: (db, version) => db.execute('''
-         CREATE TABLE $_tableName(
+          CREATE TABLE $_tableName(
           id STRING PRIMARY KEY,
-           goalAmount TEXT, savedAmount TEXT, time TEXT,
-          date TEXT, category TEXT, goalAmountLeft TEXT,image TEXT)
-        ''')); //,color TEXT
+            goalAmount TEXT, savedAmount TEXT,
+            category TEXT, goalAmountLeft TEXT,image TEXT,color TEXT)
+        '''));
     } catch (e) {
       Get.snackbar(
         'Error',
@@ -34,35 +34,33 @@ class DatabaseProviderGoals {
     }
   }
 
-  static Future<int> insertGoal(GoalModel goals) async {
-    return await _db!.insert(_tableName, goals.toMap());
+  static Future<int?> insertGoal(GoalModel goals) async {
+    return await _db?.insert(_tableName, goals.toMap());
   }
 
-  static Future<int> deleteGoal(String id) async {
-    return await _db!.delete(_tableName, where: 'id=?', whereArgs: [id]);
+  static Future<int?> deleteGoal(String id) async {
+    return await _db?.delete(_tableName, where: 'id=?', whereArgs: [id]);
   }
 
-  static Future<int> updateGoal(GoalModel tm) async {
-    return await _db!.rawUpdate('''
+  static Future<int?> updateGoal(GoalModel tm) async {
+    return await _db?.rawUpdate('''
       UPDATE $_tableName 
       goalAmount = ?,
       goalAmountLeft = ?,
       savedAmount = ?,
-      date = ?,
-      time = ?,
       category = ?,
       image = ?,
+      color = ?,
       WHERE id = ? 
 ''', [
       tm.goalAmount,
       tm.savedAmount,
-      tm.date,
-      tm.time,
       tm.category,
       tm.id,
       tm.goalAmountLeft,
       tm.image,
-    ]); // tm.color
+      tm.color
+    ]);
   }
 
   static Future<List<Map<String, dynamic>>> queryGoal() async {

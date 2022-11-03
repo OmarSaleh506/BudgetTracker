@@ -26,7 +26,7 @@ class AddGoal extends StatelessWidget {
                   Scaffold.of(context)
                       .showBottomSheet<void>(((BuildContext context) {
                     return Card(
-                        child: Container(height: 570, child: AddGoals()));
+                        child: Container(height: 516, child: AddGoals()));
                   }));
                 },
                 label: Text(
@@ -78,5 +78,3 @@ class AddGoal extends StatelessWidget {
     );
   }
 }
-
-

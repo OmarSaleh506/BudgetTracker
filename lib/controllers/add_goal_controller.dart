@@ -1,14 +1,11 @@
 import 'package:get/get.dart';
 import '../models/goalModel.dart';
 import '../providers/db_provider_goals.dart';
-import 'home_controlle.dart';
 
 class GoalsController extends GetxController {
   final Rx<double> totalGoalAmount = 0.0.obs;
   final Rx<double> totalGoalAmountLeft = 0.0.obs;
   final Rx<double> totalSaved = 0.0.obs;
-
-  final HomeController _homeController = Get.put(HomeController());
 
   final Rx<List<GoalModel>> _myGoal = Rx<List<GoalModel>>([]);
 
@@ -32,11 +29,11 @@ class GoalsController extends GetxController {
     tracker(transactionsFromDB);
   }
 
-  Future<int> deleteTransaction(String id) async {
+  Future<int?> deleteTransaction(String id) async {
     return await DatabaseProviderGoals.deleteGoal(id);
   }
 
-  Future<int> updateTransaction(GoalModel transactionModel) async {
+  Future<int?> updateTransaction(GoalModel transactionModel) async {
     return await DatabaseProviderGoals.updateGoal(transactionModel);
   }
 
