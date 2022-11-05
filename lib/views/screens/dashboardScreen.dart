@@ -32,7 +32,7 @@ class DashboardScreen extends GetView {
   @override
   Widget build(BuildContext context) {
     print("this is ${_homeController.myTransactions.length}");
-    print("internet ${ _chartController.totalInternts}");
+    print("other ${ _chartController.totalother}");
     print("Health ${ _chartController.totalHealth}");
 
     Map<String, double> dataMap = {
@@ -57,17 +57,19 @@ class DashboardScreen extends GetView {
                     dataMap:dataMap,
                     colorList:colorList,
                     chartRadius: MediaQuery.of(context).size.width /2,
-                    centerText: "${_homeController.totalExpense.value} SR \n المجموع" ,
+                    centerText: "${_homeController.totalExpense.value} SR \n مجموع المصاريف" ,
                     centerTextStyle: TextStyle(fontSize: 25, color: textColor,),
                     ringStrokeWidth: 27,
                     animationDuration: const Duration(seconds: 3),
                     chartType: ChartType.ring,
-                    chartValuesOptions: const ChartValuesOptions(
+                    chartValuesOptions:  ChartValuesOptions(
+                      showChartValues: true,
+                        showChartValuesInPercentage: true,
 
                         showChartValuesOutside: true,
                         showChartValueBackground: false,
                     ),
-                    legendOptions: const LegendOptions(
+                    legendOptions:  LegendOptions(
                         showLegends: true,
                         legendShape:BoxShape.rectangle,
                         legendTextStyle: TextStyle(fontSize: 15, letterSpacing: 2, fontWeight: FontWeight.w400,),
@@ -98,14 +100,7 @@ class DashboardScreen extends GetView {
                                 fontWeight: FontWeight.bold,
                                 color: detailColor ,letterSpacing: 0.5,
                               ),),
-                            // Text(
-                            // "View Detail",
-                            // style: TextStyle(
-                            // fontSize: 10,
-                            // fontWeight: FontWeight.w400,
-                            // color: detailColor,letterSpacing: 0.5,
-                            // decoration: TextDecoration.underline),
-                            // )
+
                           ],
                         ),
 
