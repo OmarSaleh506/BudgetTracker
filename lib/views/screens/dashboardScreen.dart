@@ -41,7 +41,7 @@ class DashboardScreen extends GetView {
       "انترنت": _chartController.totalInternts.value,
       "مقاضي": _chartController.totalgrocery.value,
       "أخرى": _chartController.totalother.value,
-    };
+    }.obs;
 
 
     int touchedIndex=1;
@@ -118,7 +118,7 @@ class DashboardScreen extends GetView {
                           _homeController.myTransactions.map((transaction){
                             final text = transaction.amount;
                             final bool isIncome = transaction.type == 'دخل' ? true : false;
-                            final formatAmount = isIncome ? '+ $text' : '- $text';
+                            final formatAmount = isIncome ? ' $text +' : ' $text -';
                             return TransactionWidget(transactionModel: transaction,
                               formatAmount: formatAmount,
                               isIncome: isIncome,);
