@@ -22,8 +22,8 @@ class DashboardScreen extends GetView {
   List<Color> colorList = [
     warningColor,
     darkBlueColor,
-    primaryColor,
-    expenseColor,
+    lightBlueColor,
+    purpleColor,
     lightpinkColor
   ];
 
@@ -38,7 +38,7 @@ class DashboardScreen extends GetView {
     Map<String, double> dataMap = {
       "الصحة": _chartController.totalHealth.value,
       "النقل": _chartController.totaltrans.value,
-      "انترنت": _chartController.totalInternts.value,
+      "سفر": _chartController.totalInternts.value,
       "مقاضي": _chartController.totalgrocery.value,
       "أخرى": _chartController.totalother.value,
     }.obs;

@@ -14,3 +14,4 @@ const Color warningColor= Color(0xffFFDA8B);
 const Color lightBlueColor= Color(0xff98C0F1);
 const Color lightpinkColor= Color(0xffFFA4B7);
 const Color darkBlueColor= Color(0xff1C6DD0);
+const Color purpleColor= Color(0xff7051a6);
