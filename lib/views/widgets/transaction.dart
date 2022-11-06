@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:budget_tracker/constants/colors.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../models/transactionModel.dart';
@@ -18,56 +19,51 @@ class TransactionWidget extends StatelessWidget {
     required this.isIncome,
   }) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
-    return
-        Card(
-            elevation: 0.4,
-            child: ListTile(
-              leading:
-              CircleAvatar(
-                backgroundColor: isIncome
-                  ? primaryColor
-                : expenseColor,
-                child: Icon(
-                  isIncome
-                 ? Icons.keyboard_double_arrow_up
-                  : Icons.keyboard_double_arrow_down,
-                  color: Colors.white,
-                ),
-              ),
-              title:  Text(
-                transactionModel.name!,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: textColor,
-                  letterSpacing: 2
-                ),
-              ),
-              
-              trailing:SizedBox(height: 100,width: 120, child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-
-
-                  Text(
-                    formatAmount,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: isIncome ?primaryColor :expenseColor,
-                        fontSize: 18),
-                  ),
-                  IconButton(onPressed: () async {
-                    await DatabaseProvider.deleteTransaction(transactionModel.id!);
+    return Card(
+        elevation: 0.4,
+        child: ListTile(
+          leading: SizedBox(
+            height: 100,
+            width: 120,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                IconButton(
+                  onPressed: () async {
+                    await DatabaseProvider.deleteTransaction(
+                        transactionModel.id!);
                     // Get.back();
-                  }, icon: Icon(
+                  },
+                  icon: Icon(
                     Icons.delete,
-                    color: expenseColor,),),
-                ],
-              ),)
-            ));
+                    color: expenseColor,
+                  ),
+                ),
+                Text(
+                  formatAmount,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: isIncome ? primaryColor : expenseColor,
+                      fontSize: 18),
+                ),
+              ],
+            ),
+          ),
+          title: Text(
+            transactionModel.name!,
+            textAlign: TextAlign.end,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: textColor,
+              letterSpacing: 2,
+            ),
+          ),
+          trailing: CircleAvatar(
+            child: SvgPicture.asset(transactionModel.image!),
+          ),
+        ));
   }
 }

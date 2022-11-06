@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -32,6 +34,41 @@ class _AddTransactionState extends State<AddTransaction> {
 
     final DateTime now = DateTime.now();
 
+    // alert dialog after transaction added
+   void _openCustomDialog(BuildContext context) {
+    showGeneralDialog(
+    barrierColor: Colors.black.withOpacity(0.5),
+    transitionBuilder: (context, a1, a2, widget) {
+     Timer(Duration(milliseconds: 1000),() {
+      Get.to(() => HomeScreen());
+      });
+         return ScaleTransition(
+              scale: Tween<double>(begin: 0.5, end: 1.0).animate(a1),
+              child: FadeTransition(
+                opacity: Tween<double>(begin: 0.5, end: 1.0).animate(a1),
+                child: AlertDialog(
+            shape: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16.0)),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset('lib/constants/icons/done.png' ,height: 164, width: 164,),
+                SizedBox(height: 5,),
+                Text('تم الإضافة بنجاح', style: TextStyle(color:detailColor ),),
+              ],
+            ),
+          )
+              ));},
+
+  
+    transitionDuration: Duration(milliseconds: 200),
+    barrierDismissible: false,
+    barrierLabel: '',
+    context: context,
+    pageBuilder: (context, animation1, animation2) { 
+      return Container();
+    });}
+
     _addTransaction() async {
       if (_nameController.text.isEmpty || _amountController.text.isEmpty) {
         Get.snackbar(
@@ -48,20 +85,25 @@ class _AddTransactionState extends State<AddTransaction> {
           amount: _amountController.text,
           category: _addTransactionController.selectedCategory,
           image: _addTransactionController.selectedImage.isNotEmpty
-              ? "lib/constants/goalsIcons/plus.svg"
-              : _addTransactionController.selectedImage,
+              ?_addTransactionController.selectedImage
+              :"lib/constants/goalsIcons/plus.svg" ,
         );
         await DatabaseProvider.insertTransaction(transactionModel);
-        Get.to(() => HomeScreen());
+        // Get.to(() => HomeScreen());
+        _openCustomDialog(context);
+
         print("this is amount ${transactionModel.amount}");
         print("this is name ${transactionModel.name}");
         print("this is type ${transactionModel.type}");
         print("this is category ${transactionModel.category}");
+
       }
     }
 
+
     final OnSelected selected = ((index, instance) {
       _addTransactionController.changeTransactionType((instance.labels[index]));
+
     });
 
     return Scaffold(

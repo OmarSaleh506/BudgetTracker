@@ -18,8 +18,8 @@ class Budget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final chartData = [
-      Data(units: _homeController.totalgrocery.value, color: expenseColor),
-      Data(units: _homeController.totalInternts.value, color: primaryColor),
+      Data(units: _homeController.totalgrocery.value, color: purpleColor),
+      Data(units: _homeController.totalInternts.value, color: lightBlueColor),
       Data(units: _homeController.totaltrans.value, color: darkBlueColor),
       Data(units: _homeController.totalother.value, color: lightpinkColor),
       Data(units: _homeController.totalHealth.value, color: warningColor),
@@ -74,7 +74,7 @@ class Budget extends StatelessWidget {
                     ),
                     SizedBox(height: 3),
                     Padding(
-                      padding: const EdgeInsets.only(left: 100),
+                      padding: const EdgeInsets.only(left: 105),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -91,7 +91,7 @@ class Budget extends StatelessWidget {
                               ),
                               Container(
                                 decoration: const BoxDecoration(
-                                  color: Color(0xffFF5678),
+                                  color:purpleColor,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
@@ -169,7 +169,7 @@ class Budget extends StatelessWidget {
                               ),
                               Container(
                                 decoration: const BoxDecoration(
-                                  color: primaryColor,
+                                  color: lightBlueColor,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
