@@ -50,6 +50,8 @@ dependencies:
   flutter_svg: ^1.1.6
   angles: ^2.1.1
   syncfusion_flutter_charts: ^20.3.52
+  color_parser: ^0.0.3
+  percent_indicator: ^4.2.2
 
 dev_dependencies:
   flutter_test:

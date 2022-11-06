@@ -13,7 +13,7 @@ final List<Goal_Category> categoriesGoals = [
   Goal_Category(
     name: 'تعليم',
     image: "lib/constants/icons/GraduationCap.svg",
-    containerColor: "0xff98C0F1",
+    containerColor: '0xff98C0F1',
   ),
   Goal_Category(
     name: 'زواج',
