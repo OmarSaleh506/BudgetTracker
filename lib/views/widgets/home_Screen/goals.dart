@@ -106,15 +106,57 @@ class Goals extends StatelessWidget {
                             fontSize: 18,
                             letterSpacing: 3,
                           ),
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 20,
                         ),
+                       
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Color(0xff1C6DD0),
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(0.0),
+                                bottomRight: Radius.circular(0.0),
+                                topLeft: Radius.circular(40.0),
+                                bottomLeft: Radius.circular(40.0),
+                              ),
+                            ),
+                            width: 74,
+                            height: 12,
+                          ),
+                          Container(
+                            decoration: const BoxDecoration(
+                              color: Color(0xffEEEEEE),
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(40.0),
+                                bottomRight: Radius.circular(40.0),
+                                topLeft: Radius.circular(00.0),
+                                bottomLeft: Radius.circular(0.0),
+                              ),
+                            ),
+                            width: 240,
+                            height: 12,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${goalModel.savedAmount} / ${goalModel.goalAmount}  ريال',
+                            style: TextStyle(
                           LinearPercentIndicator(
                     width: 300.0,
                     lineHeight: 12.0,
@@ -132,7 +174,7 @@ class Goals extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '${goalModel.savedAmount} / ${goalModel.goalAmount}  ريال',
+                              '${goalModel.savedAmount} / ${goalModel.goalAmount} SR',
                               style: TextStyle(
                                   color: detailColor,
                                   fontWeight: FontWeight.w400),
@@ -141,16 +183,13 @@ class Goals extends StatelessWidget {
                               'الباقي ${amountLft} SR',
                               style: TextStyle(
                                 color: detailColor,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 1,
-                              ),
-                            )
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
           ),

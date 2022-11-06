@@ -2,12 +2,14 @@ import 'package:budget_tracker/views/widgets/customText.dart';
 import 'package:budget_tracker/views/widgets/home_Screen/custom_text.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextFieldGoal extends StatelessWidget {
+import 'custom_text_goal.dart';
+
+class CustomTextFialedEditGoal extends StatelessWidget {
   final String text;
   final String? hint;
   final TextEditingController? controller;
 
-  const CustomTextFieldGoal(
+  const CustomTextFialedEditGoal(
       {required this.text, required this.hint, required this.controller});
 
   @override
@@ -18,7 +20,7 @@ class CustomTextFieldGoal extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 10),
-          child: CustomTextGoal(
+          child: CustomTextEditGoal(
             text: text,
           ),
         ),
@@ -29,11 +31,12 @@ class CustomTextFieldGoal extends StatelessWidget {
           child: TextFormField(
             controller: controller,
             decoration: InputDecoration(
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              hintText: hint,
-            ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                hintText: hint,
+                hintTextDirection: TextDirection.rtl,
+                hintStyle: TextStyle(color: Colors.black)),
           ),
         ),
       ],

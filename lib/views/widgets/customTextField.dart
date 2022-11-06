@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String text;
   final String? hint;
- final TextEditingController? controller;
+  final TextEditingController? controller;
 
   const CustomTextField(
       {required this.text, required this.hint, required this.controller});
@@ -16,15 +16,17 @@ class CustomTextField extends StatelessWidget {
         CustomText(
           text: text,
         ),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         TextFormField(
           controller: controller,
           decoration: InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            hintText: hint,
-          ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              hintText: hint,
+              hintTextDirection: TextDirection.rtl),
         ),
       ],
     );
