@@ -45,7 +45,20 @@ class _GoalPageState extends State<GoalPage> {
               final data = _goalController.myGoal[index];
               return GestureDetector(
                   onTap: () {
-                    EditGoal();
+                    Scaffold.of(context)
+                        .showBottomSheet<void>(((BuildContext context) {
+                      return Card(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(color: Colors.white70, width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Container(
+                              height: 532,
+                              child: EditGoal(
+                                goalModel: data,
+                              )));
+                    }));
+                    _goalController.getTransactions();
                   },
                   child: Goals(
                     goalModel: data,
