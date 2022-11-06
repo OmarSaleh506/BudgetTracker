@@ -50,7 +50,7 @@ class _AddGoalsState extends State<AddGoals> {
             id: DateTime.now().toString(),
             goalAmount: goalAmountController.text,
             savedAmount: savedAmountController.text,
-            goalAmountLeft: '0.0',
+            goalAmountLeft:'0.0',
             category: _addTransactionController.selectedCategory,
             image: _addTransactionController.selectedImage.isNotEmpty
                 ? _addTransactionController.selectedImage
