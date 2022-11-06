@@ -90,10 +90,25 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               CurrentOverview(),
-              const SizedBox(
+              SizedBox(
                 height: 20,
               ),
               Budget(),
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 290),
+                child: Text(
+                  'أهداف',
+                  style: TextStyle(
+                    color: detailColor,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    letterSpacing: 2,
+                  ),
+                ),
+              ),
               AddGoal()
             ],
           )),

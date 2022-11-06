@@ -160,9 +160,11 @@ class _AddTransactionState extends State<AddTransaction> {
             ),
             Expanded(
               child: GridView.builder(
+                  scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.all(15),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
+                    crossAxisCount: 1,
+                    crossAxisSpacing: 0,
                   ),
                   itemCount: categories.length,
                   itemBuilder: (BuildContext context, int index) {

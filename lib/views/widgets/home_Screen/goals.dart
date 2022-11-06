@@ -1,4 +1,3 @@
-import 'package:budget_tracker/models/goalModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -6,28 +5,20 @@ import 'package:get/get.dart';
 import '../../../constants/colors.dart';
 import '../../../controllers/addTrans_goal_controller.dart';
 import '../../../controllers/add_goal_controller.dart';
+import '../../../models/goalModel.dart';
 
 class Goals extends StatelessWidget {
-  Goals({
-    Key? key,
-  }) : super(key: key);
-  final GoalsController _goalController = Get.put(GoalsController());
+  final GoalModel goalModel;
+  Goals({Key? key, required this.goalModel}) : super(key: key);
+
+  final GoalsController _goalController = Get.find();
   final AddGoalController _addGoalController = Get.put(AddGoalController());
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          'أهداف',
-          style: TextStyle(
-            color: detailColor,
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-            letterSpacing: 2,
-          ),
-        ),
         SizedBox(
           height: 10,
         ),
@@ -44,7 +35,7 @@ class Goals extends StatelessWidget {
               width: 357,
               height: 172,
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -80,27 +71,25 @@ class Goals extends StatelessWidget {
                                 SizedBox(
                                   width: 10,
                                 ),
-                                Obx(
-                                  (() => Expanded(
-                                        child: CircleAvatar(
-                                          radius: 20,
-                                          backgroundColor: Color(0xff1C6DD0),
-                                          child: SvgPicture.asset(
-                                            "${_addGoalController.selectedImage}",
-                                          ),
-                                        ),
-                                      )),
-                                ),
+                                Expanded(
+                                  child: CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Color(0xff1C6DD0),
+                                    child: SvgPicture.asset(
+                                      "${goalModel.image!}",
+                                    ),
+                                  ),
+                                )
                               ]),
                         ),
-                        Obx((() => Text(
-                              '${_addGoalController.selectedCategory}',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 18,
-                                letterSpacing: 3,
-                              ),
-                            )))
+                        Text(
+                          '${goalModel.category}',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                            letterSpacing: 3,
+                          ),
+                        )
                       ],
                     ),
                     Column(
@@ -147,22 +136,18 @@ class Goals extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Obx(
-                              (() => Text(
-                                    '${_goalController.totalSaved.value} / ${_goalController.totalGoalAmount.value} ريال',
-                                    style: TextStyle(
-                                        color: detailColor,
-                                        fontWeight: FontWeight.w400),
-                                  )),
-                            ),
-                            Obx(
-                              () => Text(
-                                'الباقي ${_goalController.totalGoalAmountLeft.value} ريال',
-                                style: TextStyle(
+                            Text(
+                              '${goalModel.savedAmount} / ${goalModel.goalAmount}  ريال',
+                              style: TextStyle(
                                   color: detailColor,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 1,
-                                ),
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            Text(
+                              'الباقي ${goalModel.goalAmountLeft} SR',
+                              style: TextStyle(
+                                color: detailColor,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 1,
                               ),
                             )
                           ],
