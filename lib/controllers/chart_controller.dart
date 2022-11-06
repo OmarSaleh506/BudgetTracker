@@ -100,7 +100,7 @@ class ChartController extends GetxController {
         } else if (transactionModel.category == 'مقاضي') {
           totalgroceries += double.parse(transactionModel.amount!);
           totalgrocery.value = totalgroceries;
-        } else if (transactionModel.category == 'سكن') {
+        } else if (transactionModel.category == 'اخرى') {
           totalothers += double.parse(transactionModel.amount!);
           totalother.value = totalothers;
         }

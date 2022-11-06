@@ -85,8 +85,8 @@ class _AddTransactionState extends State<AddTransaction> {
           amount: _amountController.text,
           category: _addTransactionController.selectedCategory,
           image: _addTransactionController.selectedImage.isNotEmpty
-              ? "lib/constants/goalsIcons/plus.svg"
-              : _addTransactionController.selectedImage,
+              ?_addTransactionController.selectedImage
+              :"lib/constants/goalsIcons/plus.svg" ,
         );
         await DatabaseProvider.insertTransaction(transactionModel);
         // Get.to(() => HomeScreen());

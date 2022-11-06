@@ -22,8 +22,8 @@ class DashboardScreen extends GetView {
   List<Color> colorList = [
     warningColor,
     darkBlueColor,
-    primaryColor,
-    expenseColor,
+    lightBlueColor,
+    purpleColor,
     lightpinkColor
   ];
 
@@ -32,15 +32,22 @@ class DashboardScreen extends GetView {
   @override
   Widget build(BuildContext context) {
     print("this is ${_homeController.myTransactions.length}");
-    print("internet ${ _chartController.totalInternts}");
+    print("other ${ _chartController.totalother}");
     print("Health ${ _chartController.totalHealth}");
 
     Map<String, double> dataMap = {
       "الصحة": _chartController.totalHealth.value,
       "النقل": _chartController.totaltrans.value,
-      "انترنت": _chartController.totalInternts.value,
+      "سفر": _chartController.totalInternts.value,
       "مقاضي": _chartController.totalgrocery.value,
       "أخرى": _chartController.totalother.value,
+    }.obs;
+    Map<String, String> dataMaps = {
+      "الصحة":"ريال  ${ _chartController.totalHealth.value}                           الصحه ",
+      "النقل": " ريال ${ _chartController.totaltrans.value}                           النقل ",
+      "سفر":  " ريال ${ _chartController.totalInternts.value}                          السفر ",
+      "مقاضي": " ريال ${ _chartController.totalgrocery.value}                      المقاضي ",
+      "أخرى": " ريال ${ _chartController.totalother.value}                            أخرى ",
     };
 
 
@@ -57,20 +64,30 @@ class DashboardScreen extends GetView {
                     dataMap:dataMap,
                     colorList:colorList,
                     chartRadius: MediaQuery.of(context).size.width /2,
-                    centerText: "${_homeController.totalExpense.value} SR \n المجموع" ,
-                    centerTextStyle: TextStyle(fontSize: 25, color: textColor,),
+                    initialAngleInDegree: 0,
+                    centerText: "${_homeController.totalExpense.value} SR \n مجموع المصاريف" ,
+                    centerTextStyle: TextStyle(fontSize: 20, color: textColor,),
                     ringStrokeWidth: 27,
+
+                    chartLegendSpacing: 60,
                     animationDuration: const Duration(seconds: 3),
                     chartType: ChartType.ring,
-                    chartValuesOptions: const ChartValuesOptions(
+                    chartValuesOptions:  ChartValuesOptions(
+                      showChartValues: false,
+                        showChartValuesInPercentage: false,
+                      decimalPlaces: 1,
+
 
                         showChartValuesOutside: true,
                         showChartValueBackground: false,
                     ),
-                    legendOptions: const LegendOptions(
+                    legendLabels: dataMaps,
+                    legendOptions:  LegendOptions(
+
+                      showLegendsInRow: false,
                         showLegends: true,
                         legendShape:BoxShape.rectangle,
-                        legendTextStyle: TextStyle(fontSize: 15, letterSpacing: 2, fontWeight: FontWeight.w400,),
+                        legendTextStyle: TextStyle(fontSize: 15, letterSpacing: 2, fontWeight: FontWeight.w500,),
                       legendPosition: LegendPosition.bottom,
 
                     ),
@@ -98,14 +115,7 @@ class DashboardScreen extends GetView {
                                 fontWeight: FontWeight.bold,
                                 color: detailColor ,letterSpacing: 0.5,
                               ),),
-                            // Text(
-                            // "View Detail",
-                            // style: TextStyle(
-                            // fontSize: 10,
-                            // fontWeight: FontWeight.w400,
-                            // color: detailColor,letterSpacing: 0.5,
-                            // decoration: TextDecoration.underline),
-                            // )
+
                           ],
                         ),
 
@@ -118,7 +128,7 @@ class DashboardScreen extends GetView {
                           _homeController.myTransactions.map((transaction){
                             final text = transaction.amount;
                             final bool isIncome = transaction.type == 'دخل' ? true : false;
-                            final formatAmount = isIncome ? '+ $text' : '- $text';
+                            final formatAmount = isIncome ? ' $text +' : ' $text -';
                             return TransactionWidget(transactionModel: transaction,
                               formatAmount: formatAmount,
                               isIncome: isIncome,);
