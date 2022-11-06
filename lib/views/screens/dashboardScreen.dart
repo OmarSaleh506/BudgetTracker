@@ -42,6 +42,13 @@ class DashboardScreen extends GetView {
       "مقاضي": _chartController.totalgrocery.value,
       "أخرى": _chartController.totalother.value,
     }.obs;
+    Map<String, String> dataMaps = {
+      "الصحة":"ريال  ${ _chartController.totalHealth.value}                           الصحه ",
+      "النقل": " ريال ${ _chartController.totaltrans.value}                           النقل ",
+      "سفر":  " ريال ${ _chartController.totalInternts.value}                          السفر ",
+      "مقاضي": " ريال ${ _chartController.totalgrocery.value}                      المقاضي ",
+      "أخرى": " ريال ${ _chartController.totalother.value}                            أخرى ",
+    };
 
 
     int touchedIndex=1;
@@ -57,22 +64,30 @@ class DashboardScreen extends GetView {
                     dataMap:dataMap,
                     colorList:colorList,
                     chartRadius: MediaQuery.of(context).size.width /2,
+                    initialAngleInDegree: 0,
                     centerText: "${_homeController.totalExpense.value} SR \n مجموع المصاريف" ,
-                    centerTextStyle: TextStyle(fontSize: 25, color: textColor,),
+                    centerTextStyle: TextStyle(fontSize: 20, color: textColor,),
                     ringStrokeWidth: 27,
+
+                    chartLegendSpacing: 60,
                     animationDuration: const Duration(seconds: 3),
                     chartType: ChartType.ring,
                     chartValuesOptions:  ChartValuesOptions(
-                      showChartValues: true,
-                        showChartValuesInPercentage: true,
+                      showChartValues: false,
+                        showChartValuesInPercentage: false,
+                      decimalPlaces: 1,
+
 
                         showChartValuesOutside: true,
                         showChartValueBackground: false,
                     ),
+                    legendLabels: dataMaps,
                     legendOptions:  LegendOptions(
+
+                      showLegendsInRow: false,
                         showLegends: true,
                         legendShape:BoxShape.rectangle,
-                        legendTextStyle: TextStyle(fontSize: 15, letterSpacing: 2, fontWeight: FontWeight.w400,),
+                        legendTextStyle: TextStyle(fontSize: 15, letterSpacing: 2, fontWeight: FontWeight.w500,),
                       legendPosition: LegendPosition.bottom,
 
                     ),
