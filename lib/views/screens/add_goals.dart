@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../constants/goal_categories.dart';
 import '../../controllers/addTrans_goal_controller.dart';
+import '../../controllers/add_goal_controller.dart';
 import '../../models/goalModel.dart';
 import '../../providers/db_provider_goals.dart';
 import '../../constants/colors.dart';
@@ -23,15 +24,23 @@ class _AddGoalsState extends State<AddGoals> {
   Widget build(BuildContext context) {
     final AddGoalController _addTransactionController =
         Get.put(AddGoalController());
-    final TextEditingController _goalAmountController = TextEditingController();
-    final TextEditingController _savedAmountController =
-        TextEditingController();
+    final GoalsController _goalController = Get.find<GoalsController>();
 
+    final TextEditingController goalAmountController = TextEditingController();
+    // final TextEditingController goalAmountLeftController =
+    //     TextEditingController();
+
+    final TextEditingController savedAmountController = TextEditingController();
     final DateTime now = DateTime.now();
-
+    // final double goalLeft =
+    //     double.parse((goalAmountController.text).toString());
+    // final double goalLeft2 =
+    //     double.parse((savedAmountController.text).toString());
+    // final double totalGoalLeft = goalLeft - goalLeft2;
+    // final String finalTotalGoalLeft = totalGoalLeft.toString();
     _addGoalsTransaction() async {
-      if (_goalAmountController.text.isEmpty ||
-          _savedAmountController.text.isEmpty) {
+      if (goalAmountController.text.isEmpty ||
+          savedAmountController.text.isEmpty) {
         Get.snackbar(
           'Required',
           'All fields are requried',
@@ -39,18 +48,25 @@ class _AddGoalsState extends State<AddGoals> {
       } else {
         final GoalModel transactionModel = GoalModel(
             id: DateTime.now().toString(),
-            goalAmount: _goalAmountController.text,
+            goalAmount: goalAmountController.text,
+            savedAmount: savedAmountController.text,
             goalAmountLeft: '0.0',
-            savedAmount: _savedAmountController.text,
             category: _addTransactionController.selectedCategory,
             image: _addTransactionController.selectedImage.isNotEmpty
                 ? _addTransactionController.selectedImage
                 : "lib/constants/goalsIcons/plus.svg",
             color: _addTransactionController.selectedColor.isNotEmpty
-                ? _addTransactionController.selectedCategory
-                : "اخرى");
+                ? _addTransactionController.selectedColor
+                : "0xff1C6DD0");
         await DatabaseProviderGoals.insertGoal(transactionModel);
         Get.to(HomeScreen());
+        print("this is id ${transactionModel.id}");
+        print("this is goalAmount ${transactionModel.goalAmount}");
+        print("this is savedAmount ${transactionModel.savedAmount}");
+        print("this is goalAmountLeft ${transactionModel.goalAmountLeft}");
+        print("this is category ${transactionModel.category}");
+        print("this is image ${transactionModel.image}");
+        print("this is color ${transactionModel.color}");
       }
     }
 
@@ -122,7 +138,7 @@ class _AddGoalsState extends State<AddGoals> {
                 child: Column(
                   children: [
                     CustomTextFieldGoal(
-                      controller: _goalAmountController,
+                      controller: goalAmountController,
                       text: 'المبلغ',
                       hint: '200...',
                     ),
@@ -130,7 +146,7 @@ class _AddGoalsState extends State<AddGoals> {
                       height: 20,
                     ),
                     CustomTextFieldGoal(
-                      controller: _savedAmountController,
+                      controller: savedAmountController,
                       text: 'أدخرت',
                       hint: '200...',
                     ),

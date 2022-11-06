@@ -3,7 +3,7 @@ class GoalModel {
   final String? category;
   final String? image;
   final String? goalAmount;
-  final String? goalAmountLeft;
+  late final String? goalAmountLeft;
   final String? savedAmount;
   final String? color;
 
