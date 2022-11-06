@@ -1,3 +1,4 @@
+import 'package:color_parser/color_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,10 @@ class Goals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double amountLft = double.parse(goalModel.goalAmount!)  - double.parse(goalModel.savedAmount!);
+    ColorParser parser;
+    parser = ColorParser.value(int.parse(goalModel.color!));
+    Color? color = parser.getColor();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -74,7 +79,7 @@ class Goals extends StatelessWidget {
                                 Expanded(
                                   child: CircleAvatar(
                                     radius: 20,
-                                    backgroundColor: Color(0xff1C6DD0),
+                                    backgroundColor: color,
                                     child: SvgPicture.asset(
                                       "${goalModel.image!}",
                                     ),
@@ -143,7 +148,7 @@ class Goals extends StatelessWidget {
                                   fontWeight: FontWeight.w400),
                             ),
                             Text(
-                              'الباقي ${goalModel.goalAmountLeft} SR',
+                              'الباقي ${amountLft} SR',
                               style: TextStyle(
                                 color: detailColor,
                                 fontWeight: FontWeight.w600,
