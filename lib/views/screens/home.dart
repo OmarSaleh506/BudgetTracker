@@ -109,6 +109,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              
               AddGoal()
             ],
           )),

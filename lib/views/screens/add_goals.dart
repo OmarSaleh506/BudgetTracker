@@ -25,19 +25,9 @@ class _AddGoalsState extends State<AddGoals> {
     final AddGoalController _addTransactionController =
         Get.put(AddGoalController());
     final GoalsController _goalController = Get.find<GoalsController>();
-
     final TextEditingController goalAmountController = TextEditingController();
-    // final TextEditingController goalAmountLeftController =
-    //     TextEditingController();
-
     final TextEditingController savedAmountController = TextEditingController();
     final DateTime now = DateTime.now();
-    // final double goalLeft =
-    //     double.parse((goalAmountController.text).toString());
-    // final double goalLeft2 =
-    //     double.parse((savedAmountController.text).toString());
-    // final double totalGoalLeft = goalLeft - goalLeft2;
-    // final String finalTotalGoalLeft = totalGoalLeft.toString();
     _addGoalsTransaction() async {
       if (goalAmountController.text.isEmpty ||
           savedAmountController.text.isEmpty) {
@@ -50,7 +40,7 @@ class _AddGoalsState extends State<AddGoals> {
             id: DateTime.now().toString(),
             goalAmount: goalAmountController.text,
             savedAmount: savedAmountController.text,
-            goalAmountLeft:'0.0',
+            goalAmountLeft: '0.0',
             category: _addTransactionController.selectedCategory,
             image: _addTransactionController.selectedImage.isNotEmpty
                 ? _addTransactionController.selectedImage

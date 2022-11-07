@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:budget_tracker/constants/colors.dart';
 import 'package:get/get.dart';
 import 'package:sqflite/sqflite.dart';
-
 import '../models/goalModel.dart';
 
 class DatabaseProviderGoals {
@@ -34,32 +33,32 @@ class DatabaseProviderGoals {
     }
   }
 
-  static Future<int?> insertGoal(GoalModel goals) async {
-    return await _db?.insert(_tableName, goals.toMap());
+  static Future<int> insertGoal(GoalModel goals) async {
+    return await _db!.insert(_tableName, goals.toMap());
   }
 
-  static Future<int?> deleteGoal(String id) async {
-    return await _db?.delete(_tableName, where: 'id=?', whereArgs: [id]);
+  static Future<int> deleteGoal(String id) async {
+    return await _db!.delete(_tableName, where: 'id=?', whereArgs: [id]);
   }
 
-  static Future<int?> updateGoal(GoalModel tm) async {
-    return await _db?.rawUpdate('''
+  static Future<int> updateGoal(GoalModel gm) async {
+    return await _db!.rawUpdate('''
       UPDATE $_tableName 
       goalAmount = ?,
       goalAmountLeft = ?,
       savedAmount = ?,
       category = ?,
       image = ?,
-      color = ?,
+      color = ?
       WHERE id = ? 
 ''', [
-      tm.goalAmount,
-      tm.savedAmount,
-      tm.category,
-      tm.id,
-      tm.goalAmountLeft,
-      tm.image,
-      tm.color
+      gm.goalAmount,
+      gm.goalAmountLeft,
+      gm.savedAmount,
+      gm.category,
+      gm.image,
+      gm.color,
+      gm.id
     ]);
   }
 

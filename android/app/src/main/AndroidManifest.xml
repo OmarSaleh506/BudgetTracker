@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.budget_tracker">
    <application
-        android:label="budget_tracker"
+        android:label="وفير"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -12,6 +12,7 @@ import 'controllers/addTransactionController.dart';
 import 'models/transactionModel.dart';
 import 'providers/db_provider_goals.dart';
 import 'views/screens/first_page.dart';
+import 'views/screens/start_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Themes.lightTheme,
-      home: FirstPage(),
+      home: StartPage(),
     );
   }
 }
