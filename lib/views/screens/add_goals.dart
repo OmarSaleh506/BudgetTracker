@@ -36,7 +36,7 @@ class _AddGoalsState extends State<AddGoals> {
           'All fields are requried',
         );
       } else {
-        final GoalModel transactionModel = GoalModel(
+        final GoalModel goalModel = GoalModel(
             id: DateTime.now().toString(),
             goalAmount: goalAmountController.text,
             savedAmount: savedAmountController.text,
@@ -48,15 +48,15 @@ class _AddGoalsState extends State<AddGoals> {
             color: _addTransactionController.selectedColor.isNotEmpty
                 ? _addTransactionController.selectedColor
                 : "0xff1C6DD0");
-        await DatabaseProviderGoals.insertGoal(transactionModel);
+        await DatabaseProviderGoals.insertGoal(goalModel);
         Get.to(HomeScreen());
-        print("this is id ${transactionModel.id}");
-        print("this is goalAmount ${transactionModel.goalAmount}");
-        print("this is savedAmount ${transactionModel.savedAmount}");
-        print("this is goalAmountLeft ${transactionModel.goalAmountLeft}");
-        print("this is category ${transactionModel.category}");
-        print("this is image ${transactionModel.image}");
-        print("this is color ${transactionModel.color}");
+        print("this is id ${goalModel.id}");
+        print("this is goalAmount ${goalModel.goalAmount}");
+        print("this is savedAmount ${goalModel.savedAmount}");
+        print("this is goalAmountLeft ${goalModel.goalAmountLeft}");
+        print("this is category ${goalModel.category}");
+        print("this is image ${goalModel.image}");
+        print("this is color ${goalModel.color}");
       }
     }
 
