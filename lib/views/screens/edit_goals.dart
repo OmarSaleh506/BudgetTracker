@@ -7,7 +7,6 @@ import '../../models/goalModel.dart';
 import '../../providers/db_provider_goals.dart';
 import '../widgets/custom_edit_goal.dart';
 import '../widgets/home_Screen/custom_text.dart';
-import 'goal_page.dart';
 
 class EditGoal extends StatefulWidget {
   final GoalModel goalModel;
@@ -19,44 +18,24 @@ class EditGoal extends StatefulWidget {
 }
 
 class _EditGoalState extends State<EditGoal> {
-  final TextEditingController goalAmountController = TextEditingController();
-
-  final TextEditingController savedAmountController = TextEditingController();
-
   final AddGoalController addGoalTransactionController =
       Get.put(AddGoalController());
+  final TextEditingController _goalAmountController = TextEditingController();
+  final TextEditingController _savedAmountController = TextEditingController();
+  final TextEditingController _goalAmountLeftController =
+      TextEditingController();
+
   @override
   void initState() {
     super.initState();
     setState(() {
-      goalAmountController.text = widget.goalModel.goalAmount!;
-      savedAmountController.text = widget.goalModel.savedAmount!;
+      _goalAmountController.text = widget.goalModel.goalAmount!;
+      _savedAmountController.text = widget.goalModel.savedAmount!;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    _updateGoal() async {
-      if (goalAmountController.text.isEmpty ||
-          savedAmountController.text.isEmpty) {
-        Get.snackbar(
-          'Required',
-          'All fields are requried',
-        );
-      } else {
-        final GoalModel transactionModel = GoalModel(
-          id: DateTime.now().toString(),
-          goalAmount: goalAmountController.text,
-          savedAmount: savedAmountController.text,
-          goalAmountLeft: '0.0',
-        );
-        await DatabaseProviderGoals.updateGoal(transactionModel);
-        Get.to(GoalPage());
-        print("this is goalAmount ${transactionModel.goalAmount}");
-        print("this is savedAmount ${transactionModel.savedAmount}");
-      }
-    }
-
     return Scaffold(
       body: Center(
         child: Column(
@@ -73,7 +52,7 @@ class _EditGoalState extends State<EditGoal> {
               radius: 20,
               backgroundColor: Color(0xff1C6DD0),
               child: SvgPicture.asset(
-                "lib/constants/goalsIcons/house.svg",
+                "${widget.goalModel.image}",
                 color: lightModeScaffoldBgCle,
               ),
             ),
@@ -93,14 +72,14 @@ class _EditGoalState extends State<EditGoal> {
             CustomTextFialedEditGoal(
                 text: "المبلغ",
                 hint: widget.goalModel.goalAmount,
-                controller: goalAmountController),
+                controller: _goalAmountController),
             SizedBox(
               height: 20,
             ),
             CustomTextFialedEditGoal(
                 text: "ادخرت",
                 hint: widget.goalModel.savedAmount,
-                controller: savedAmountController),
+                controller: _savedAmountController),
             SizedBox(
               height: 20,
             ),
@@ -109,7 +88,10 @@ class _EditGoalState extends State<EditGoal> {
               width: 351,
               child: ElevatedButton(
                 onPressed: () async {
-                  _updateGoal();
+                  print(_goalAmountController.text);
+                  print(_savedAmountController.text);
+                  print(_goalAmountLeftController.text);
+                  await _updateGoal();
                 },
                 style: ButtonStyle(
                     backgroundColor:
@@ -177,5 +159,27 @@ class _EditGoalState extends State<EditGoal> {
         ),
       ),
     );
+  }
+
+  _updateGoal() async {
+    if (_goalAmountController.text.isEmpty ||
+        _savedAmountController.text.isEmpty) {
+      Get.snackbar(
+        'Required',
+        'All fields are requried',
+      );
+    } else {
+      final GoalModel transactionModel = GoalModel(
+        id: widget.goalModel.id,
+        goalAmount: _goalAmountController.text,
+        savedAmount: _savedAmountController.text,
+        goalAmountLeft: _goalAmountLeftController.text,
+        category: widget.goalModel.category,
+        color: widget.goalModel.color,
+        image: widget.goalModel.image,
+      );
+      await DatabaseProviderGoals.updateGoal(transactionModel);
+      Get.back();
+    }
   }
 }

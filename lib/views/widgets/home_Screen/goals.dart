@@ -20,19 +20,21 @@ class Goals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double amountLft = double.parse(goalModel.goalAmount!)  - double.parse(goalModel.savedAmount!);
+    double amountLft = double.parse(goalModel.goalAmount!) -
+        double.parse(goalModel.savedAmount!);
     ColorParser parser;
     parser = ColorParser.value(int.parse(goalModel.color!));
     Color? color = parser.getColor();
-    double? goalPrecent =double.parse(goalModel.savedAmount!)/double.parse(goalModel.goalAmount!);
+    double? goalPrecent = double.parse(goalModel.savedAmount!) /
+        double.parse(goalModel.goalAmount!);
 
-    double roundDouble(double value, int places){
+    double roundDouble(double value, int places) {
       num mod = pow(10.0, places);
 
       return ((value * mod).round().toDouble() / mod);
     }
-    var percentRound= roundDouble(goalPrecent, 1) *100;
 
+    var percentRound = roundDouble(goalPrecent, 1) * 100;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -40,119 +42,117 @@ class Goals extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-
-          Card(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: Colors.white70, width: 1),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Container(
-              width: 357,
-              height: 172,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: 98,
-                          height: 41,
-                          decoration: BoxDecoration(
-                            color: Color(0xffEEEEEE),
-                            borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(40.0),
-                              bottomRight: Radius.circular(40.0),
-                              topLeft: Radius.circular(40.0),
-                              bottomLeft: Radius.circular(40.0),
-                            ),
+        Card(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: Colors.white70, width: 1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Container(
+            width: 357,
+            height: 172,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        width: 98,
+                        height: 41,
+                        decoration: BoxDecoration(
+                          color: Color(0xffEEEEEE),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(40.0),
+                            bottomRight: Radius.circular(40.0),
+                            topLeft: Radius.circular(40.0),
+                            bottomLeft: Radius.circular(40.0),
                           ),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  '% $percentRound ',
-                                  style: TextStyle(
-                                      color: detailColor,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: CircleAvatar(
-                                    radius: 20,
-                                    backgroundColor: color,
-                                    child: SvgPicture.asset(
-                                      "${goalModel.image!}",
-                                    ),
-                                  ),
-                                )
-                              ]),
                         ),
-                        Text(
-                          '${goalModel.category}',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                            letterSpacing: 3,
-                          ),
-                        )
-                      ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        LinearPercentIndicator(
-                          width: 300.0,
-                          lineHeight: 12.0,
-                          percent: roundDouble(goalPrecent,1),
-                          progressColor: color,
-                          barRadius: Radius.circular(16),
-                          animation: true,
-                          animationDuration: 1000,
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '${goalModel.savedAmount} / ${goalModel.goalAmount}  ريال',
-                              style: TextStyle(
-                                  color: detailColor,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              'الباقي ${amountLft} SR',
-                              style: TextStyle(
-                                color: detailColor,
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 1,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                width: 20,
                               ),
-                            )
-                          ],
-                        )
-                      ],
-                    )
-                  ],
-                ),
+                              Text(
+                                '% $percentRound ',
+                                style: TextStyle(
+                                    color: detailColor,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: color,
+                                  child: SvgPicture.asset(
+                                    "${goalModel.image!}",
+                                  ),
+                                ),
+                              )
+                            ]),
+                      ),
+                      Text(
+                        '${goalModel.category}',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 18,
+                          letterSpacing: 3,
+                        ),
+                      )
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      LinearPercentIndicator(
+                        width: 300.0,
+                        lineHeight: 12.0,
+                        percent: roundDouble(goalPrecent, 1),
+                        progressColor: color,
+                        barRadius: Radius.circular(16),
+                        animation: true,
+                        animationDuration: 1000,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '${goalModel.savedAmount} / ${goalModel.goalAmount} SR',
+                            style: TextStyle(
+                                color: detailColor,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          Text(
+                            'الباقي ${amountLft} SR',
+                            style: TextStyle(
+                              color: detailColor,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  )
+                ],
               ),
             ),
           ),
-
+        ),
       ],
     );
   }
