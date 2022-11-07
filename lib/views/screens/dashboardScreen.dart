@@ -1,23 +1,15 @@
 import 'package:budget_tracker/controllers/chart_controller.dart';
-import 'package:budget_tracker/models/transactionModel.dart';
 import 'package:budget_tracker/views/screens/edit_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:budget_tracker/constants/colors.dart';
-import 'package:intl/intl.dart';
-import '../../controllers/add_goal_controller.dart';
 import '../../controllers/home_controlle.dart';
-import '../widgets/chartIndicator.dart';
 import '../widgets/transaction.dart';
-import 'edit_goals.dart';
-import 'file.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class DashboardScreen extends StatelessWidget {
   final ChartController _chartController = Get.put(ChartController());
   final HomeController _homeController = Get.find<HomeController>();
-  final GoalsController _goalController = Get.find<GoalsController>();
 
   List<Color> colorList = [
     warningColor,
@@ -53,10 +45,9 @@ class DashboardScreen extends StatelessWidget {
           " ريال ${_chartController.totalother.value}                            أخرى ",
     };
 
-    int touchedIndex = 1;
     return Obx(() => Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             "وضعك المالي",
           ),
           backgroundColor: Colors.transparent,
@@ -75,7 +66,7 @@ class DashboardScreen extends StatelessWidget {
                 initialAngleInDegree: 0,
                 centerText:
                     "${_homeController.totalExpense.value} SR \n مجموع المصاريف",
-                centerTextStyle: TextStyle(
+                centerTextStyle: const TextStyle(
                   fontSize: 20,
                   color: textColor,
                 ),
@@ -126,71 +117,55 @@ class DashboardScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-
               ]),
-
             ),
             Expanded(
               child: _homeController.myTransactions.length == 0
-                  ? Text(
-                "لا توجد عمليات لعرضها",
-                style: TextStyle(fontSize: 18),
-              )
-                  : //show message if there is no any transaction
-              ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: _homeController.myTransactions.length,
-                itemBuilder: (context, i) {
-                  final transaction = _homeController.myTransactions[i];
-                  final text = transaction.amount;
+                  ? //show message if there is no any transaction
+                  const Text(
+                      "لا توجد عمليات لعرضها",
+                      style: TextStyle(fontSize: 18),
+                    )
+                  : ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: _homeController.myTransactions.length,
+                      itemBuilder: (context, i) {
+                        final transaction = _homeController.myTransactions[i];
+                        final text = transaction.amount;
 
-                  final bool isIncome =
-                  transaction.type == 'دخل' ? true : false;
-                  final formatAmount = isIncome ? '+ $text' : '- $text';
+                        final bool isIncome =
+                            transaction.type == 'دخل' ? true : false;
+                        final formatAmount = isIncome ? '+ $text' : '- $text';
 
-                  return GestureDetector(
-                    onTap: () async {
-                      Scaffold.of(context).showBottomSheet<void>(
-                          ((BuildContext context) {
-                            return Card(
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      color: Colors.white70, width: 1),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Container(
-                                    height: 532,
-                                    child: EditTransaction(
-                                      transactionModel: transaction,
-                                    )));
-                          }));
-                      await _homeController.getTransactions();
-                    },
-                    child: TransactionWidget(
-                        transactionModel: transaction,
-                        formatAmount: formatAmount,
-                        isIncome: isIncome),
-                  );
-
-                  return SizedBox();
-                },
-              ), //or populate list to Column children if there is transaction data.
-
+                        return GestureDetector(
+                          onTap: () async {
+                            Scaffold.of(context)
+                                .showBottomSheet<void>(((BuildContext context) {
+                              return Card(
+                                  shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Colors.white70, width: 1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Container(
+                                      height: 532,
+                                      child: EditTransaction(
+                                        transactionModel: transaction,
+                                      )));
+                            }));
+                            await _homeController.getTransactions();
+                          },
+                          child: TransactionWidget(
+                              transactionModel: transaction,
+                              formatAmount: formatAmount,
+                              isIncome: isIncome),
+                        );
+                      },
+                    ),
+              //or populate list to Column children if there is transaction data.
             ),
           ]),
-
         )));
   }
 }
-//       Scaffold.of(context)
-// .showBottomSheet<void>(((BuildContext context) {
-// return Card(
-// shape: RoundedRectangleBorder(
-// side: BorderSide(color: Colors.white70, width: 1),
-// borderRadius: BorderRadius.circular(10),
-// ),
-// child: Container(
-// height: 532,
-// child: EditTransaction(transactionModel: transaction,)));
-// }));
