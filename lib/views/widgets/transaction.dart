@@ -1,17 +1,22 @@
+import 'package:budget_tracker/views/widgets/home_Screen/add_goal.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_tracker/constants/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../models/goalModel.dart';
 import '../../models/transactionModel.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../providers/db_provider.dart';
+import '../screens/edit_goals.dart';
+import '../screens/edit_transaction.dart';
 
 class TransactionWidget extends StatelessWidget {
   final TransactionModel transactionModel;
   final bool isIncome;
   final String formatAmount;
+  
   TransactionWidget({
     Key? key,
     required this.transactionModel,
@@ -30,17 +35,7 @@ class TransactionWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () async {
-                    await DatabaseProvider.deleteTransaction(
-                        transactionModel.id!);
-                    // Get.back();
-                  },
-                  icon: Icon(
-                    Icons.delete,
-                    color: expenseColor,
-                  ),
-                ),
+
                 Text(
                   formatAmount,
                   style: TextStyle(

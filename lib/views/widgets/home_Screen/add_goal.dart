@@ -65,7 +65,7 @@ class AddGoal extends StatelessWidget {
                 children: [
                   TextButton.icon(
                       onPressed: (() {
-                        Get.to(GoalPage());
+                        Get.to(()=> GoalPage());
                       }),
                       icon: Icon(Icons.chevron_left),
                       label: Text('جميع الأهداف'))

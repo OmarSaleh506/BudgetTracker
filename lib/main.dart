@@ -1,3 +1,5 @@
+import 'package:budget_tracker/views/screens/dashboardScreen.dart';
+import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -31,7 +33,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: Themes.lightTheme,
-      home: StartPage(),
+      home: HomeScreen(),
     );
   }
 }

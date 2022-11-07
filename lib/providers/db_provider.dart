@@ -43,19 +43,21 @@ class DatabaseProvider {
 
   static Future<int?> updateTransaction(TransactionModel tm) async {
     return await _db?.rawUpdate('''
-      UPDATE $_tableName 
+      UPDATE $_tableName
       SET type = ?,
       name = ?,
       amount = ?,
-      category = ?,
+      category = ?
       WHERE id = ? 
-      image = ?,
+     
+   
 ''', [
       tm.type,
       tm.name,
       tm.amount,
       tm.category,
       tm.id,
+
     ]);
   }
 
