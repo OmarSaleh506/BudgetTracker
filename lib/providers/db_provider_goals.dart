@@ -44,20 +44,20 @@ class DatabaseProviderGoals {
   static Future<int> updateGoal(GoalModel gm) async {
     return await _db!.rawUpdate('''
       UPDATE $_tableName 
-      goalAmount = ?,
-      goalAmountLeft = ?,
+      SET goalAmount = ?,
       savedAmount = ?,
+      goalAmountLeft = ?,
       category = ?,
-      image = ?,
-      color = ?
+      color = ?,
+      image = ?
       WHERE id = ? 
 ''', [
       gm.goalAmount,
-      gm.goalAmountLeft,
       gm.savedAmount,
+      gm.goalAmountLeft,
       gm.category,
-      gm.image,
       gm.color,
+      gm.image,
       gm.id
     ]);
   }
