@@ -22,8 +22,8 @@ class _EditGoalState extends State<EditGoal> {
       Get.put(AddGoalController());
   final TextEditingController _goalAmountController = TextEditingController();
   final TextEditingController _savedAmountController = TextEditingController();
-  final TextEditingController _goalAmountLeftController =
-      TextEditingController();
+  // final TextEditingController _goalAmountLeftController =
+  //     TextEditingController();
 
   @override
   void initState() {
@@ -90,7 +90,7 @@ class _EditGoalState extends State<EditGoal> {
                 onPressed: () async {
                   print(_goalAmountController.text);
                   print(_savedAmountController.text);
-                  print(_goalAmountLeftController.text);
+                  // print(_goalAmountLeftController.text);
                   await _updateGoal();
                 },
                 style: ButtonStyle(
@@ -169,16 +169,12 @@ class _EditGoalState extends State<EditGoal> {
         'All fields are requried',
       );
     } else {
-      final GoalModel transactionModel = GoalModel(
-        id: widget.goalModel.id,
+      final GoalModel goalModel = GoalModel(
+        id: widget.goalModel.id!,
         goalAmount: _goalAmountController.text,
         savedAmount: _savedAmountController.text,
-        goalAmountLeft: _goalAmountLeftController.text,
-        category: widget.goalModel.category,
-        color: widget.goalModel.color,
-        image: widget.goalModel.image,
       );
-      await DatabaseProviderGoals.updateGoal(transactionModel);
+      await DatabaseProviderGoals.updateGoal(goalModel);
       Get.back();
     }
   }

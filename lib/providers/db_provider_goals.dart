@@ -43,24 +43,26 @@ class DatabaseProviderGoals {
 
   static Future<int> updateGoal(GoalModel gm) async {
     return await _db!.rawUpdate('''
-      UPDATE $_tableName 
-      goalAmount = ?,
-      goalAmountLeft = ?,
-      savedAmount = ?,
-      category = ?,
-      image = ?,
-      color = ?
-      WHERE id = ? 
+      UPDATE $_tableName
+       SET goalAmount = ?, 
+       savedAmount = ?
+        WHERE id = ? 
 ''', [
       gm.goalAmount,
-      gm.goalAmountLeft,
       gm.savedAmount,
-      gm.category,
-      gm.image,
-      gm.color,
       gm.id
     ]);
   }
+
+  //  Future<int> updateGoal(GoalModel goal) async {
+  //   int result = await _db!.update(
+  //     'users',
+  //     goal.toMap(),
+  //     where: "id = ?",
+  //     whereArgs: [goal.id],
+  //   );
+  //   return result;
+  // }
 
   static Future<List<Map<String, dynamic>>> queryGoal() async {
     return await _db!.query(_tableName);
