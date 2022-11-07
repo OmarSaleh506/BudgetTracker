@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:budget_tracker/controllers/home_controlle.dart';
 import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -28,6 +29,7 @@ class _AddTransactionState extends State<AddTransaction> {
   Widget build(BuildContext context) {
     final AddTransactionController _addTransactionController =
         Get.put(AddTransactionController());
+    final HomeController _homeController= Get.find<HomeController>();
     final TextEditingController _nameController = TextEditingController();
     final TextEditingController _amountController = TextEditingController();
     final List<String> _transactionTypes = ['دخل', 'صرف'];
@@ -89,6 +91,7 @@ class _AddTransactionState extends State<AddTransaction> {
               :"lib/constants/goalsIcons/plus.svg" ,
         );
         await DatabaseProvider.insertTransaction(transactionModel);
+        print("this is for impty ${_addTransactionController.transactionType.isNotEmpty}");
         // Get.to(() => HomeScreen());
         _openCustomDialog(context);
 
@@ -247,7 +250,11 @@ class _AddTransactionState extends State<AddTransaction> {
               height: 60,
               width: 311,
               child: ElevatedButton(
-                onPressed: () => _addTransaction(),
+                onPressed: () async {
+                 _addTransaction();
+                 await _homeController.getTransactions();
+                },
+
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(primaryColor),
