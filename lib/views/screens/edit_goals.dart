@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../constants/colors.dart';
 import '../../controllers/addTrans_goal_controller.dart';
+import '../../controllers/add_goal_controller.dart';
 import '../../models/goalModel.dart';
 import '../../providers/db_provider_goals.dart';
 import '../widgets/custom_edit_goal.dart';
@@ -22,6 +23,7 @@ class _EditGoalState extends State<EditGoal> {
   final TextEditingController _savedAmountController = TextEditingController();
   final TextEditingController _goalAmountLeftController =
       TextEditingController();
+  final GoalsController _goalController = Get.find<GoalsController>();
 
   @override
   void initState() {
@@ -93,6 +95,8 @@ class _EditGoalState extends State<EditGoal> {
                   print(_savedAmountController.text);
                   print(_goalAmountLeftController.text);
                   await _updateGoal();
+                  await _goalController.getTransactions();
+
                 },
                 style: ButtonStyle(
                     backgroundColor:
@@ -127,6 +131,8 @@ class _EditGoalState extends State<EditGoal> {
               child: TextButton(
                 onPressed: () async {
                   await DatabaseProviderGoals.deleteGoal(widget.goalModel.id!);
+                  await _goalController.getTransactions();
+
                   Get.back();
                 },
                 style: ButtonStyle(

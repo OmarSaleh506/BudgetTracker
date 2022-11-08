@@ -44,6 +44,8 @@ class ChartController extends GetxController {
         total -= double.parse(transactionModel.amount!);
       }
     }
+
+
   }
 
   getTransactions() async {
@@ -90,23 +92,24 @@ class ChartController extends GetxController {
       if (transactionModel.type == "صرف") {
         if (transactionModel.category == 'سفر') {
           totalInternt += double.parse(transactionModel.amount!);
-          totalInternts.value=totalInternt;
         } else if (transactionModel.category == 'صحه') {
           totalhealth += double.parse(transactionModel.amount!);
-          totalHealth.value = totalhealth;
+
         } else if (transactionModel.category == 'نقل') {
           totaltranspo += double.parse(transactionModel.amount!);
-          totaltrans.value = totaltranspo;
+
         } else if (transactionModel.category == 'مقاضي') {
           totalgroceries += double.parse(transactionModel.amount!);
-          totalgrocery.value = totalgroceries;
+
         } else if (transactionModel.category == 'اخرى') {
           totalothers += double.parse(transactionModel.amount!);
-          totalother.value = totalothers;
         }
       }
     }
-
-    getTransactions();
+    totalInternts.value=totalInternt;
+    totalHealth.value = totalhealth;
+    totaltrans.value = totaltranspo;
+    totalgrocery.value = totalgroceries;
+    totalother.value = totalothers;
   }
 }
