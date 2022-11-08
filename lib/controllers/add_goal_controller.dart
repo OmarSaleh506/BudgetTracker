@@ -48,7 +48,7 @@ class GoalsController extends GetxController {
       // total += double.parse(transactionGoalModel.goalAmountLeft!);
     }
 
-    getTransactions();
+
   }
 
   tracker(List<GoalModel> gm) {

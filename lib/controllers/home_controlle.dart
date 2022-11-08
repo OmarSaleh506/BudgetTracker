@@ -35,7 +35,7 @@ class HomeController extends GetxController {
   getTransactions() async {
     final List<TransactionModel> transactionsFromDB = [];
     List<Map<String, dynamic>> transactions =
-        await DatabaseProvider.queryTransaction();
+    await DatabaseProvider.queryTransaction();
     transactionsFromDB.assignAll(transactions.reversed
         .map((data) => TransactionModel().fromJson(data))
         .toList());
@@ -43,6 +43,7 @@ class HomeController extends GetxController {
     getTotalAmount(transactionsFromDB);
     tracker(transactionsFromDB);
     getTotalCategoryInternet(transactionsFromDB);
+
   }
 
   Future<int?> deleteTransaction(String id) async {
@@ -65,6 +66,7 @@ class HomeController extends GetxController {
         total -= double.parse(transactionModel.amount!);
       }
     }
+
 
 print("in total amount");
 
@@ -90,7 +92,7 @@ print("in total amount");
     balance = income - expense;
     totalIncome.value = income;
     totalExpense.value = expense;
-    totalBalance.value = balance - saved;
+    totalBalance.value = balance ;
   }
 
   getTotalCategoryInternet(List<TransactionModel> tm) async {
@@ -106,22 +108,23 @@ print("in total amount");
       if (transactionModel.type == "صرف") {
         if (transactionModel.category == 'سفر') {
           totalInternt += double.parse(transactionModel.amount!);
-          totalInternts.value=totalInternt;
 
         } else if (transactionModel.category == 'صحه') {
           totalhealth += double.parse(transactionModel.amount!);
-          totalHealth.value = totalhealth;
         } else if (transactionModel.category == 'نقل') {
           totaltranspo += double.parse(transactionModel.amount!);
-          totaltrans.value = totaltranspo;
         } else if (transactionModel.category == 'مقاضي') {
           totalgroceries += double.parse(transactionModel.amount!);
-          totalgrocery.value = totalgroceries;
         } else if (transactionModel.category == 'اخرى') {
           totalothers += double.parse(transactionModel.amount!);
-          totalother.value = totalothers;
         }
       }
     }
+    totalInternts.value=totalInternt;
+    totalHealth.value = totalhealth;
+    totaltrans.value = totaltranspo;
+    totalgrocery.value = totalgroceries;
+    totalother.value = totalothers;
+
   }
 }

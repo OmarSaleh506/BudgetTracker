@@ -25,7 +25,7 @@ class Budget extends StatelessWidget {
       Data(units: _homeController.totalHealth.value, color: warningColor),
       Data(units: 0, color: const Color(0xFFC7C3CE)),
     ].obs;
-    print(chartData[1]);
+    print(chartData[1].units);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
@@ -35,12 +35,12 @@ class Budget extends StatelessWidget {
           style: TextStyle(
               color: detailColor, fontWeight: FontWeight.w700, fontSize: 18),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Card(
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.white70, width: 1),
+            side: const BorderSide(color: Colors.white70, width: 1),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Container(
@@ -60,19 +60,24 @@ class Budget extends StatelessWidget {
                         color: detailColor,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
-                    Center(
-                      child: SizedBox(
-                          height: 18,
-                          child: Obx(
-                            () => HorizontalBarChart(
-                              data: chartData.value,
-                            ),
-                          )),
+                    GetBuilder<HomeController>(
+                      builder: (_) {
+                        return Center(
+                        child: SizedBox(
+                        height: 18,
+                        child: HorizontalBarChart(
+                          data: chartData,
+
+                        ), ),
+                        );
+
+                      },
+
                     ),
-                    SizedBox(height: 3),
+                    const SizedBox(height: 3),
                     Padding(
                       padding: const EdgeInsets.only(left: 105),
                       child: Row(
@@ -91,7 +96,7 @@ class Budget extends StatelessWidget {
                               ),
                               Container(
                                 decoration: const BoxDecoration(
-                                  color:purpleColor,
+                                  color: purpleColor,
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20)),
                                 ),
@@ -185,12 +190,12 @@ class Budget extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 15.0),
                       child: InkWell(
                         onTap: () {
-                          Get.to(DashboardScreen());
+                          Get.to(() => DashboardScreen());
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
+                          children: const [
                             Text(
                               "المزيد",
                               style: TextStyle(color: detailColor),
@@ -205,7 +210,7 @@ class Budget extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
       ],

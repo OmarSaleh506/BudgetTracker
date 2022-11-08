@@ -7,6 +7,7 @@ import '../../controllers/home_controlle.dart';
 import '../widgets/transaction.dart';
 import 'package:pie_chart/pie_chart.dart';
 
+
 class DashboardScreen extends StatelessWidget {
   final ChartController _chartController = Get.put(ChartController());
   final HomeController _homeController = Get.find<HomeController>();
@@ -19,30 +20,31 @@ class DashboardScreen extends StatelessWidget {
     lightpinkColor
   ];
 
+
   @override
   Widget build(BuildContext context) {
     print("this is ${_homeController.myTransactions.length}");
     print("other ${_chartController.totalother}");
-    print("Health ${_chartController.totalHealth}");
+    print("Health ${_homeController.totalHealth}");
 
     Map<String, double> dataMap = {
-      "الصحة": _chartController.totalHealth.value,
-      "النقل": _chartController.totaltrans.value,
-      "سفر": _chartController.totalInternts.value,
-      "مقاضي": _chartController.totalgrocery.value,
-      "أخرى": _chartController.totalother.value,
+      "الصحة": _homeController.totalHealth.value,
+      "النقل": _homeController.totaltrans.value,
+      "سفر": _homeController.totalInternts.value,
+      "مقاضي": _homeController.totalgrocery.value,
+      "أخرى": _homeController.totalother.value,
     }.obs;
     Map<String, String> dataMaps = {
       "الصحة":
-          "ريال  ${_chartController.totalHealth.value}                           الصحه ",
+          "ريال  ${_homeController.totalHealth.value}                           الصحه ",
       "النقل":
-          " ريال ${_chartController.totaltrans.value}                           النقل ",
+          " ريال ${_homeController.totaltrans.value}                           النقل ",
       "سفر":
-          " ريال ${_chartController.totalInternts.value}                          السفر ",
+          " ريال ${_homeController.totalInternts.value}                          السفر ",
       "مقاضي":
-          " ريال ${_chartController.totalgrocery.value}                      المقاضي ",
+          " ريال ${_homeController.totalgrocery.value}                      المقاضي ",
       "أخرى":
-          " ريال ${_chartController.totalother.value}                            أخرى ",
+          " ريال ${_homeController.totalother.value}                            أخرى ",
     };
 
     return Obx(() => Scaffold(

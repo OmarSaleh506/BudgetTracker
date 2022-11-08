@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../constants/colors.dart';
 import '../../controllers/addTrans_goal_controller.dart';
+import '../../controllers/home_controlle.dart';
 import '../../models/goalModel.dart';
 import '../../providers/db_provider.dart';
 import '../../providers/db_provider_goals.dart';
@@ -26,6 +27,7 @@ class _EditTransactionState extends State<EditTransaction> {
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _tranNameController = TextEditingController();
   final List<String> _transactionTypes = ['دخل', 'صرف'];
+  final HomeController _homeController= Get.find<HomeController>();
   String? _transactionType;
   String? _selectedCategory;
   String? _selectedImage;
@@ -97,10 +99,11 @@ class _EditTransactionState extends State<EditTransaction> {
           height: 58,
           width: 351,
           child: ElevatedButton(
-            onPressed: ()  {
+            onPressed: () async {
               print(_tranNameController.text);
               print(_amountController.text);
             _updateTrans();
+              await _homeController.getTransactions();
             },
             style: ButtonStyle(
                 backgroundColor:
@@ -136,6 +139,7 @@ class _EditTransactionState extends State<EditTransaction> {
             onPressed: () async {
               await DatabaseProvider.deleteTransaction(widget.transactionModel.id!);
               Get.back();
+              await _homeController.getTransactions();
             },
             style: ButtonStyle(
                 backgroundColor:
@@ -182,15 +186,9 @@ class _EditTransactionState extends State<EditTransaction> {
     } else {
       final TransactionModel transactionModel = TransactionModel(
         id: widget.transactionModel.id!,
-        type: addTransactionController.transactionType.isNotEmpty
-            ? addTransactionController.transactionType
-            : _transactionTypes[0],
         name: _tranNameController.text,
         amount: _amountController.text,
-        category: addTransactionController.selectedCategory!,
-        image: addTransactionController.selectedImage.isNotEmpty
-            ?addTransactionController.selectedImage!
-            :"lib/constants/goalsIcons/plus.svg" ,
+
       );
       await DatabaseProvider.updateTransaction(transactionModel);
       Get.back();
