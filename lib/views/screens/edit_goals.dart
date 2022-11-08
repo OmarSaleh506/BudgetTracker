@@ -20,8 +20,8 @@ class _EditGoalState extends State<EditGoal> {
       Get.put(AddGoalController());
   final TextEditingController _goalAmountController = TextEditingController();
   final TextEditingController _savedAmountController = TextEditingController();
-  final TextEditingController _goalAmountLeftController =
-      TextEditingController();
+  // final TextEditingController _goalAmountLeftController =
+  //     TextEditingController();
 
   @override
   void initState() {
@@ -91,7 +91,7 @@ class _EditGoalState extends State<EditGoal> {
                 onPressed: () async {
                   print(_goalAmountController.text);
                   print(_savedAmountController.text);
-                  print(_goalAmountLeftController.text);
+                  // print(_goalAmountLeftController.text);
                   await _updateGoal();
                 },
                 style: ButtonStyle(
@@ -161,7 +161,6 @@ class _EditGoalState extends State<EditGoal> {
       ),
     );
   }
-
   _updateGoal() async {
     if (_goalAmountController.text.isEmpty ||
         _savedAmountController.text.isEmpty) {
@@ -179,7 +178,7 @@ class _EditGoalState extends State<EditGoal> {
         image: widget.goalModel.image,
         id: widget.goalModel.id,
       );
-      await DatabaseProviderGoals.updateGoal(transactionModel);
+      await DatabaseProviderGoals.updateGoal(goalModel);
       Get.back();
     }
   }

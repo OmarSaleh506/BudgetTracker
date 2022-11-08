@@ -61,7 +61,6 @@ class DatabaseProviderGoals {
       gm.id
     ]);
   }
-
   static Future<List<Map<String, dynamic>>> queryGoal() async {
     return await _db!.query(_tableName);
   }
