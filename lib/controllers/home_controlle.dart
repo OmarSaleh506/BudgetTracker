@@ -66,7 +66,8 @@ class HomeController extends GetxController {
       }
     }
 
-    getTransactions();
+print("in total amount");
+
   }
 
   tracker(List<TransactionModel> tm) {
