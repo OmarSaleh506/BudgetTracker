@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
+import '../../../controllers/add_goal_controller.dart';
 
 class AddGoal extends StatelessWidget {
   const AddGoal({
@@ -13,6 +14,7 @@ class AddGoal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GoalsController _goalController = Get.find<GoalsController>();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -65,8 +67,9 @@ class AddGoal extends StatelessWidget {
               Row(
                 children: [
                   TextButton.icon(
-                      onPressed: (() {
+                      onPressed: (() async {
                         Get.to(GoalPage());
+                        await _goalController.getTransactions();
                       }),
                       icon: Icon(Icons.chevron_left),
                       label: Text('جميع الأهداف'))
