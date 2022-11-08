@@ -9,10 +9,8 @@ import '../widgets/custom_edit_goal.dart';
 import '../widgets/home_Screen/custom_text.dart';
 
 class EditGoal extends StatefulWidget {
-  final GoalModel goalModel;
-
   EditGoal({Key? key, required this.goalModel}) : super(key: key);
-
+  final GoalModel goalModel;
   @override
   State<EditGoal> createState() => _EditGoalState();
 }
@@ -31,6 +29,9 @@ class _EditGoalState extends State<EditGoal> {
     setState(() {
       _goalAmountController.text = widget.goalModel.goalAmount!;
       _savedAmountController.text = widget.goalModel.savedAmount!;
+      double amountLeft = double.parse(_goalAmountController.text) -
+          double.parse(_savedAmountController.text);
+      _goalAmountLeftController.text = amountLeft.toString();
     });
   }
 
@@ -160,7 +161,6 @@ class _EditGoalState extends State<EditGoal> {
       ),
     );
   }
-
   _updateGoal() async {
     if (_goalAmountController.text.isEmpty ||
         _savedAmountController.text.isEmpty) {
@@ -169,10 +169,14 @@ class _EditGoalState extends State<EditGoal> {
         'All fields are requried',
       );
     } else {
-      final GoalModel goalModel = GoalModel(
-        id: widget.goalModel.id!,
+      final GoalModel transactionModel = GoalModel(
         goalAmount: _goalAmountController.text,
         savedAmount: _savedAmountController.text,
+        goalAmountLeft: _goalAmountLeftController.text,
+        category: widget.goalModel.category,
+        color: widget.goalModel.color,
+        image: widget.goalModel.image,
+        id: widget.goalModel.id,
       );
       await DatabaseProviderGoals.updateGoal(goalModel);
       Get.back();
