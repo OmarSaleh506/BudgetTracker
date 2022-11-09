@@ -9,9 +9,9 @@ class SecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
           children: [
             const SizedBox(
               height: 63,
@@ -50,7 +50,7 @@ class SecondPage extends StatelessWidget {
                     top: 180,
                     child: TextButton(
                       onPressed: () {
-                        Get.to(ThirdPage());
+                        Get.off(ThirdPage());
                       },
                       child: Icon(
                         Icons.arrow_forward,

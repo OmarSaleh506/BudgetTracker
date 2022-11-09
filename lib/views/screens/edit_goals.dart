@@ -17,6 +17,8 @@ class EditGoal extends StatefulWidget {
 }
 
 class _EditGoalState extends State<EditGoal> {
+  final GoalsController goalController = Get.put(GoalsController());
+
   final AddGoalController addGoalTransactionController =
       Get.put(AddGoalController());
   final TextEditingController _goalAmountController = TextEditingController();
@@ -131,8 +133,7 @@ class _EditGoalState extends State<EditGoal> {
               child: TextButton(
                 onPressed: () async {
                   await DatabaseProviderGoals.deleteGoal(widget.goalModel.id!);
-                  await _goalController.getTransactions();
-
+                  await goalController.getTransactions();
                   Get.back();
                 },
                 style: ButtonStyle(

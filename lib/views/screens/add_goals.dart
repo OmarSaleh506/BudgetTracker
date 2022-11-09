@@ -22,9 +22,9 @@ class _AddGoalsState extends State<AddGoals> {
   List<bool> isCardEnabled = [];
   @override
   Widget build(BuildContext context) {
-    final AddGoalController _addTransactionController =
+    final AddGoalController addTransactionController =
         Get.put(AddGoalController());
-    final GoalsController _goalController = Get.find<GoalsController>();
+    final GoalsController goalController = Get.put(GoalsController());
     final TextEditingController goalAmountController = TextEditingController();
     final TextEditingController savedAmountController = TextEditingController();
     final DateTime now = DateTime.now();
@@ -41,12 +41,12 @@ class _AddGoalsState extends State<AddGoals> {
             goalAmount: goalAmountController.text,
             savedAmount: savedAmountController.text,
             goalAmountLeft: '0.0',
-            category: _addTransactionController.selectedCategory,
-            image: _addTransactionController.selectedImage.isNotEmpty
-                ? _addTransactionController.selectedImage
+            category: addTransactionController.selectedCategory,
+            image: addTransactionController.selectedImage.isNotEmpty
+                ? addTransactionController.selectedImage
                 : "lib/constants/goalsIcons/plus.svg",
-            color: _addTransactionController.selectedColor.isNotEmpty
-                ? _addTransactionController.selectedColor
+            color: addTransactionController.selectedColor.isNotEmpty
+                ? addTransactionController.selectedColor
                 : "0xff1C6DD0");
         await DatabaseProviderGoals.insertGoal(goalModel);
         Get.to(HomeScreen());
@@ -84,11 +84,11 @@ class _AddGoalsState extends State<AddGoals> {
                       final data = categoriesGoals[index];
                       return GestureDetector(
                         onTap: () {
-                          _addTransactionController
+                          addTransactionController
                               .updateSelectedCategory(data.name ?? '');
-                          _addTransactionController
+                          addTransactionController
                               .updateSelectedImage(data.image ?? '');
-                          _addTransactionController
+                          addTransactionController
                               .updateSelectedColor(data.containerColor ?? "");
                           isCardEnabled.replaceRange(0, isCardEnabled.length, [
                             for (int i = 0; i < isCardEnabled.length; i++) false
@@ -108,7 +108,12 @@ class _AddGoalsState extends State<AddGoals> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Center(
-                                  child: SvgPicture.asset(data.image ?? ''),
+                                  child: SvgPicture.asset(
+                                    data.image ?? '',
+                                    color: isCardEnabled[index]
+                                        ? lightModeScaffoldBgCle
+                                        : Colors.black,
+                                  ),
                                 ),
                               ),
                             ),

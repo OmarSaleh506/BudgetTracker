@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
+import '../../controllers/add_goal_controller.dart';
 
 class ThirdPage extends StatelessWidget {
-  const ThirdPage({super.key});
+  ThirdPage({super.key});
+  // final GoalsController _goalController = Get.put(GoalsController());
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
           children: [
             SizedBox(
               height: 67,
@@ -58,8 +60,9 @@ class ThirdPage extends StatelessWidget {
                     left: 80,
                     top: 140,
                     child: TextButton(
-                        onPressed: () {
-                          Get.to(HomeScreen());
+                        onPressed: () async {
+                          // await _goalController.getTransactions();
+                          Get.off(HomeScreen());
                         },
                         child: Text(
                           'أبدأ',

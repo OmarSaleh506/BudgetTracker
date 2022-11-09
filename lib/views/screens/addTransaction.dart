@@ -30,7 +30,7 @@ class _AddTransactionState extends State<AddTransaction> {
   Widget build(BuildContext context) {
     final AddTransactionController _addTransactionController =
         Get.put(AddTransactionController());
-    final HomeController _homeController= Get.find<HomeController>();
+    final HomeController _homeController = Get.find<HomeController>();
     final TextEditingController _nameController = TextEditingController();
     final TextEditingController _amountController = TextEditingController();
     final List<String> _transactionTypes = ['دخل', 'صرف'];
@@ -38,39 +38,47 @@ class _AddTransactionState extends State<AddTransaction> {
     final DateTime now = DateTime.now();
 
     // alert dialog after transaction added
-   void _openCustomDialog(BuildContext context) {
-    showGeneralDialog(
-    barrierColor: Colors.black.withOpacity(0.5),
-    transitionBuilder: (context, a1, a2, widget) {
-     Timer(Duration(milliseconds: 1000),() {
-      Get.to(() => HomeScreen());
-      });
-         return ScaleTransition(
-              scale: Tween<double>(begin: 0.5, end: 1.0).animate(a1),
-              child: FadeTransition(
-                opacity: Tween<double>(begin: 0.5, end: 1.0).animate(a1),
-                child: AlertDialog(
-            shape: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.0)),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset('lib/constants/icons/done.png' ,height: 164, width: 164,),
-                SizedBox(height: 5,),
-                Text('تم الإضافة بنجاح', style: TextStyle(color:detailColor ),),
-              ],
-            ),
-          )
-              ));},
-
-  
-    transitionDuration: Duration(milliseconds: 200),
-    barrierDismissible: false,
-    barrierLabel: '',
-    context: context,
-    pageBuilder: (context, animation1, animation2) { 
-      return Container();
-    });}
+    void _openCustomDialog(BuildContext context) {
+      showGeneralDialog(
+          barrierColor: Colors.black.withOpacity(0.5),
+          transitionBuilder: (context, a1, a2, widget) {
+            Timer(Duration(milliseconds: 1000), () {
+              Get.off(() => HomeScreen());
+            });
+            return ScaleTransition(
+                scale: Tween<double>(begin: 0.5, end: 1.0).animate(a1),
+                child: FadeTransition(
+                    opacity: Tween<double>(begin: 0.5, end: 1.0).animate(a1),
+                    child: AlertDialog(
+                      shape: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0)),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(
+                            'lib/constants/icons/done.png',
+                            height: 164,
+                            width: 164,
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'تم الإضافة بنجاح',
+                            style: TextStyle(color: detailColor),
+                          ),
+                        ],
+                      ),
+                    )));
+          },
+          transitionDuration: Duration(milliseconds: 200),
+          barrierDismissible: false,
+          barrierLabel: '',
+          context: context,
+          pageBuilder: (context, animation1, animation2) {
+            return Container();
+          });
+    }
 
     _addTransaction() async {
       if (_nameController.text.isEmpty || _amountController.text.isEmpty) {
@@ -88,11 +96,12 @@ class _AddTransactionState extends State<AddTransaction> {
           amount: _amountController.text,
           category: _addTransactionController.selectedCategory,
           image: _addTransactionController.selectedImage.isNotEmpty
-              ?_addTransactionController.selectedImage
-              :"lib/constants/goalsIcons/plus.svg" ,
+              ? _addTransactionController.selectedImage
+              : "lib/constants/goalsIcons/plus.svg",
         );
         await DatabaseProvider.insertTransaction(transactionModel);
-        print("this is for impty ${_addTransactionController.transactionType.isNotEmpty}");
+        print(
+            "this is for impty ${_addTransactionController.transactionType.isNotEmpty}");
         // Get.to(() => HomeScreen());
         _openCustomDialog(context);
 
@@ -100,14 +109,11 @@ class _AddTransactionState extends State<AddTransaction> {
         print("this is name ${transactionModel.name}");
         print("this is type ${transactionModel.type}");
         print("this is category ${transactionModel.category}");
-
       }
     }
 
-
     final OnSelected selected = ((index, instance) {
       _addTransactionController.changeTransactionType((instance.labels[index]));
-
     });
 
     return Scaffold(
@@ -116,7 +122,7 @@ class _AddTransactionState extends State<AddTransaction> {
           elevation: 0,
           leading: GestureDetector(
             onTap: () {
-              Get.to(HomeScreen());
+              Get.off(HomeScreen());
             },
             child: Icon(
               Icons.arrow_back_ios,
@@ -164,11 +170,10 @@ class _AddTransactionState extends State<AddTransaction> {
             ),
             Expanded(
               child: GridView.builder(
-                  scrollDirection: Axis.horizontal,
+                  scrollDirection: Axis.vertical,
                   padding: const EdgeInsets.all(15),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    crossAxisSpacing: 0,
+                    crossAxisCount: 5,
                   ),
                   itemCount: categories.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -198,7 +203,12 @@ class _AddTransactionState extends State<AddTransaction> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8)),
                                 child: Center(
-                                  child: SvgPicture.asset(data.icon ?? ""),
+                                  child: SvgPicture.asset(
+                                    data.icon ?? "",
+                                    color: isCardEnabled[index]
+                                        ? lightModeScaffoldBgCle
+                                        : Colors.black,
+                                  ),
                                 ),
                               ),
                             ),
@@ -256,7 +266,6 @@ class _AddTransactionState extends State<AddTransaction> {
                  await _homeController.getTransactions();
                  Get.offAllNamed(Routes.homeScreen);
                 },
-
                 style: ButtonStyle(
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(primaryColor),

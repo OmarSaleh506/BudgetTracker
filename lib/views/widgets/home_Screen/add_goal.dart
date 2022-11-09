@@ -14,7 +14,6 @@ class AddGoal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GoalsController _goalController = Get.find<GoalsController>();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -23,62 +22,39 @@ class AddGoal extends StatelessWidget {
           padding: const EdgeInsets.only(top: 20),
           child: Column(
             children: [
-              TextButton.icon(
-                onPressed: () {
-                  Scaffold.of(context)
-                      .showBottomSheet<void>(((BuildContext context) {
-                    return Card(
-                      child: Container(height: 516, child: AddGoals()),
-                    );
-                  }));
-                },
-                label: Text(
-                  'أضف هدف',
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xff797979),
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                icon: Icon(
-                  Icons.add,
-                  size: 19,
-                  color: Color(0xff797979),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 250),
-                child: SizedBox(
-                  width: 84,
-                  height: 84,
-                  child: FloatingActionButton.large(
-                    onPressed: () {
-                      Get.to(AddTransaction());
-                    },
-                    child: const Icon(
-                      Icons.add,
-                      color: lightModeScaffoldBgCle,
-                      size: 35,
-                    ),
-                    backgroundColor: primaryColor,
-                  ),
-                ),
-              ),
-              Row(
-                children: [
-                  TextButton.icon(
-                      onPressed: (() async {
-                        Get.to(GoalPage());
-                        await _goalController.getTransactions();
-                      }),
-                      icon: Icon(Icons.chevron_left),
-                      label: Text('جميع الأهداف'))
-                ],
-              )
+              AddNewTransaction(),
             ],
           ),
         ),
       ],
+    );
+  }
+}
+
+class AddNewTransaction extends StatelessWidget {
+  const AddNewTransaction({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 280, bottom: 50),
+      child: SizedBox(
+        width: 84,
+        height: 84,
+        child: FloatingActionButton.large(
+          onPressed: () {
+            Get.to(AddTransaction());
+          },
+          child: const Icon(
+            Icons.add,
+            color: lightModeScaffoldBgCle,
+            size: 35,
+          ),
+          backgroundColor: primaryColor,
+        ),
+      ),
     );
   }
 }

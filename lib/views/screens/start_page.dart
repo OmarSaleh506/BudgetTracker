@@ -17,7 +17,7 @@ class _StartPageState extends State<StartPage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 2), () => Get.to(FirstPage()));
+    Timer(Duration(seconds: 2), () => Get.off(FirstPage()));
   }
 
   @override
