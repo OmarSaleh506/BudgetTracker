@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:get_storage/get_storage.dart';
+import 'package:sizer/sizer.dart';
 
 import 'constants/colors.dart';
 
@@ -30,13 +31,16 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: Themes.lightTheme,
-      initialRoute: AppRoute.home,
-      getPages: AppRoute.routes,
-
-
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: Themes.lightTheme,
+          home: FirstPage(),
+          // initialRoute: AppRoute.home,
+          // getPages: AppRoute.routes,
+        );
+      },
     );
   }
 }

@@ -9,9 +9,9 @@ class FirstPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
           children: [
             SizedBox(
               height: 67,
@@ -42,7 +42,7 @@ class FirstPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(140, 65, 0, 0),
+              padding: EdgeInsets.fromLTRB(140, 55, 0, 0),
               child: Stack(
                 children: [
                   Image(
@@ -53,7 +53,7 @@ class FirstPage extends StatelessWidget {
                     top: 180,
                     child: TextButton(
                       onPressed: () {
-                        Get.off(SecondPage());
+                        Get.to(SecondPage());
                       },
                       child: Icon(
                         Icons.arrow_forward,
