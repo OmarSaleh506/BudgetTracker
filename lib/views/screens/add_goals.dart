@@ -157,8 +157,7 @@ class _AddGoalsState extends State<AddGoals> {
                       child: ElevatedButton(
                         onPressed: () async {
                           _addGoalsTransaction();
-                          await goalController.getTransactions();
-                          // Get.back();
+                          await _goalController.getTransactions();
                           Get.back();
                         },
                         style: ButtonStyle(
