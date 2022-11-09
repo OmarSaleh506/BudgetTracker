@@ -15,8 +15,8 @@ class Goals extends StatelessWidget {
   final GoalModel goalModel;
   Goals({Key? key, required this.goalModel}) : super(key: key);
 
-  final GoalsController _goalController = Get.find();
-  final AddGoalController _addGoalController = Get.put(AddGoalController());
+  // final GoalsController _goalController = Get.find();
+  // final AddGoalController _addGoalController = Get.put(AddGoalController());
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +93,7 @@ class Goals extends StatelessWidget {
                                   backgroundColor: color,
                                   child: SvgPicture.asset(
                                     "${goalModel.image!}",
+                                    color: lightModeScaffoldBgCle,
                                   ),
                                 ),
                               )
