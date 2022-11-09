@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:budget_tracker/controllers/home_controlle.dart';
+import 'package:budget_tracker/routes/routes.dart';
 import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -253,6 +254,7 @@ class _AddTransactionState extends State<AddTransaction> {
                 onPressed: () async {
                  _addTransaction();
                  await _homeController.getTransactions();
+                 Get.offAllNamed(Routes.homeScreen);
                 },
 
                 style: ButtonStyle(
