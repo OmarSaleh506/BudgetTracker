@@ -36,8 +36,9 @@ class _AddGoalsState extends State<AddGoals> {
       if (goalAmountController.text.isEmpty ||
           savedAmountController.text.isEmpty) {
         Get.snackbar(
-          'Required',
-          'All fields are requried',
+          'مطلوب',
+          'جميع الحقول مطلوبة',
+            backgroundColor: Colors.red.shade300
         );
       }
        else if (int.parse(savedAmountController.text) >
@@ -45,7 +46,9 @@ class _AddGoalsState extends State<AddGoals> {
         Get.snackbar(
           'خطأ',
           'المبلغ المدخر اعلى من مبلغ الهدف',
+          backgroundColor: Colors.red.shade300
         );
+
       } 
       else {
         final GoalModel goalModel = GoalModel(
@@ -60,8 +63,10 @@ class _AddGoalsState extends State<AddGoals> {
             color: addTransactionController.selectedColor.isNotEmpty
                 ? addTransactionController.selectedColor
                 : "0xff1C6DD0");
-                  Get.offNamed(Routes.homeScreen);
+
         await DatabaseProviderGoals.insertGoal(goalModel);
+        Get.toNamed(Routes.homeScreen);
+        Get.back();
        
         // Get.to(HomeScreen());
         print("this is id ${goalModel.id}");
@@ -108,6 +113,7 @@ class _AddGoalsState extends State<AddGoals> {
                             for (int i = 0; i < isCardEnabled.length; i++) false
                           ]);
                           isCardEnabled[index] = true;
+
                           setState(() {});
                         },
                         child: Column(
@@ -182,7 +188,8 @@ class _AddGoalsState extends State<AddGoals> {
                         onPressed: () async {
                           _addGoalsTransaction();
                           await goalController.getTransactions();
-                          Get.back();
+
+
                          
             
                 
