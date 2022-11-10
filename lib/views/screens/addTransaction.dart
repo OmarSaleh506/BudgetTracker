@@ -44,6 +44,7 @@ class _AddTransactionState extends State<AddTransaction> {
           transitionBuilder: (context, a1, a2, widget) {
             Timer(Duration(milliseconds: 1000), () {
               // Get.to(() => HomeScreen());
+              Get.back();
 
               print('in dialog');
             });
@@ -105,7 +106,7 @@ class _AddTransactionState extends State<AddTransaction> {
         print(
             "this is for impty ${_addTransactionController.transactionType.isNotEmpty}");
         // Get.to(() => HomeScreen());
-        // _openCustomDialog(context);
+        _openCustomDialog(context);
 
         print("this is amount ${transactionModel.amount}");
         print("this is name ${transactionModel.name}");

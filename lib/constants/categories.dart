@@ -28,7 +28,7 @@ final List<Category> expenseCategories = [
 final List<Category> incomeCategories = [
   Category(
     name: 'راتب',
-    icon: "lib/constants/icons/health.svg",
+    icon: "lib/constants/icons/salary.svg",
   ),
   Category(
     name: 'عقار',
