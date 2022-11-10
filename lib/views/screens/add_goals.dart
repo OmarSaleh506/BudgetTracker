@@ -60,7 +60,7 @@ class _AddGoalsState extends State<AddGoals> {
             color: addTransactionController.selectedColor.isNotEmpty
                 ? addTransactionController.selectedColor
                 : "0xff1C6DD0");
-                  Get.offNamed(Routes.homeScreen);
+
         await DatabaseProviderGoals.insertGoal(goalModel);
        
         // Get.to(HomeScreen());
@@ -108,6 +108,7 @@ class _AddGoalsState extends State<AddGoals> {
                             for (int i = 0; i < isCardEnabled.length; i++) false
                           ]);
                           isCardEnabled[index] = true;
+
                           setState(() {});
                         },
                         child: Column(
@@ -182,7 +183,9 @@ class _AddGoalsState extends State<AddGoals> {
                         onPressed: () async {
                           _addGoalsTransaction();
                           await goalController.getTransactions();
+                          Get.toNamed(Routes.homeScreen);
                           Get.back();
+
                          
             
                 

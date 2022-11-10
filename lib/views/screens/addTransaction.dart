@@ -279,7 +279,7 @@ class _AddTransactionState extends State<AddTransaction> {
               child: ElevatedButton(
                 onPressed: () async {
                   _addTransaction();
-                  Get.offNamed(Routes.homeScreen);
+                  // Get.offNamed(Routes.homeScreen);
                   await _homeController.getTransactions();
                 },
                 style: ButtonStyle(
