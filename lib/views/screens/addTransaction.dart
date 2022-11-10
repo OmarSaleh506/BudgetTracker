@@ -44,7 +44,7 @@ class _AddTransactionState extends State<AddTransaction> {
           transitionBuilder: (context, a1, a2, widget) {
             Timer(Duration(milliseconds: 1000), () {
               // Get.to(() => HomeScreen());
-              Get.back();
+              Get.offNamed(Routes.homeScreen);
 
               print('in dialog');
             });
@@ -279,7 +279,7 @@ class _AddTransactionState extends State<AddTransaction> {
               child: ElevatedButton(
                 onPressed: () async {
                   _addTransaction();
-                  // Get.offNamed(Routes.homeScreen);
+                  //Get.offNamed(Routes.homeScreen);
                   await _homeController.getTransactions();
                 },
                 style: ButtonStyle(
