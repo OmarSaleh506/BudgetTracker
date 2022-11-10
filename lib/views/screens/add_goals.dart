@@ -9,6 +9,7 @@ import '../../controllers/goal_controller.dart';
 import '../../models/goalModel.dart';
 import '../../providers/db_provider_goals.dart';
 import '../../constants/colors.dart';
+import '../../routes/routes.dart';
 import '../widgets/home_Screen/custom_TextField.dart';
 import '../widgets/home_Screen/custom_text.dart';
 
@@ -18,17 +19,19 @@ class AddGoals extends StatefulWidget {
   @override
   State<AddGoals> createState() => _AddGoalsState();
 }
-
+ 
 class _AddGoalsState extends State<AddGoals> {
   List<bool> isCardEnabled = [];
   @override
   Widget build(BuildContext context) {
-    final AddGoalController addTransactionController =
-        Get.put(AddGoalController());
-    final GoalsController goalController = Get.put(GoalsController());
+    final AddGoalController addTransactionController = Get.find();
+    final GoalsController goalController = Get.find();
+
     final TextEditingController goalAmountController = TextEditingController();
     final TextEditingController savedAmountController = TextEditingController();
+
     final DateTime now = DateTime.now();
+
     _addGoalsTransaction() async {
       if (goalAmountController.text.isEmpty ||
           savedAmountController.text.isEmpty) {
@@ -36,13 +39,14 @@ class _AddGoalsState extends State<AddGoals> {
           'Required',
           'All fields are requried',
         );
-      } else if (int.parse(savedAmountController.text)  > int.parse(goalAmountController.text)){
-          Get.snackbar(  
+      }
+       else if (int.parse(savedAmountController.text) >
+          int.parse(goalAmountController.text)) {
+        Get.snackbar(
           'خطأ',
           'المبلغ المدخر اعلى من مبلغ الهدف',
         );
-      }
-      
+      } 
       else {
         final GoalModel goalModel = GoalModel(
             id: DateTime.now().toString(),
@@ -56,8 +60,10 @@ class _AddGoalsState extends State<AddGoals> {
             color: addTransactionController.selectedColor.isNotEmpty
                 ? addTransactionController.selectedColor
                 : "0xff1C6DD0");
+                  Get.offNamed(Routes.homeScreen);
         await DatabaseProviderGoals.insertGoal(goalModel);
-        Get.to(HomeScreen());
+       
+        // Get.to(HomeScreen());
         print("this is id ${goalModel.id}");
         print("this is goalAmount ${goalModel.goalAmount}");
         print("this is savedAmount ${goalModel.savedAmount}");
@@ -177,6 +183,9 @@ class _AddGoalsState extends State<AddGoals> {
                           _addGoalsTransaction();
                           await goalController.getTransactions();
                           Get.back();
+                         
+            
+                
                         },
                         style: ButtonStyle(
                             backgroundColor:

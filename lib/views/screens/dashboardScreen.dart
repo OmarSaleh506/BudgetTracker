@@ -54,8 +54,9 @@ class DashboardScreen extends StatelessWidget {
             "وضعك المالي",
           ),
               leading: GestureDetector(
-            onTap: () {
+            onTap: () async{
               Get.offNamed(Routes.homeScreen);
+             
             },
             child: Icon(
               Icons.arrow_back_ios,

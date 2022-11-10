@@ -58,9 +58,9 @@ class AppRoute {
       GetPage(
       name: Routes.goalsPage, 
       page: () =>  Goals()),
-      GetPage(
-      name: Routes.editGoal, 
-      page: () =>  EditGoal()),
+      // GetPage(
+      // name: Routes.editGoal, 
+      // page: () =>  EditGoal()),
       GetPage(
       name: Routes.dashboardScreen, 
       page: () =>  DashboardScreen(),

@@ -10,8 +10,8 @@ class DashBord extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final HomeController _homeController = Get.put(HomeController());
-  final GoalsController _goalsController = Get.put(GoalsController());
+  final HomeController _homeController = Get.find();
+  final GoalsController _goalsController = Get.find();
 
   @override
   Widget build(BuildContext context) {
