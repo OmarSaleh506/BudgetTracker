@@ -1,4 +1,5 @@
 import 'package:budget_tracker/controllers/home_controlle.dart';
+import 'package:budget_tracker/routes/routes.dart';
 import 'package:budget_tracker/views/screens/dashboardScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,7 @@ import '../../../constants/colors.dart';
 import '../../../controllers/chart_controller.dart';
 
 class Budget extends StatelessWidget {
-  final HomeController _homeController = Get.put(HomeController());
+  final HomeController _homeController = Get.find<HomeController>();
 
   Budget({
     Key? key,
@@ -181,7 +182,7 @@ class Budget extends StatelessWidget {
                                 width: 7,
                                 height: 7,
                               ),
-                            ],
+                            ], 
                           ),
                         ],
                       ),
@@ -190,7 +191,7 @@ class Budget extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 15.0),
                       child: InkWell(
                         onTap: () {
-                          Get.to(() => DashboardScreen());
+                          Get.toNamed(Routes.dashboardScreen);
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,

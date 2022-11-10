@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
+import '../../../routes/routes.dart';
 import '../../screens/addTransaction.dart';
 
 class AddNewTransaction extends StatelessWidget {
@@ -18,7 +19,7 @@ class AddNewTransaction extends StatelessWidget {
         height: 84,
         child: FloatingActionButton.large(
           onPressed: () {
-            Get.off(AddTransaction());
+            Get.offNamed(Routes.addTransaction);
           },
           child: const Icon(
             Icons.add,
