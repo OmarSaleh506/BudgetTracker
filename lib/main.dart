@@ -1,3 +1,4 @@
+import 'package:budget_tracker/routes/bindings/home_binding.dart';
 import 'package:budget_tracker/routes/routes.dart';
 import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
       theme: Themes.lightTheme,
       initialRoute: AppRoute.home,
       getPages: AppRoute.routes,
+      initialBinding: HomeBinding(),
 
 
     );

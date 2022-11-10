@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
-import '../../../controllers/add_goal_controller.dart';
+import '../../../controllers/goal_controller.dart';
 import '../../../controllers/home_controlle.dart';
 
 class DashBord extends StatelessWidget {
@@ -10,8 +10,8 @@ class DashBord extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final HomeController _homeController = Get.put(HomeController());
-  final GoalsController _goalsController = Get.put(GoalsController());
+  final HomeController _homeController = Get.find();
+  final GoalsController _goalsController = Get.find();
 
   @override
   Widget build(BuildContext context) {

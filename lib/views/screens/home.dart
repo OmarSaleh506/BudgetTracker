@@ -2,11 +2,11 @@ import 'package:budget_tracker/constants/colors.dart';
 import 'package:budget_tracker/views/widgets/home_Screen/goals.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/add_goal_controller.dart';
+import '../../controllers/goal_controller.dart';
 import '../../controllers/home_controlle.dart';
 import '../../models/goalModel.dart';
-import '../widgets/home_Screen/add_goal.dart';
 import '../widgets/home_Screen/add_new_goal.dart';
+import '../widgets/home_Screen/add_new_transaction.dart';
 import '../widgets/home_Screen/all_goals.dart';
 import '../widgets/home_Screen/budget.dart';
 import '../widgets/home_Screen/current_overview.dart';
@@ -15,8 +15,8 @@ import '../widgets/home_Screen/header.dart';
 import 'edit_goals.dart';
 
 class HomeScreen extends StatelessWidget {
-  final HomeController _homeController = Get.put(HomeController());
-  final GoalsController _goalController = Get.put(GoalsController());
+  final  _homeController = Get.find<HomeController>();
+  final  _goalController = Get.find<GoalsController>();
   HomeScreen({super.key});
   @override
   Widget build(

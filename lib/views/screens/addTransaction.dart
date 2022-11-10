@@ -29,7 +29,7 @@ class _AddTransactionState extends State<AddTransaction> {
   @override
   Widget build(BuildContext context) {
     final AddTransactionController _addTransactionController =
-        Get.put(AddTransactionController());
+        Get.find<AddTransactionController>();
     final HomeController _homeController = Get.find<HomeController>();
     final TextEditingController _nameController = TextEditingController();
     final TextEditingController _amountController = TextEditingController();
@@ -43,7 +43,9 @@ class _AddTransactionState extends State<AddTransaction> {
           barrierColor: Colors.black.withOpacity(0.5),
           transitionBuilder: (context, a1, a2, widget) {
             Timer(Duration(milliseconds: 1000), () {
-              Get.off(() => HomeScreen());
+              // Get.to(() => HomeScreen());
+
+              print('in dialog');
             });
             return ScaleTransition(
                 scale: Tween<double>(begin: 0.5, end: 1.0).animate(a1),
@@ -103,7 +105,7 @@ class _AddTransactionState extends State<AddTransaction> {
         print(
             "this is for impty ${_addTransactionController.transactionType.isNotEmpty}");
         // Get.to(() => HomeScreen());
-        _openCustomDialog(context);
+        // _openCustomDialog(context);
 
         print("this is amount ${transactionModel.amount}");
         print("this is name ${transactionModel.name}");
@@ -112,8 +114,15 @@ class _AddTransactionState extends State<AddTransaction> {
       }
     }
 
-    final OnSelected selected = ((index, instance) {
+    final OnSelected selected = ((index, instance) async {
       _addTransactionController.changeTransactionType((instance.labels[index]));
+
+      final data = _addTransactionController.transactionType == "صرف"
+          ? expenseCategories[index]
+          : incomeCategories[index];
+      await _addTransactionController.updateSelectedCategory(data.name ?? '');
+      await _addTransactionController.updateSelectedImage(data.icon ?? '');
+      setState(() {});
     });
 
     return Scaffold(
@@ -122,7 +131,7 @@ class _AddTransactionState extends State<AddTransaction> {
           elevation: 0,
           leading: GestureDetector(
             onTap: () {
-              Get.off(HomeScreen());
+              Get.toNamed(Routes.homeScreen);
             },
             child: Icon(
               Icons.arrow_back_ios,
@@ -174,11 +183,17 @@ class _AddTransactionState extends State<AddTransaction> {
                   padding: const EdgeInsets.all(15),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 5,
+                    crossAxisSpacing: 0,
                   ),
-                  itemCount: categories.length,
+                  itemCount: _addTransactionController.transactionType == "صرف"
+                      ? expenseCategories.length
+                      : incomeCategories.length,
                   itemBuilder: (BuildContext context, int index) {
                     isCardEnabled.add(false);
-                    final data = categories[index];
+                    final data =
+                        _addTransactionController.transactionType == "صرف"
+                            ? expenseCategories[index]
+                            : incomeCategories[index];
                     return GestureDetector(
                         onTap: () {
                           _addTransactionController
@@ -262,9 +277,9 @@ class _AddTransactionState extends State<AddTransaction> {
               width: 311,
               child: ElevatedButton(
                 onPressed: () async {
-                 _addTransaction();
-                 await _homeController.getTransactions();
-                 Get.offAllNamed(Routes.homeScreen);
+                  _addTransaction();
+                  Get.offNamed(Routes.homeScreen);
+                  await _homeController.getTransactions();
                 },
                 style: ButtonStyle(
                     backgroundColor:

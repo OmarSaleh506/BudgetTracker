@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/addTrans_goal_controller.dart';
-import '../../controllers/add_goal_controller.dart';
+import '../../controllers/goal_controller.dart';
 import '../widgets/home_Screen/goals.dart';
 import 'edit_goals.dart';
 import 'home.dart';

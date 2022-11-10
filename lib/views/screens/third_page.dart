@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../constants/colors.dart';
-import '../../controllers/add_goal_controller.dart';
+import '../../controllers/goal_controller.dart';
+import '../../routes/routes.dart';
 
 class ThirdPage extends StatelessWidget {
   ThirdPage({super.key});
@@ -62,7 +63,7 @@ class ThirdPage extends StatelessWidget {
                     child: TextButton(
                         onPressed: () async {
                           // await _goalController.getTransactions();
-                          Get.off(HomeScreen());
+                          Get.offNamed(Routes.homeScreen);
                         },
                         child: Text(
                           'أبدأ',

@@ -2,14 +2,10 @@ import 'package:flutter/services.dart';
 import 'dart:math' as math;
 
 class DecimalTextInputFormatter extends TextInputFormatter {
-  DecimalTextInputFormatter({this.decimalRange, this.beforeDecimalRange})
-      : assert(decimalRange == null ||
-            decimalRange > 0 ||
-            beforeDecimalRange == null ||
-            beforeDecimalRange > 0);
+  DecimalTextInputFormatter({this.decimalRange})
+      : assert(decimalRange == null || decimalRange > 0);
 
   final int? decimalRange;
-  final int? beforeDecimalRange;
 
   @override
   TextEditingValue formatEditUpdate(
@@ -19,28 +15,16 @@ class DecimalTextInputFormatter extends TextInputFormatter {
     TextSelection newSelection = newValue.selection;
     String truncated = newValue.text;
 
-    String value;
-
-    if (beforeDecimalRange != null) {
-      value = newValue.text;
-
-      if (value.contains(".")) {
-        if (value.split(".")[0].length > beforeDecimalRange!) {
-          truncated = oldValue.text;
-          newSelection = oldValue.selection;
-        }
-      } else {
-        if (value.length > beforeDecimalRange!) {
-          truncated = oldValue.text;
-          newSelection = oldValue.selection;
-        }
-      }
-    }
-
     if (decimalRange != null) {
-      value = newValue.text;
+      String value = newValue.text;
 
-      if (value.contains(".") &&
+      if (value.contains(',') ||
+          value.contains('-') ||
+          value.contains(' ') ||
+          value.contains('..')) {
+        truncated = oldValue.text;
+        newSelection = oldValue.selection;
+      } else if (value.contains(".") &&
           value.substring(value.indexOf(".") + 1).length > decimalRange!) {
         truncated = oldValue.text;
         newSelection = oldValue.selection;

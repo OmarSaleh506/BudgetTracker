@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../constants/colors.dart';
+import '../../constants/input_formatter.dart';
 import '../../controllers/addTrans_goal_controller.dart';
 import '../../controllers/home_controlle.dart';
 import '../../models/goalModel.dart';
@@ -13,9 +14,9 @@ import '../widgets/custom_edit_goal.dart';
 import '../widgets/home_Screen/custom_text.dart';
 
 class EditTransaction extends StatefulWidget {
-  final TransactionModel transactionModel;
+  final TransactionModel? transactionModel;
 
-  EditTransaction({Key? key, required this.transactionModel}) : super(key: key);
+  EditTransaction({Key? key, this.transactionModel}) : super(key: key);
 
   @override
   State<EditTransaction> createState() => _EditTransactionState();
@@ -37,8 +38,8 @@ class _EditTransactionState extends State<EditTransaction> {
   void initState() {
     super.initState();
     setState(() {
-      _amountController.text = widget.transactionModel.amount!;
-      _tranNameController.text = widget.transactionModel.name!;
+      _amountController.text = widget.transactionModel!.amount!;
+      _tranNameController.text = widget.transactionModel!.name!;
 
 
 
@@ -64,7 +65,7 @@ class _EditTransactionState extends State<EditTransaction> {
           radius: 20,
           backgroundColor: Color(0xff1C6DD0),
           child: SvgPicture.asset(
-            "${widget.transactionModel.image}",
+            "${widget.transactionModel!.image}",
             color: lightModeScaffoldBgCle,
           ),
         ),
@@ -72,7 +73,7 @@ class _EditTransactionState extends State<EditTransaction> {
           height: 20,
         ),
         Text(
-          '${widget.transactionModel.category}',
+          '${widget.transactionModel!.category}',
           style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 22,
@@ -83,15 +84,18 @@ class _EditTransactionState extends State<EditTransaction> {
         ),
         CustomTextFialedEditGoal(
             text: "اسم العملية",
-            hint: widget.transactionModel.name,
+            hint: widget.transactionModel!.name,
             controller: _tranNameController),
         SizedBox(
           height: 20,
         ),
         CustomTextFialedEditGoal(
             text: "المبلغ",
-            hint: widget.transactionModel.amount,
-            controller: _amountController),
+            hint: widget.transactionModel!.amount,
+            controller: _amountController,  
+            inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            ),
         SizedBox(
           height: 20,
         ),
@@ -137,9 +141,10 @@ class _EditTransactionState extends State<EditTransaction> {
           width: 351,
           child: TextButton(
             onPressed: () async {
-              await DatabaseProvider.deleteTransaction(widget.transactionModel.id!);
-              Get.back();
+              await DatabaseProvider.deleteTransaction(widget.transactionModel!.id!);
               await _homeController.getTransactions();
+                Get.back();
+              
             },
             style: ButtonStyle(
                 backgroundColor:
@@ -185,7 +190,7 @@ class _EditTransactionState extends State<EditTransaction> {
       );
     } else {
       final TransactionModel transactionModel = TransactionModel(
-        id: widget.transactionModel.id!,
+        id: widget.transactionModel!.id!,
         name: _tranNameController.text,
         amount: _amountController.text,
 
