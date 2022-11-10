@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:budget_tracker/constants/colors.dart';
 import '../../controllers/home_controlle.dart';
+import '../../routes/routes.dart';
 import '../widgets/transaction.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 
 class DashboardScreen extends StatelessWidget {
-  final ChartController _chartController = Get.put(ChartController());
+  final ChartController _chartController = Get.find<ChartController>();
   final HomeController _homeController = Get.find<HomeController>();
 
   List<Color> colorList = [
@@ -51,6 +52,15 @@ class DashboardScreen extends StatelessWidget {
         appBar: AppBar(
           title: const Text(
             "وضعك المالي",
+          ),
+              leading: GestureDetector(
+            onTap: () {
+              Get.offNamed(Routes.homeScreen);
+            },
+            child: Icon(
+              Icons.arrow_back_ios,
+              color: Colors.black,
+            ),
           ),
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -157,6 +167,7 @@ class DashboardScreen extends StatelessWidget {
                                       )));
                             }));
                             await _homeController.getTransactions();
+                            // Get.toNamed(Routes.editTransaction);
                           },
                           child: TransactionWidget(
                               transactionModel: transaction,

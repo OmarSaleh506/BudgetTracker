@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/add_goal_controller.dart';
+import '../../../controllers/goal_controller.dart';
 import '../../screens/goal_page.dart';
 
 class AllGoals extends StatelessWidget {

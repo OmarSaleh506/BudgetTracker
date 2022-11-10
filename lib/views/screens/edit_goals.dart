@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../constants/colors.dart';
+import '../../constants/input_formatter.dart';
 import '../../controllers/addTrans_goal_controller.dart';
-import '../../controllers/add_goal_controller.dart';
+import '../../controllers/goal_controller.dart';
 import '../../models/goalModel.dart';
 import '../../providers/db_provider_goals.dart';
 import '../widgets/custom_edit_goal.dart';
 import '../widgets/home_Screen/custom_text.dart';
 
 class EditGoal extends StatefulWidget {
-  EditGoal({Key? key, required this.goalModel}) : super(key: key);
-  final GoalModel goalModel;
+  EditGoal({Key? key,  this.goalModel}) : super(key: key);
+  final GoalModel? goalModel;
   @override
   State<EditGoal> createState() => _EditGoalState();
 }
@@ -31,8 +32,8 @@ class _EditGoalState extends State<EditGoal> {
   void initState() {
     super.initState();
     setState(() {
-      _goalAmountController.text = widget.goalModel.goalAmount!;
-      _savedAmountController.text = widget.goalModel.savedAmount!;
+      _goalAmountController.text = widget.goalModel!.goalAmount!;
+      _savedAmountController.text = widget.goalModel!.savedAmount!;
       double amountLeft = double.parse(_goalAmountController.text) -
           double.parse(_savedAmountController.text);
       _goalAmountLeftController.text = amountLeft.toString();
@@ -57,7 +58,7 @@ class _EditGoalState extends State<EditGoal> {
               radius: 20,
               backgroundColor: Color(0xff1C6DD0),
               child: SvgPicture.asset(
-                "${widget.goalModel.image}",
+                "${widget.goalModel!.image}",
                 color: lightModeScaffoldBgCle,
               ),
             ),
@@ -65,7 +66,7 @@ class _EditGoalState extends State<EditGoal> {
               height: 20,
             ),
             Text(
-              '${widget.goalModel.category}',
+              '${widget.goalModel!.category}',
               style: TextStyle(
                   fontWeight: FontWeight.w400,
                   fontSize: 22,
@@ -76,15 +77,21 @@ class _EditGoalState extends State<EditGoal> {
             ),
             CustomTextFialedEditGoal(
                 text: "المبلغ",
-                hint: widget.goalModel.goalAmount,
-                controller: _goalAmountController),
+                hint: widget.goalModel?.goalAmount,
+                controller: _goalAmountController,
+                inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                ),
             SizedBox(
               height: 20,
             ),
             CustomTextFialedEditGoal(
                 text: "ادخرت",
-                hint: widget.goalModel.savedAmount,
-                controller: _savedAmountController),
+                hint: widget.goalModel?.savedAmount,
+                controller: _savedAmountController,
+                inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+                keyboardType: TextInputType.numberWithOptions(decimal: true), 
+                ),
             SizedBox(
               height: 20,
             ),
@@ -132,7 +139,7 @@ class _EditGoalState extends State<EditGoal> {
               width: 351,
               child: TextButton(
                 onPressed: () async {
-                  await DatabaseProviderGoals.deleteGoal(widget.goalModel.id!);
+                  await DatabaseProviderGoals.deleteGoal(widget.goalModel!.id!);
                   await goalController.getTransactions();
                   Get.back();
                 },
@@ -181,10 +188,10 @@ class _EditGoalState extends State<EditGoal> {
         goalAmount: _goalAmountController.text,
         savedAmount: _savedAmountController.text,
         goalAmountLeft: _goalAmountLeftController.text,
-        category: widget.goalModel.category,
-        color: widget.goalModel.color,
-        image: widget.goalModel.image,
-        id: widget.goalModel.id,
+        category: widget.goalModel!.category,
+        color: widget.goalModel!.color,
+        image: widget.goalModel!.image,
+        id: widget.goalModel!.id,
       );
       await DatabaseProviderGoals.updateGoal(transactionModel);
       Get.back();

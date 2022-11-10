@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/colors.dart';
-import '../../../controllers/add_goal_controller.dart';
+import '../../../controllers/goal_controller.dart';
 import '../../../controllers/home_controlle.dart';
 
 class DashBord extends StatelessWidget {

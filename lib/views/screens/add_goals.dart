@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../constants/goal_categories.dart';
+import '../../constants/input_formatter.dart';
 import '../../controllers/addTrans_goal_controller.dart';
-import '../../controllers/add_goal_controller.dart';
+import '../../controllers/goal_controller.dart';
 import '../../models/goalModel.dart';
 import '../../providers/db_provider_goals.dart';
 import '../../constants/colors.dart';
@@ -35,7 +36,14 @@ class _AddGoalsState extends State<AddGoals> {
           'Required',
           'All fields are requried',
         );
-      } else {
+      } else if (int.parse(savedAmountController.text)  > int.parse(goalAmountController.text)){
+          Get.snackbar(  
+          'خطأ',
+          'المبلغ المدخر اعلى من مبلغ الهدف',
+        );
+      }
+      
+      else {
         final GoalModel goalModel = GoalModel(
             id: DateTime.now().toString(),
             goalAmount: goalAmountController.text,
@@ -136,6 +144,11 @@ class _AddGoalsState extends State<AddGoals> {
                       controller: goalAmountController,
                       text: 'المبلغ',
                       hint: '200...',
+                      inputFormatters: [
+                        DecimalTextInputFormatter(decimalRange: 2)
+                      ],
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
                     ),
                     SizedBox(
                       height: 20,
@@ -144,6 +157,11 @@ class _AddGoalsState extends State<AddGoals> {
                       controller: savedAmountController,
                       text: 'أدخرت',
                       hint: '200...',
+                      inputFormatters: [
+                        DecimalTextInputFormatter(decimalRange: 2)
+                      ],
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
                     ),
                     SizedBox(
                       height: 20,

@@ -3,7 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import '../models/transactionModel.dart';
 import '../providers/db_provider.dart';
-import 'add_goal_controller.dart';
+import 'goal_controller.dart';
 
 final GoalsController _goalController = Get.put(GoalsController());
 

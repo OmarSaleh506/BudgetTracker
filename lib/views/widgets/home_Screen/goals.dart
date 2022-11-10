@@ -8,25 +8,25 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 import '../../../constants/colors.dart';
 import '../../../controllers/addTrans_goal_controller.dart';
-import '../../../controllers/add_goal_controller.dart';
+import '../../../controllers/goal_controller.dart';
 import '../../../models/goalModel.dart';
 
 class Goals extends StatelessWidget {
-  final GoalModel goalModel;
-  Goals({Key? key, required this.goalModel}) : super(key: key);
+  final GoalModel? goalModel;
+  Goals({Key? key,  this.goalModel}) : super(key: key);
 
   // final GoalsController _goalController = Get.find();
   // final AddGoalController _addGoalController = Get.put(AddGoalController());
 
   @override
   Widget build(BuildContext context) {
-    double amountLft = double.parse(goalModel.goalAmount!) -
-        double.parse(goalModel.savedAmount!);
+    double amountLft = double.parse(goalModel!.goalAmount!) -
+        double.parse(goalModel!.savedAmount!);
     ColorParser parser;
-    parser = ColorParser.value(int.parse(goalModel.color!));
+    parser = ColorParser.value(int.parse(goalModel!.color!));
     Color? color = parser.getColor();
-    double? goalPrecent = double.parse(goalModel.savedAmount!) /
-        double.parse(goalModel.goalAmount!);
+    double? goalPrecent = double.parse(goalModel!.savedAmount!) /
+        double.parse(goalModel!.goalAmount!);
 
     double roundDouble(double value, int places) {
       num mod = pow(10.0, places);
@@ -92,7 +92,7 @@ class Goals extends StatelessWidget {
                                   radius: 20,
                                   backgroundColor: color,
                                   child: SvgPicture.asset(
-                                    "${goalModel.image!}",
+                                    "${goalModel!.image!}",
                                     color: lightModeScaffoldBgCle,
                                   ),
                                 ),
@@ -100,7 +100,7 @@ class Goals extends StatelessWidget {
                             ]),
                       ),
                       Text(
-                        '${goalModel.category}',
+                        '${goalModel!.category}',
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 18,
@@ -132,7 +132,7 @@ class Goals extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '${goalModel.savedAmount} / ${goalModel.goalAmount} SR',
+                            '${goalModel!.savedAmount} / ${goalModel!.goalAmount} SR',
                             style: TextStyle(
                                 color: detailColor,
                                 fontWeight: FontWeight.w400),
