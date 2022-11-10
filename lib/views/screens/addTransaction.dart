@@ -15,6 +15,7 @@ import '../../views/widgets/customText.dart';
 import '../../constants/colors.dart';
 import '../widgets/customTextField.dart';
 import 'package:fk_toggle/fk_toggle.dart';
+import 'package:budget_tracker/constants/colors.dart';
 
 class AddTransaction extends StatefulWidget {
   AddTransaction({super.key});
@@ -44,7 +45,7 @@ class _AddTransactionState extends State<AddTransaction> {
           transitionBuilder: (context, a1, a2, widget) {
             Timer(Duration(milliseconds: 1000), () {
               // Get.to(() => HomeScreen());
-              Get.offNamed(Routes.homeScreen);
+              //Get.toNamed(Routes.homeScreen);
 
               print('in dialog');
             });
@@ -86,8 +87,9 @@ class _AddTransactionState extends State<AddTransaction> {
     _addTransaction() async {
       if (_nameController.text.isEmpty || _amountController.text.isEmpty) {
         Get.snackbar(
-          'Required',
-          'All fields are requried',
+          'مطلوب',
+          'جميع الحقول مطلوبة',
+            backgroundColor: Colors.red.shade300
         );
       } else {
         final TransactionModel transactionModel = TransactionModel(
@@ -106,7 +108,15 @@ class _AddTransactionState extends State<AddTransaction> {
         print(
             "this is for impty ${_addTransactionController.transactionType.isNotEmpty}");
         // Get.to(() => HomeScreen());
-        _openCustomDialog(context);
+        //_openCustomDialog(context);
+        Get.snackbar(
+            'نجاح',
+            'تم اضافه العملية',
+            backgroundColor: Colors.greenAccent,
+            snackPosition: SnackPosition.BOTTOM
+        );
+        Get.offNamed(Routes.homeScreen);
+
 
         print("this is amount ${transactionModel.amount}");
         print("this is name ${transactionModel.name}");
@@ -279,7 +289,7 @@ class _AddTransactionState extends State<AddTransaction> {
               child: ElevatedButton(
                 onPressed: () async {
                   _addTransaction();
-                  //Get.offNamed(Routes.homeScreen);
+
                   await _homeController.getTransactions();
                 },
                 style: ButtonStyle(
