@@ -3,6 +3,7 @@ import 'package:budget_tracker/views/screens/edit_transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:budget_tracker/constants/colors.dart';
+import 'package:sizer/sizer.dart';
 import '../../controllers/home_controlle.dart';
 import '../../routes/routes.dart';
 import '../widgets/transaction.dart';
@@ -69,7 +70,7 @@ class DashboardScreen extends StatelessWidget {
         body: SafeArea(
           child: Column(children: <Widget>[
             SizedBox(
-              height: 30,
+              height: 3.2.h,
             ),
             Center(
               child: PieChart(
@@ -79,12 +80,12 @@ class DashboardScreen extends StatelessWidget {
                 initialAngleInDegree: 0,
                 centerText:
                     "${_homeController.totalExpense.value} SR \n مجموع المصاريف",
-                centerTextStyle: const TextStyle(
-                  fontSize: 20,
+                centerTextStyle:  TextStyle(
+                  fontSize: 15.sp,
                   color: textColor,
                 ),
-                ringStrokeWidth: 27,
-                chartLegendSpacing: 60,
+                ringStrokeWidth: 6.w,
+                chartLegendSpacing: 6.h,
                 animationDuration: const Duration(seconds: 3),
                 chartType: ChartType.ring,
                 chartValuesOptions: ChartValuesOptions(
@@ -100,7 +101,7 @@ class DashboardScreen extends StatelessWidget {
                   showLegends: true,
                   legendShape: BoxShape.rectangle,
                   legendTextStyle: TextStyle(
-                    fontSize: 15,
+                    fontSize: 11.sp,
                     letterSpacing: 2,
                     fontWeight: FontWeight.w500,
                   ),
@@ -110,18 +111,18 @@ class DashboardScreen extends StatelessWidget {
             ),
             Container(
               child: Column(children: [
-                const SizedBox(
-                  height: 30,
+                 SizedBox(
+                  height: 3.2.h,
                 ),
                 Padding(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.all(1.6.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children:  [
                       Text(
                         "آخر العمليات",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 13.sp,
                           fontWeight: FontWeight.bold,
                           color: detailColor,
                           letterSpacing: 0.5,
@@ -135,9 +136,9 @@ class DashboardScreen extends StatelessWidget {
             Expanded(
               child: _homeController.myTransactions.length == 0
                   ? //show message if there is no any transaction
-                  const Text(
+                   Text(
                       "لا توجد عمليات لعرضها",
-                      style: TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 12.sp),
                     )
                   : ListView.builder(
                       scrollDirection: Axis.vertical,
@@ -162,7 +163,7 @@ class DashboardScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: Container(
-                                      height: 532,
+                                      height: 57.1.h,
                                       child: EditTransaction(
                                         transactionModel: transaction,
                                       )));

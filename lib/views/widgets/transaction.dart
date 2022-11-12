@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:budget_tracker/constants/colors.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:sizer/sizer.dart';
 import '../../models/transactionModel.dart';
 
 
@@ -23,8 +24,8 @@ class TransactionWidget extends StatelessWidget {
         elevation: 0.4,
         child: ListTile(
           leading: SizedBox(
-            height: 100,
-            width: 120,
+            height: 10.7.h,
+            width: 12.9.w,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -33,7 +34,7 @@ class TransactionWidget extends StatelessWidget {
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: isIncome ? primaryColor : expenseColor,
-                      fontSize: 18),
+                      fontSize: 13.sp),
                 ),
               ],
             ),
@@ -41,8 +42,8 @@ class TransactionWidget extends StatelessWidget {
           title: Text(
             transactionModel.name!,
             textAlign: TextAlign.end,
-            style: const TextStyle(
-              fontSize: 18,
+            style:  TextStyle(
+              fontSize: 13.sp,
               fontWeight: FontWeight.bold,
               color: textColor,
               letterSpacing: 2,
