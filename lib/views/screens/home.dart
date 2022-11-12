@@ -2,6 +2,7 @@ import 'package:budget_tracker/constants/colors.dart';
 import 'package:budget_tracker/views/widgets/home_Screen/goals.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import '../../controllers/goal_controller.dart';
 import '../../controllers/home_controlle.dart';
 import '../../models/goalModel.dart';
@@ -15,14 +16,13 @@ import '../widgets/home_Screen/header.dart';
 import 'edit_goals.dart';
 
 class HomeScreen extends StatelessWidget {
-  final  _homeController = Get.find<HomeController>();
-  final  _goalController = Get.find<GoalsController>();
+  final _homeController = Get.find<HomeController>();
+  final _goalController = Get.find<GoalsController>();
   HomeScreen({super.key});
   @override
   Widget build(
     BuildContext context,
   ) {
-    bool check = false;
     GoalModel goalModel;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -31,87 +31,94 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Stack(
-                alignment: Alignment(0, 54),
-                children: <Widget>[Header(), DashBord()],
-              ),
+              Stack(alignment: Alignment(0, 24.h), children: [
+                Header(),
+                DashBord(),
+              ]),
               SizedBox(
-                height: 150,
+                height: 17.h,
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(2.w),
                 child: Builder(builder: (context) {
                   if (_homeController.totalIncome.value <
                       _homeController.totalExpense.value)
                     return Container(
-                      margin: const EdgeInsets.all(1.0),
-                      padding: const EdgeInsets.only(
-                          left: 100, top: 2, right: 100, bottom: 2),
+                      margin: EdgeInsets.all(1.0.w),
+                      padding: EdgeInsets.only(
+                          left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
                       decoration: BoxDecoration(
                           border: Border.all(
                             color: expenseColor,
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(4.w),
+                          )),
                       child: Text(
                         ' 😱 صرفت آكثر من ما دخلت',
                         style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15,
-                            color: expenseColor),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 10.sp,
+                          color: expenseColor,
+                          letterSpacing: 0.08.w,
+                        ),
                       ),
                     );
                   else if (_homeController.totalIncome.value >
                       _homeController.totalExpense.value)
                     return Container(
-                      margin: const EdgeInsets.all(1.0),
-                      padding: const EdgeInsets.only(
-                          left: 100, top: 2, right: 100, bottom: 2),
+                      margin: EdgeInsets.all(1.0.w),
+                      padding: EdgeInsets.only(
+                          left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
                       decoration: BoxDecoration(
                           border: Border.all(
                             color: detailColor,
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                          borderRadius: BorderRadius.all(Radius.circular(4.w))),
                       child: Text(
                         '👍 كفو دخلت آكثر من ما صرفت',
                         style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 15,
-                            color: detailColor),
+                          fontWeight: FontWeight.w700,
+                          fontSize: 9.sp,
+                          color: detailColor,
+                          letterSpacing: 0.08.w,
+                        ),
                       ),
                     );
                   else
                     return SizedBox(
-                      height: 1,
+                      height: 0.h,
                     );
                 }),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(270, 0, 0, 10),
+                padding: EdgeInsets.fromLTRB(62.w, 1.h, 0.w, 1.3.h),
                 child: Text(
                   'معدل صرفك',
                   style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18,
-                      color: detailColor),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12.sp,
+                    color: detailColor,
+                  ),
                 ),
               ),
               CurrentOverview(),
               SizedBox(
-                height: 20,
+                height: 3.h,
               ),
               Budget(),
               SizedBox(
-                height: 15,
+                height: 2.h,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 290),
+                padding: EdgeInsets.only(left: 67.w),
                 child: Text(
                   'أهداف',
                   style: TextStyle(
                     color: detailColor,
                     fontWeight: FontWeight.w700,
-                    fontSize: 18,
-                    letterSpacing: 2,
+                    fontSize: 14.sp,
+                    letterSpacing: 0.5.w,
                   ),
                 ),
               ),
@@ -123,20 +130,25 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                          Scaffold.of(context)
-                              .showBottomSheet<void>(((BuildContext context) {
-                            return Card(
+                          Scaffold.of(context).showBottomSheet<void>(
+                            ((BuildContext context) {
+                              return Card(
                                 shape: RoundedRectangleBorder(
                                   side: BorderSide(
-                                      color: Colors.white70, width: 1),
+                                      color: Colors.white70, width: 1.w),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                child: Container(
-                                    height: 532,
-                                    child: EditGoal(
-                                      goalModel: _goalController.myGoal.last,
-                                    )));
-                          }));
+                                child: SizedBox(
+                                  width: MediaQuery.of(context).size.width,
+                                  height:
+                                      MediaQuery.of(context).size.height * .7,
+                                  child: EditGoal(
+                                    goalModel: _goalController.myGoal.last,
+                                  ),
+                                ),
+                              );
+                            }),
+                          );
                           await _goalController.getTransactions();
                         },
                         child: Goals(goalModel: _goalController.myGoal.last),
@@ -155,3 +167,19 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+//  GestureDetector(
+//                         onTap: () async {
+//                           Get.bottomSheet(Card(
+//                             shape: RoundedRectangleBorder(
+//                               side:
+//                                   BorderSide(color: Colors.white70, width: 1.w),
+//                               borderRadius: BorderRadius.circular(5.w),
+//                             ),
+//                             child: EditGoal(
+//                               goalModel: _goalController.myGoal.last,
+//                             ),
+//                           ));
+//                           await _goalController.getTransactions();
+//                         },
+//                         child: Goals(goalModel: _goalController.myGoal.last),
+//                       ),

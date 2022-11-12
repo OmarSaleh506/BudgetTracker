@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../constants/colors.dart';
 import '../../../controllers/goal_controller.dart';
@@ -18,50 +19,58 @@ class DashBord extends StatelessWidget {
     return Card(
       color: lightModeScaffoldBgCle,
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: Colors.white70, width: 1),
-        borderRadius: BorderRadius.circular(10),
+        side: BorderSide(
+          color: Colors.white12,
+          width: 1.w,
+        ),
+        borderRadius: BorderRadius.circular(4.w),
       ),
       child: SizedBox(
-        height: 170,
-        width: 327,
+        height: 21.h,
+        width: 80.w,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(180, 0, 0, 0),
+              padding: EdgeInsets.fromLTRB(38.w, 0.h, 0.w, 0.h),
               child: Text(
                 'إجمالي الرصيد',
                 style: TextStyle(
-                    color: detailColor, fontSize: 14, letterSpacing: 1),
+                  color: detailColor,
+                  fontSize: 12.sp,
+                  letterSpacing: 0.5.w,
+                ),
               ),
             ),
             Obx(() => Text(
                   "${_homeController.totalBalance.value.toStringAsFixed(2)} SR",
                   style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                      letterSpacing: 3),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17.sp,
+                    letterSpacing: 1.1.w,
+                  ),
                 )),
             Padding(
-              padding: EdgeInsets.fromLTRB(200, 0, 0, 0),
+              padding: EdgeInsets.fromLTRB(54.w, 0.h, 0.w, 0.h),
               child: Text(
                 "أدخرت",
                 style: TextStyle(
-                    color: detailColor, fontSize: 14, letterSpacing: 3),
+                  color: detailColor,
+                  fontSize: 12.sp,
+                  letterSpacing: 0.8.w,
+                ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-              child: Obx(
-                () => Text(
-                    ' ${_goalsController.totalSaved.toStringAsFixed(2)} SR',
-                    style: TextStyle(
+            Obx(
+              () =>
+                  Text(' ${_goalsController.totalSaved.toStringAsFixed(2)} SR',
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        letterSpacing: 3,
-                        color: primaryColor)),
-              ),
+                        fontSize: 17.sp,
+                        letterSpacing: 0.8.w,
+                        color: primaryColor,
+                      )),
             ),
           ],
         ),
