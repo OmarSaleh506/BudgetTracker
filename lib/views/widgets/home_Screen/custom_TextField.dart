@@ -2,6 +2,7 @@ import 'package:budget_tracker/views/widgets/customText.dart';
 import 'package:budget_tracker/views/widgets/home_Screen/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomTextFieldGoal extends StatelessWidget {
   final String text;
@@ -23,6 +24,7 @@ class CustomTextFieldGoal extends StatelessWidget {
           padding: const EdgeInsets.only(right: 10),
           child: CustomTextGoal(
             text: text,
+            fontSize: 10.sp,
           ),
         ),
         SizedBox(
@@ -30,6 +32,7 @@ class CustomTextFieldGoal extends StatelessWidget {
         ),
         Card(
           child: TextFormField(
+            textAlign: TextAlign.right,
             controller: controller,
               inputFormatters: inputFormatters,
             keyboardType: keyboardType,
@@ -38,6 +41,7 @@ class CustomTextFieldGoal extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               hintText: hint,
+                hintStyle: TextStyle(fontSize: 10.sp),
             ),
           ),
         ),

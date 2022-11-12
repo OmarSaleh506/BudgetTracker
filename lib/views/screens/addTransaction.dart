@@ -6,6 +6,7 @@ import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import '../../constants/categories.dart';
 import '../../constants/input_formatter.dart';
 import '../../controllers/addTransactionController.dart';
@@ -86,11 +87,8 @@ class _AddTransactionState extends State<AddTransaction> {
 
     _addTransaction() async {
       if (_nameController.text.isEmpty || _amountController.text.isEmpty) {
-        Get.snackbar(
-          'مطلوب',
-          'جميع الحقول مطلوبة',
-            backgroundColor: Colors.red.shade300
-        );
+        Get.snackbar('مطلوب', 'جميع الحقول مطلوبة',
+            backgroundColor: Colors.red.shade300);
       } else {
         final TransactionModel transactionModel = TransactionModel(
           id: DateTime.now().toString(),
@@ -109,14 +107,10 @@ class _AddTransactionState extends State<AddTransaction> {
             "this is for impty ${_addTransactionController.transactionType.isNotEmpty}");
         // Get.to(() => HomeScreen());
         //_openCustomDialog(context);
-        Get.snackbar(
-            'نجاح',
-            'تم اضافه العملية',
+        Get.snackbar('نجاح', 'تم اضافه العملية',
             backgroundColor: Colors.greenAccent,
-            snackPosition: SnackPosition.BOTTOM
-        );
+            snackPosition: SnackPosition.BOTTOM);
         Get.offNamed(Routes.homeScreen);
-
 
         print("this is amount ${transactionModel.amount}");
         print("this is name ${transactionModel.name}");
@@ -136,181 +130,201 @@ class _AddTransactionState extends State<AddTransaction> {
       setState(() {});
     });
 
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: GestureDetector(
-            onTap: () {
-              Get.toNamed(Routes.homeScreen);
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+         resizeToAvoidBottomInset : false,
+        appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            leading: GestureDetector(
+              onTap: () {
+                Get.toNamed(Routes.homeScreen);
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
             ),
-          ),
-          title: Text(
-            'إضافة',
-            style: TextStyle(
-                color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
-          )),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Container(
-          child: Column(children: [
-            SizedBox(
-              height: 50,
-            ),
-            FkToggle(
-                width: 120,
-                height: 36,
-                cornerRadius: 29,
-                selectedColor: Colors.white,
-                backgroundColor: Colors.grey.shade300,
-                enabledElementColor: Colors.black,
-                disabledElementColor: Colors.grey,
-                labels: _transactionTypes,
-                icons: [
-                  Icon(
-                    Icons.call_made,
-                    color: Color(0xff21AA93),
-                  ),
-                  Icon(
-                    Icons.call_received,
-                    color: Color(0xffFA6161),
-                  ),
-                ],
-                onSelected: selected),
-            SizedBox(
-              height: 30,
-            ),
-            CustomText(text: 'تصنيف'),
-            SizedBox(
-              height: 8,
-            ),
-            Expanded(
-              child: GridView.builder(
-                  scrollDirection: Axis.vertical,
-                  padding: const EdgeInsets.all(15),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 5,
-                    crossAxisSpacing: 0,
-                  ),
-                  itemCount: _addTransactionController.transactionType == "صرف"
-                      ? expenseCategories.length
-                      : incomeCategories.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    isCardEnabled.add(false);
-                    final data =
+            title: Text(
+              'إضافة',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17.sp,
+                  fontWeight: FontWeight.bold),
+            )),
+        body: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Container(
+            child: Column(children: [
+              SizedBox(
+                height: 5.h,
+              ),
+              FkToggle(
+                  width: 26.w,
+                  height: 3.5.h,
+                  cornerRadius: 29,
+                  selectedColor: Colors.white,
+                  backgroundColor: Colors.grey.shade300,
+                  enabledElementColor: Colors.black,
+                  disabledElementColor: Colors.grey,
+                  labels: _transactionTypes,
+                  fontSize: 12.sp,
+                  icons: [
+                    Icon(
+                      Icons.call_made,
+                      color: Color(0xff21AA93),
+                    ),
+                    Icon(
+                      Icons.call_received,
+                      color: Color(0xffFA6161),
+                    ),
+                  ],
+                  onSelected: selected),
+              SizedBox(
+                height: 3.h,
+              ),
+              CustomText(text: 'تصنيف', fontSize: 10.sp,),
+              SizedBox(
+                height: 0.8.h,
+              ),
+              Expanded(
+                child: GridView.builder(
+                    scrollDirection: Axis.vertical,
+                    padding: const EdgeInsets.all(15),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 5,
+                      crossAxisSpacing: 0,
+                    ),
+                    itemCount:
                         _addTransactionController.transactionType == "صرف"
-                            ? expenseCategories[index]
-                            : incomeCategories[index];
-                    return GestureDetector(
-                        onTap: () {
-                          _addTransactionController
-                              .updateSelectedCategory(data.name ?? '');
-                          _addTransactionController
-                              .updateSelectedImage(data.icon ?? '');
-                          isCardEnabled.replaceRange(0, isCardEnabled.length, [
-                            for (int i = 0; i < isCardEnabled.length; i++) false
-                          ]);
-                          isCardEnabled[index] = true;
-                          setState(() {});
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 55,
-                              width: 55,
-                              child: Card(
-                                color: isCardEnabled[index]
-                                    ? darkBlueColor
-                                    : Colors.white,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)),
-                                child: Center(
-                                  child: SvgPicture.asset(
-                                    data.icon ?? "",
-                                    color: isCardEnabled[index]
-                                        ? lightModeScaffoldBgCle
-                                        : Colors.black,
+                            ? expenseCategories.length
+                            : incomeCategories.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      isCardEnabled.add(false);
+                      final data =
+                          _addTransactionController.transactionType == "صرف"
+                              ? expenseCategories[index]
+                              : incomeCategories[index];
+                      return GestureDetector(
+                          onTap: () {
+                            _addTransactionController
+                                .updateSelectedCategory(data.name ?? '');
+                            _addTransactionController
+                                .updateSelectedImage(data.icon ?? '');
+                            isCardEnabled.replaceRange(
+                                0, isCardEnabled.length, [
+                              for (int i = 0; i < isCardEnabled.length; i++)
+                                false
+                            ]);
+                            isCardEnabled[index] = true;
+                            setState(() {});
+                          },
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 6.h,
+                                width: 14.w,
+                                child: Card(
+                                  color: isCardEnabled[index]
+                                      ? darkBlueColor
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)),
+                                  child: Center(
+                                    child: SvgPicture.asset(
+                                      data.icon ?? "",
+                                      color: isCardEnabled[index]
+                                          ? lightModeScaffoldBgCle
+                                          : Colors.black,
+                                      height: 2.5.h,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            CustomText(
-                              text: data.name ?? '',
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              alignment: Alignment.center,
-                            )
-                          ],
-                        ));
-                  }),
-            ),
-            Column(
-              children: [
-                CustomText(
-                  text: 'إضافة عملية',
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
-                  keyboardType: TextInputType.numberWithOptions(decimal: true),
-                  controller: _amountController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
+                              CustomText(
+                                text: data.name ?? '',
+                                fontSize: 10.sp,
+                                fontWeight: FontWeight.normal,
+                                alignment: Alignment.center,
+                              )
+                            ],
+                          ));
+                    }),
+              ),
+              Column(
+                children: [
+                  CustomText(
+                    text: 'إضافة عملية',
+                    fontSize: 10.sp,
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  TextFormField(
+                    textAlign: TextAlign.right,
+                    inputFormatters: [
+                      DecimalTextInputFormatter(decimalRange: 2)
+                    ],
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    controller: _amountController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      hintText: '00.00',
+                      hintStyle: TextStyle(fontSize: 10.sp),
                     ),
-                    hintText: '00.00',
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              CustomTextField(
+                controller: _nameController,
+                text: 'اسم العملية',
+                hint: 'كريم...',
+              ),
+              SizedBox(
+                height: 3.h,
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Container(
+                height: 7.h,
+                width: 70.w,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    _addTransaction();
+
+                    await _homeController.getTransactions();
+                  },
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStatePropertyAll<Color>(primaryColor),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ))),
+                  child: CustomText(
+                    text: 'أضف',
+                    fontSize: 15.sp,
+                    color: Colors.white,
+                    alignment: Alignment.center,
                   ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CustomTextField(
-              controller: _nameController,
-              text: 'اسم العملية',
-              hint: 'كريم...',
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            SizedBox(
-              height: 150,
-            ),
-            Container(
-              height: 60,
-              width: 311,
-              child: ElevatedButton(
-                onPressed: () async {
-                  _addTransaction();
-
-                  await _homeController.getTransactions();
-                },
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll<Color>(primaryColor),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ))),
-                child: CustomText(
-                  text: 'أضف',
-                  fontSize: 18,
-                  color: Colors.white,
-                  alignment: Alignment.center,
-                ),
               ),
-            ),
-            SizedBox(
-              height: 50,
-            )
-          ]),
+              SizedBox(
+                height: 5.h,
+              )
+            ]),
+          ),
         ),
       ),
     );

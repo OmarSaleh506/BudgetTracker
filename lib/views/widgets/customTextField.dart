@@ -1,5 +1,6 @@
 import 'package:budget_tracker/views/widgets/customText.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class CustomTextField extends StatelessWidget {
   final String text;
@@ -15,9 +16,10 @@ class CustomTextField extends StatelessWidget {
       children: [
         CustomText(
           text: text,
+          fontSize: 10.sp,
         ),
         SizedBox(
-          height: 10,
+          height: 1.h,
         ),
         TextFormField(
           controller: controller,
@@ -26,6 +28,7 @@ class CustomTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               hintText: hint,
+                hintStyle: TextStyle(fontSize: 10.sp),
               hintTextDirection: TextDirection.rtl),
         ),
       ],
