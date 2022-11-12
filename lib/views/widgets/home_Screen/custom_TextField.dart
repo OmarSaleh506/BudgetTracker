@@ -52,11 +52,9 @@ class CustomTextFieldGoal extends StatelessWidget {
                 borderSide: BorderSide.none,
               ),
               hintText: hint,
-                hintStyle: TextStyle(fontSize: 10.sp),
+                hintStyle: TextStyle(fontSize: 10.sp, color: Colors.black),
               hintTextDirection: TextDirection.rtl,
-              hintStyle: TextStyle(
-                color: Colors.black,
-              ),
+
             ),
           ),
         ),
