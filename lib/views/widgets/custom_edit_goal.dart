@@ -42,8 +42,8 @@ class CustomTextFialedEditGoal extends StatelessWidget {
           ),
           child: TextFormField(
             controller: controller,
-            inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: inputFormatters,
+            keyboardType: keyboardType,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderSide: BorderSide.none,
