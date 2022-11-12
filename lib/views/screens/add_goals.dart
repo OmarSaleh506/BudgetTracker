@@ -1,4 +1,3 @@
-import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -60,7 +59,6 @@ class _AddGoalsState extends State<AddGoals> {
         Get.toNamed(Routes.homeScreen);
         Get.back();
 
-        // Get.to(HomeScreen());
         print("this is id ${goalModel.id}");
         print("this is goalAmount ${goalModel.goalAmount}");
         print("this is savedAmount ${goalModel.savedAmount}");
@@ -78,11 +76,11 @@ class _AddGoalsState extends State<AddGoals> {
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
-           physics: ClampingScrollPhysics(),
+          physics: ClampingScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.all(15),
             child: Container(
-               height: 55.h,
+              height: 55.h,
               child: Column(
                 children: [
                   Icon(
@@ -107,13 +105,14 @@ class _AddGoalsState extends State<AddGoals> {
                                   .updateSelectedCategory(data.name ?? '');
                               addTransactionController
                                   .updateSelectedImage(data.image ?? '');
-                              addTransactionController
-                                  .updateSelectedColor(data.containerColor ?? "");
-                              isCardEnabled.replaceRange(0, isCardEnabled.length, [
-                                for (int i = 0; i < isCardEnabled.length; i++) false
+                              addTransactionController.updateSelectedColor(
+                                  data.containerColor ?? "");
+                              isCardEnabled.replaceRange(
+                                  0, isCardEnabled.length, [
+                                for (int i = 0; i < isCardEnabled.length; i++)
+                                  false
                               ]);
                               isCardEnabled[index] = true;
-        
                               setState(() {});
                             },
                             child: Column(
@@ -189,12 +188,15 @@ class _AddGoalsState extends State<AddGoals> {
                             onPressed: () async {
                               _addGoalsTransaction();
                               await goalController.getTransactions();
+                              Get.back();
                             },
                             style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStatePropertyAll<Color>(primaryColor),
+                                    MaterialStatePropertyAll<Color>(
+                                        primaryColor),
                                 shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(RoundedRectangleBorder(
+                                        RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ))),
                             child: CustomTextGoal(

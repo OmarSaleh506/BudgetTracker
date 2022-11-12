@@ -48,8 +48,3 @@ class AddNewGoal extends StatelessWidget {
     );
   }
 }
-// Get.bottomSheet(
-          // Card(
-          //   child: Container(height: 60.h, child: AddGoals()),
-          // ),
-//         );
