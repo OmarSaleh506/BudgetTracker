@@ -9,12 +9,13 @@ class CustomTextEditGoal extends StatelessWidget {
   final Alignment alignment;
   final FontWeight fontWeight;
 
-  CustomTextEditGoal(
-      {this.text = '',
-      this.fontSize = 14,
-      this.color = detailColor,
-      this.alignment = Alignment.topRight,
-      this.fontWeight = FontWeight.bold});
+  CustomTextEditGoal({
+    this.text = '',
+    this.fontSize = 14,
+    this.color = detailColor,
+    this.alignment = Alignment.topRight,
+    this.fontWeight = FontWeight.bold,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
