@@ -3,6 +3,7 @@ import 'package:budget_tracker/models/transactionModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import '../../constants/colors.dart';
 import '../../constants/input_formatter.dart';
 import '../../controllers/addTrans_goal_controller.dart';
@@ -24,15 +25,14 @@ class EditTransaction extends StatefulWidget {
 
 class _EditTransactionState extends State<EditTransaction> {
   final AddTransactionController addTransactionController =
-  Get.put(AddTransactionController());
+      Get.put(AddTransactionController());
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _tranNameController = TextEditingController();
   final List<String> _transactionTypes = ['دخل', 'صرف'];
-  final HomeController _homeController= Get.find<HomeController>();
+  final HomeController _homeController = Get.find<HomeController>();
   String? _transactionType;
   String? _selectedCategory;
   String? _selectedImage;
-
 
   @override
   void initState() {
@@ -40,150 +40,152 @@ class _EditTransactionState extends State<EditTransaction> {
     setState(() {
       _amountController.text = widget.transactionModel!.amount!;
       _tranNameController.text = widget.transactionModel!.name!;
-
-
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
-      return Scaffold(
-      body: Center(
-      child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          Icons.expand_less,
-          color: Colors.black,
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        CircleAvatar(
-          radius: 20,
-          backgroundColor: Color(0xff1C6DD0),
-          child: SvgPicture.asset(
-            "${widget.transactionModel!.image}",
-            color: lightModeScaffoldBgCle,
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        Text(
-          '${widget.transactionModel!.category}',
-          style: TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 22,
-              letterSpacing: 0.5),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-        CustomTextFialedEditGoal(
-            text: "اسم العملية",
-            hint: widget.transactionModel!.name,
-            controller: _tranNameController),
-        SizedBox(
-          height: 20,
-        ),
-        CustomTextFialedEditGoal(
-            text: "المبلغ",
-            hint: widget.transactionModel!.amount,
-            controller: _amountController,  
-            inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
-            ),
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-          height: 58,
-          width: 351,
-          child: ElevatedButton(
-            onPressed: () async {
-              print(_tranNameController.text);
-              print(_amountController.text);
-            _updateTrans();
-              await _homeController.getTransactions();
-            },
-            style: ButtonStyle(
-                backgroundColor:
-                MaterialStatePropertyAll<Color>(Color(0xffEEEEEE)),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ))),
-            child: Row(
+    return GestureDetector(
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+           physics: ClampingScrollPhysics(),
+          child: Center(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                CustomTextGoal(
-                  text: 'تعديل العملية',
-                  fontSize: 18,
-                  color: darkBlueColor,
-                  alignment: Alignment.center,
+                Icon(
+                  Icons.expand_less,
+                  color: Colors.black,
                 ),
                 SizedBox(
-                  width: 20,
+                  height: 2.h,
                 ),
-                SvgPicture.asset('images/pencil.svg')
+                CircleAvatar(
+                  radius: 20,
+                  backgroundColor: Color(0xff1C6DD0),
+                  child: SvgPicture.asset(
+                    "${widget.transactionModel!.image}",
+                    color: lightModeScaffoldBgCle,
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Text(
+                  '${widget.transactionModel!.category}',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 14.sp,
+                      letterSpacing: 0.5),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                CustomTextFialedEditGoal(
+                    text: "اسم العملية",
+                    hint: widget.transactionModel!.name,
+                    controller: _tranNameController),
+                SizedBox(
+                  height: 2.h,
+                ),
+                CustomTextFialedEditGoal(
+                  text: "المبلغ",
+                  hint: widget.transactionModel!.amount,
+                  controller: _amountController,
+                  inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Container(
+                  height: 5.8.h,
+                  width: 40.h,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      print(_tranNameController.text);
+                      print(_amountController.text);
+                      _updateTrans();
+                      await _homeController.getTransactions();
+                    },
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll<Color>(Color(0xffEEEEEE)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomTextGoal(
+                          text: 'تعديل العملية',
+                          fontSize: 13.sp,
+                          color: darkBlueColor,
+                          alignment: Alignment.center,
+                        ),
+                        SizedBox(
+                          width: 2.h,
+                        ),
+                        SvgPicture.asset('images/pencil.svg')
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Container(
+                 height: 5.8.h,
+                  width: 40.h,
+                  child: TextButton(
+                    onPressed: () async {
+                      await DatabaseProvider.deleteTransaction(
+                          widget.transactionModel!.id!);
+                      await _homeController.getTransactions();
+                      Get.back();
+                    },
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStatePropertyAll<Color>(Color(0xffFFFFFF)),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CustomTextGoal(
+                          text: 'حذف العملية',
+                          fontSize: 13.sp,
+                          color: expenseColor,
+                          alignment: Alignment.center,
+                        ),
+                        SizedBox(
+                          width: 2.h,
+                        ),
+                        SvgPicture.asset('images/trash.svg'),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
               ],
             ),
           ),
         ),
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-          height: 58,
-          width: 351,
-          child: TextButton(
-            onPressed: () async {
-              await DatabaseProvider.deleteTransaction(widget.transactionModel!.id!);
-              await _homeController.getTransactions();
-                Get.back();
-              
-            },
-            style: ButtonStyle(
-                backgroundColor:
-                MaterialStatePropertyAll<Color>(Color(0xffFFFFFF)),
-                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ))),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CustomTextGoal(
-                  text: 'حذف العملية',
-                  fontSize: 18,
-                  color: expenseColor,
-                  alignment: Alignment.center,
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                SvgPicture.asset('images/trash.svg'),
-              ],
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 20,
-        ),
-      ],
-    ),
-    ),
+      ),
     );
-
-
   }
 
   _updateTrans() async {
-    if (_tranNameController.text.isEmpty ||
-        _amountController.text.isEmpty) {
+    if (_tranNameController.text.isEmpty || _amountController.text.isEmpty) {
       Get.snackbar(
         'Required',
         'All fields are requried',
@@ -193,7 +195,6 @@ class _EditTransactionState extends State<EditTransaction> {
         id: widget.transactionModel!.id!,
         name: _tranNameController.text,
         amount: _amountController.text,
-
       );
       await DatabaseProvider.updateTransaction(transactionModel);
       Get.back();
