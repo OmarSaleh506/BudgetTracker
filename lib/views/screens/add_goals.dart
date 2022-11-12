@@ -36,16 +36,19 @@ class _AddGoalsState extends State<AddGoals> {
       if (goalAmountController.text.isEmpty ||
           savedAmountController.text.isEmpty) {
         Get.snackbar(
-          'Required',
-          'All fields are requried',
+          'مطلوب',
+          'جميع الحقول مطلوبة',
+            backgroundColor: Colors.red.shade300
         );
       } else if (int.parse(savedAmountController.text) >
           int.parse(goalAmountController.text)) {
         Get.snackbar(
           'خطأ',
           'المبلغ المدخر اعلى من مبلغ الهدف',
+          backgroundColor: Colors.red.shade300
         );
-      } else {
+      } 
+      else {
         final GoalModel goalModel = GoalModel(
             id: DateTime.now().toString(),
             goalAmount: goalAmountController.text,
@@ -58,9 +61,9 @@ class _AddGoalsState extends State<AddGoals> {
             color: addTransactionController.selectedColor.isNotEmpty
                 ? addTransactionController.selectedColor
                 : "0xff1C6DD0");
-        Get.offNamed(Routes.homeScreen);
         await DatabaseProviderGoals.insertGoal(goalModel);
-
+        Get.toNamed(Routes.homeScreen);
+        Get.back();
         print("this is id ${goalModel.id}");
         print("this is goalAmount ${goalModel.goalAmount}");
         print("this is savedAmount ${goalModel.savedAmount}");
@@ -73,6 +76,7 @@ class _AddGoalsState extends State<AddGoals> {
 
     return Scaffold(
       body: Padding(
+
         padding: EdgeInsets.all(3.w),
         child: Column(
           children: [
@@ -133,6 +137,7 @@ class _AddGoalsState extends State<AddGoals> {
                             alignment: Alignment.center,
                           )
                         ],
+
                       ),
                     );
                   }),
