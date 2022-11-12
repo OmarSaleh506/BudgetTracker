@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../controllers/goal_controller.dart';
 import '../../screens/goal_page.dart';
@@ -11,7 +12,7 @@ class AllGoals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 250),
+      padding: EdgeInsets.only(right: 60.w),
       child: TextButton.icon(
         onPressed: (() async {
           await _goalController.getTransactions();

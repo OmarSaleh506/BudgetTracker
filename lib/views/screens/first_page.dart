@@ -14,7 +14,6 @@ class FirstPage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
-
           child: Column(
             children: [
               SizedBox(
@@ -45,17 +44,18 @@ class FirstPage extends StatelessWidget {
                 height: 9.h,
                 child: Text(
                   "ماعليك سوى إظافة جميع اهدافك المالية التي توجهك نحو احلامك يمكنك ان ترى الى اي مدى وصلت وماهي المعالم المتبقية لك لتحقق النجاح!",
-                  style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w400),
+                  style:
+                      TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w400),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(61.w, 25.6.h, 0.w, 0.h),
+                padding: EdgeInsets.fromLTRB(61.w, 19.h, 0.w, 0.h),
                 child: Stack(
                   children: [
                     Image(image: AssetImage('images/Blob.png')),
                     Positioned(
                       left: 22.w,
-                      top: 6.h,
+                      top: 7.h,
                       child: TextButton(
                         onPressed: () {
                           Get.to(SecondPage());

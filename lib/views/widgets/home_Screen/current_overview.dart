@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../../constants/colors.dart';
 import '../../../controllers/home_controlle.dart';
@@ -15,20 +16,20 @@ class CurrentOverview extends StatelessWidget {
       children: [
         Card(
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.white70, width: 1),
-            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(color: Colors.white70, width: 1.w),
+            borderRadius: BorderRadius.circular(3.w),
           ),
           child: Container(
-            width: 163,
-            height: 73,
+            width: 40.w,
+            height: 8.5.h,
             child: Padding(
-              padding: EdgeInsets.only(left: 20),
+              padding: EdgeInsets.only(left: 2.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -39,9 +40,10 @@ class CurrentOverview extends StatelessWidget {
                         Text(
                           'دخلك',
                           style: TextStyle(
-                              color: detailColor,
-                              fontSize: 12,
-                              letterSpacing: 1),
+                            color: detailColor,
+                            fontSize: 10.sp,
+                            letterSpacing: 0.5.w,
+                          ),
                         ),
                       ],
                     ),
@@ -50,8 +52,8 @@ class CurrentOverview extends StatelessWidget {
                         ' ${_homeController.totalIncome.value} SR',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          letterSpacing: 3,
+                          fontSize: 13.sp,
+                          letterSpacing: 0.7.w,
                         ),
                       )),
                 ],
@@ -61,12 +63,15 @@ class CurrentOverview extends StatelessWidget {
         ),
         Card(
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.white70, width: 1),
-            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(
+              color: Colors.white70,
+              width: 1.w,
+            ),
+            borderRadius: BorderRadius.circular(3.w),
           ),
           child: Container(
-            width: 163,
-            height: 73,
+            width: 40.w,
+            height: 8.5.h,
             child: Padding(
               padding: EdgeInsets.only(left: 20),
               child: Column(
@@ -74,7 +79,7 @@ class CurrentOverview extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    padding: EdgeInsets.symmetric(horizontal: 4.w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -85,9 +90,10 @@ class CurrentOverview extends StatelessWidget {
                         Text(
                           'صرفك',
                           style: TextStyle(
-                              color: detailColor,
-                              fontSize: 12,
-                              letterSpacing: 1),
+                            color: detailColor,
+                            fontSize: 10.sp,
+                            letterSpacing: 0.5.w,
+                          ),
                         ),
                       ],
                     ),
@@ -95,10 +101,11 @@ class CurrentOverview extends StatelessWidget {
                   Obx(() => Text(
                         ' ${_homeController.totalExpense.value} SR',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            letterSpacing: 3,
-                            color: expenseColor),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.sp,
+                          letterSpacing: 0.7.w,
+                          color: expenseColor,
+                        ),
                       )),
                 ],
               ),
