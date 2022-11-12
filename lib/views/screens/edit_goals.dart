@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 import '../../constants/colors.dart';
 import '../../constants/input_formatter.dart';
 import '../../controllers/addTrans_goal_controller.dart';
@@ -11,7 +12,7 @@ import '../widgets/custom_edit_goal.dart';
 import '../widgets/home_Screen/custom_text.dart';
 
 class EditGoal extends StatefulWidget {
-  EditGoal({Key? key,  this.goalModel}) : super(key: key);
+  EditGoal({Key? key, this.goalModel}) : super(key: key);
   final GoalModel? goalModel;
   @override
   State<EditGoal> createState() => _EditGoalState();
@@ -27,7 +28,6 @@ class _EditGoalState extends State<EditGoal> {
   final TextEditingController _goalAmountLeftController =
       TextEditingController();
   final GoalsController _goalController = Get.find<GoalsController>();
-
   @override
   void initState() {
     super.initState();
@@ -42,136 +42,136 @@ class _EditGoalState extends State<EditGoal> {
 
   @override
   Widget build(BuildContext context) {
+    String? color = widget.goalModel!.color;
+    int colors = int.parse(color!);
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.expand_less,
-              color: Colors.black,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(
+            Icons.expand_less,
+            color: Colors.black,
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          CircleAvatar(
+            radius: 5.w,
+            backgroundColor: Color(colors),
+            child: SvgPicture.asset(
+              "${widget.goalModel!.image}",
+              color: lightModeScaffoldBgCle,
             ),
-            SizedBox(
-              height: 20,
+          ),
+          SizedBox(
+            height: 3.h,
+          ),
+          Text(
+            '${widget.goalModel!.category}',
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 16.sp,
+              letterSpacing: 0.2.w,
             ),
-            CircleAvatar(
-              radius: 20,
-              backgroundColor: Color(0xff1C6DD0),
-              child: SvgPicture.asset(
-                "${widget.goalModel!.image}",
-                color: lightModeScaffoldBgCle,
+          ),
+          SizedBox(
+            height: 1.h,
+          ),
+          CustomTextFialedEditGoal(
+            text: "المبلغ",
+            hint: widget.goalModel?.goalAmount,
+            controller: _goalAmountController,
+            inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          CustomTextFialedEditGoal(
+            text: "ادخرت",
+            hint: widget.goalModel?.savedAmount,
+            controller: _savedAmountController,
+            inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
+            keyboardType: TextInputType.numberWithOptions(decimal: true),
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          SizedBox(
+            height: 6.5.h,
+            width: 87.w,
+            child: ElevatedButton(
+              onPressed: () async {
+                print(_goalAmountController.text);
+                print(_savedAmountController.text);
+                print(_goalAmountLeftController.text);
+                await _updateGoal();
+                await _goalController.getTransactions();
+              },
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll<Color>(Color(0xffEEEEEE)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomTextGoal(
+                    text: 'تعديل الهدف',
+                    fontSize: 18,
+                    color: darkBlueColor,
+                    alignment: Alignment.center,
+                  ),
+                  SizedBox(
+                    width: 4.w,
+                  ),
+                  SvgPicture.asset('images/pencil.svg')
+                ],
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              '${widget.goalModel!.category}',
-              style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 22,
-                  letterSpacing: 0.5),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            CustomTextFialedEditGoal(
-                text: "المبلغ",
-                hint: widget.goalModel?.goalAmount,
-                controller: _goalAmountController,
-                inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                ),
-            SizedBox(
-              height: 20,
-            ),
-            CustomTextFialedEditGoal(
-                text: "ادخرت",
-                hint: widget.goalModel?.savedAmount,
-                controller: _savedAmountController,
-                inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
-                keyboardType: TextInputType.numberWithOptions(decimal: true), 
-                ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 58,
-              width: 351,
-              child: ElevatedButton(
-                onPressed: () async {
-                  print(_goalAmountController.text);
-                  print(_savedAmountController.text);
-                  print(_goalAmountLeftController.text);
-                  await _updateGoal();
-                  await _goalController.getTransactions();
-
-                },
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll<Color>(Color(0xffEEEEEE)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTextGoal(
-                      text: 'تعديل الهدف',
-                      fontSize: 18,
-                      color: darkBlueColor,
-                      alignment: Alignment.center,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    SvgPicture.asset('images/pencil.svg')
-                  ],
-                ),
+          ),
+          SizedBox(
+            height: 2.h,
+          ),
+          SizedBox(
+            height: 6.5.h,
+            width: 87.w,
+            child: TextButton(
+              onPressed: () async {
+                await DatabaseProviderGoals.deleteGoal(widget.goalModel!.id!);
+                await goalController.getTransactions();
+                Get.back();
+              },
+              style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStatePropertyAll<Color>(Color(0xffFFFFFF)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.w),
+                  ))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CustomTextGoal(
+                    text: 'حذف الهدف',
+                    fontSize: 13.sp,
+                    color: expenseColor,
+                    alignment: Alignment.center,
+                  ),
+                  SizedBox(
+                    width: 4.w,
+                  ),
+                  SvgPicture.asset('images/trash.svg'),
+                ],
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
-            Container(
-              height: 58,
-              width: 351,
-              child: TextButton(
-                onPressed: () async {
-                  await DatabaseProviderGoals.deleteGoal(widget.goalModel!.id!);
-                  await goalController.getTransactions();
-                  Get.back();
-                },
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll<Color>(Color(0xffFFFFFF)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTextGoal(
-                      text: 'حذف الهدف',
-                      fontSize: 18,
-                      color: expenseColor,
-                      alignment: Alignment.center,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    SvgPicture.asset('images/trash.svg'),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: 0.h,
+          ),
+        ],
       ),
     );
   }

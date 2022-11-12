@@ -1,82 +1,82 @@
-import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 import '../../constants/colors.dart';
-import '../../controllers/goal_controller.dart';
 import '../../routes/routes.dart';
 
 class ThirdPage extends StatelessWidget {
   ThirdPage({super.key});
-  // final GoalsController _goalController = Get.put(GoalsController());
-
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            SizedBox(
-              height: 67,
-            ),
-            Image(image: AssetImage('images/third.png')),
-            const SizedBox(
-              height: 30,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 140),
-              child: const Text(
-                'مخطط التمويل',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.normal),
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 5.h,
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Container(
-              width: 283,
-              height: 84,
-              child: Text(
-                "تعرف على وضعك المالي بناءً على المعلومات المنظمة من حساباتك المصرفية",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
+              Image(image: AssetImage('images/third.png')),
+              SizedBox(
+                height: 3.h,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 25.w),
+                child: Text(
+                  'مخطط التمويل',
+                  style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(280, 37, 0, 0),
-              child: Stack(
-                children: [
-                  Image(
-                    image: AssetImage(
-                      'images/Blob-3.png',
-                    ),
-                    width: 150,
-                  ),
-                  Positioned(
-                    left: 80,
-                    top: 140,
-                    child: TextButton(
-                        onPressed: () async {
-                          // await _goalController.getTransactions();
-                          Get.offNamed(Routes.homeScreen);
-                        },
-                        child: Text(
-                          'أبدأ',
-                          style: TextStyle(
-                              color: lightModeScaffoldBgCle,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        )),
-                  ),
-                ],
+              SizedBox(
+                height: 2.h,
               ),
-            )
-          ],
+              Container(
+                alignment: Alignment.center,
+                width: 60.w,
+                height: 5.h,
+                child: Text(
+                  "تعرف على وضعك المالي بناءً على المعلومات المنظمة من حساباتك المصرفية",
+                  style: TextStyle(
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(65.1.w, 8.h, 0, 0),
+                child: Stack(
+                  children: [
+                    Image(
+                      image: AssetImage(
+                        'images/Blob-3.png',
+                      ),
+                    ),
+                    Positioned(
+                      left: 19.w,
+                      top: 16.h,
+                      child: TextButton(
+                          onPressed: () async {
+                            Get.offNamed(Routes.homeScreen);
+                          },
+                          child: Text(
+                            'أبدأ',
+                            style: TextStyle(
+                              color: lightModeScaffoldBgCle,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          )),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,23 +1,15 @@
 import 'dart:math';
-
 import 'package:color_parser/color_parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-
+import 'package:sizer/sizer.dart';
 import '../../../constants/colors.dart';
-import '../../../controllers/addTrans_goal_controller.dart';
-import '../../../controllers/goal_controller.dart';
 import '../../../models/goalModel.dart';
 
 class Goals extends StatelessWidget {
   final GoalModel? goalModel;
-  Goals({Key? key,  this.goalModel}) : super(key: key);
-
-  // final GoalsController _goalController = Get.find();
-  // final AddGoalController _addGoalController = Get.put(AddGoalController());
-
+  Goals({Key? key, this.goalModel}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     double amountLft = double.parse(goalModel!.goalAmount!) -
@@ -40,18 +32,18 @@ class Goals extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         SizedBox(
-          height: 10,
+          height: 1.2.h,
         ),
         Card(
           shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.white70, width: 1),
-            borderRadius: BorderRadius.circular(10),
+            side: BorderSide(color: Colors.white70, width: 1.w),
+            borderRadius: BorderRadius.circular(4.w),
           ),
           child: Container(
-            width: 357,
-            height: 172,
+            width: 85.w,
+            height: 19.h,
             child: Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(4.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -60,15 +52,15 @@ class Goals extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        width: 98,
-                        height: 41,
+                        width: 23.w,
+                        height: 4.h,
                         decoration: BoxDecoration(
                           color: Color(0xffEEEEEE),
                           borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(40.0),
-                            bottomRight: Radius.circular(40.0),
-                            topLeft: Radius.circular(40.0),
-                            bottomLeft: Radius.circular(40.0),
+                            topRight: Radius.circular(10.w),
+                            bottomRight: Radius.circular(10.w),
+                            topLeft: Radius.circular(10.w),
+                            bottomLeft: Radius.circular(10.w),
                           ),
                         ),
                         child: Row(
@@ -76,20 +68,21 @@ class Goals extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 20,
+                                width: 3.w,
                               ),
                               Text(
                                 '% $percentRound ',
                                 style: TextStyle(
-                                    color: detailColor,
-                                    fontWeight: FontWeight.w700),
+                                  color: detailColor,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
                               SizedBox(
-                                width: 10,
+                                width: 3.w,
                               ),
                               Expanded(
                                 child: CircleAvatar(
-                                  radius: 20,
+                                  radius: 4.w,
                                   backgroundColor: color,
                                   child: SvgPicture.asset(
                                     "${goalModel!.image!}",
@@ -103,8 +96,8 @@ class Goals extends StatelessWidget {
                         '${goalModel!.category}',
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
-                          fontSize: 18,
-                          letterSpacing: 3,
+                          fontSize: 13.sp,
+                          letterSpacing: 1.w,
                         ),
                       )
                     ],
@@ -113,19 +106,19 @@ class Goals extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 20,
+                        height: 3.h,
                       ),
                       LinearPercentIndicator(
-                        width: 300.0,
-                        lineHeight: 12.0,
+                        width: 76.w,
+                        lineHeight: 1.5.h,
                         percent: roundDouble(goalPrecent, 1),
                         progressColor: color,
-                        barRadius: Radius.circular(16),
+                        barRadius: Radius.circular(1.5.w),
                         animation: true,
                         animationDuration: 1000,
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 3.h,
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -134,15 +127,16 @@ class Goals extends StatelessWidget {
                           Text(
                             '${goalModel!.savedAmount} / ${goalModel!.goalAmount} SR',
                             style: TextStyle(
-                                color: detailColor,
-                                fontWeight: FontWeight.w400),
+                              color: detailColor,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
                           Text(
                             'الباقي ${amountLft} SR',
                             style: TextStyle(
                               color: detailColor,
                               fontWeight: FontWeight.w600,
-                              letterSpacing: 1,
+                              letterSpacing: 0.3.w,
                             ),
                           )
                         ],
