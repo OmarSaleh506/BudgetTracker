@@ -1,22 +1,13 @@
 import 'package:budget_tracker/routes/bindings/home_binding.dart';
 import 'package:budget_tracker/routes/routes.dart';
-import 'package:budget_tracker/views/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import 'package:get_storage/get_storage.dart';
 import 'package:sizer/sizer.dart';
-
-import 'constants/colors.dart';
-
 import 'constants/theme.dart';
 import '../../providers/db_provider.dart';
-import 'controllers/addTransactionController.dart';
-import 'models/transactionModel.dart';
 import 'providers/db_provider_goals.dart';
-import 'views/screens/first_page.dart';
-import 'views/screens/start_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +28,7 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           theme: Themes.lightTheme,
-          initialRoute: AppRoute.home,
+          initialRoute: Routes.addTransaction,
           getPages: AppRoute.routes,
           initialBinding: HomeBinding(),
         );

@@ -3,8 +3,8 @@ import 'package:budget_tracker/views/widgets/home_Screen/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../../constants/input_formatter.dart';
+
 
 class CustomTextFieldGoal extends StatelessWidget {
   final String text;
@@ -31,6 +31,7 @@ class CustomTextFieldGoal extends StatelessWidget {
           padding: EdgeInsets.only(right: 2.2.w),
           child: CustomTextGoal(
             text: text,
+            fontSize: 10.sp,
           ),
         ),
         SizedBox(
@@ -42,6 +43,7 @@ class CustomTextFieldGoal extends StatelessWidget {
             borderRadius: BorderRadius.circular(2.w),
           ),
           child: TextFormField(
+            textAlign: TextAlign.right,
             controller: controller,
             inputFormatters: [DecimalTextInputFormatter(decimalRange: 2)],
             keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -50,6 +52,7 @@ class CustomTextFieldGoal extends StatelessWidget {
                 borderSide: BorderSide.none,
               ),
               hintText: hint,
+                hintStyle: TextStyle(fontSize: 10.sp),
               hintTextDirection: TextDirection.rtl,
               hintStyle: TextStyle(
                 color: Colors.black,
