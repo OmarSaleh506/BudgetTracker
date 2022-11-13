@@ -25,7 +25,7 @@ class TransactionWidget extends StatelessWidget {
         child: ListTile(
           leading: SizedBox(
             height: 10.7.h,
-            width: 12.9.w,
+            width: 17.9.w,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -46,7 +46,7 @@ class TransactionWidget extends StatelessWidget {
               fontSize: 13.sp,
               fontWeight: FontWeight.bold,
               color: textColor,
-              letterSpacing: 2,
+              letterSpacing: 0.1,
             ),
           ),
           trailing: CircleAvatar(

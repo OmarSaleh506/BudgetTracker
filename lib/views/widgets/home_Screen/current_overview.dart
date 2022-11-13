@@ -42,7 +42,7 @@ class CurrentOverview extends StatelessWidget {
                           style: TextStyle(
                             color: detailColor,
                             fontSize: 10.sp,
-                            letterSpacing: 0.5.w,
+                            letterSpacing: 0.1.w,
                           ),
                         ),
                       ],
@@ -105,7 +105,7 @@ class CurrentOverview extends StatelessWidget {
                           style: TextStyle(
                             color: detailColor,
                             fontSize: 10.sp,
-                            letterSpacing: 0.5.w,
+                            letterSpacing: 0.1.w,
                           ),
                         ),
                       ],
