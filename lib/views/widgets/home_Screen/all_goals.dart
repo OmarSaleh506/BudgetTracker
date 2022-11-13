@@ -1,3 +1,4 @@
+import 'package:budget_tracker/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -16,6 +17,9 @@ class AllGoals extends StatelessWidget {
       child: TextButton.icon(
         onPressed: (() async {
           await _goalController.getTransactions();
+          if (_goalController.getTransactions() == null) {
+            return;
+          }
           Get.off(GoalPage());
         }),
         icon: Icon(Icons.chevron_left),
