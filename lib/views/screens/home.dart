@@ -41,54 +41,61 @@ class HomeScreen extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(2.w),
                 child: Builder(builder: (context) {
-                  if (_homeController.totalIncome.value <
-                      _homeController.totalExpense.value)
-                    return Container(
-                      margin: EdgeInsets.all(1.0.w),
-                      padding: EdgeInsets.only(
-                          left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
-                      decoration: BoxDecoration(
-                          border: Border.all(
+                  if(_homeController.myTransactions.isNotEmpty){
+                    if (_homeController.totalIncome.value <
+                        _homeController.totalExpense.value) {
+                      return Container(
+                        margin: EdgeInsets.all(1.0.w),
+                        padding: EdgeInsets.only(
+                            left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: expenseColor,
+                            ),
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(4.w),
+                            )),
+                        child: Text(
+                          ' 😱 صرفت آكثر من ما دخلت',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 10.sp,
                             color: expenseColor,
+                            letterSpacing: 0.08.w,
                           ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(4.w),
-                          )),
-                      child: Text(
-                        ' 😱 صرفت آكثر من ما دخلت',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 10.sp,
-                          color: expenseColor,
-                          letterSpacing: 0.08.w,
                         ),
-                      ),
-                    );
-                  else if (_homeController.totalIncome.value >
-                      _homeController.totalExpense.value)
-                    return Container(
-                      margin: EdgeInsets.all(1.0.w),
-                      padding: EdgeInsets.only(
-                          left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
-                      decoration: BoxDecoration(
-                          border: Border.all(
+                      );
+                    } else if (_homeController.totalIncome.value >
+                        _homeController.totalExpense.value) {
+                      return Container(
+                        margin: EdgeInsets.all(1.0.w),
+                        padding: EdgeInsets.only(
+                            left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: detailColor,
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(4.w))),
+                        child: Text(
+                          '👍 كفو دخلت آكثر من ما صرفت',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 9.sp,
                             color: detailColor,
+                            letterSpacing: 0.08.w,
                           ),
-                          borderRadius: BorderRadius.all(Radius.circular(4.w))),
-                      child: Text(
-                        '👍 كفو دخلت آكثر من ما صرفت',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 9.sp,
-                          color: detailColor,
-                          letterSpacing: 0.08.w,
                         ),
-                      ),
-                    );
+                      );
+                    } else
+                      return SizedBox(
+                        height: 0.h,
+                      );
+                  }
                   else
                     return SizedBox(
                       height: 0.h,
                     );
+
                 }),
               ),
               Padding(

@@ -48,14 +48,27 @@ class CurrentOverview extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Obx(() => Text(
+                  Obx(() {
+                    if (_homeController.myTransactions.isEmpty) {
+                      return Text(
+                        "0.0 SR",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.sp,
+                          letterSpacing: 0.7.w,
+                        ),
+                      );
+                    } else {
+                      return Text(
                         ' ${_homeController.totalIncome.value} SR',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 13.sp,
                           letterSpacing: 0.7.w,
                         ),
-                      )),
+                      );
+                    }
+                  }),
                 ],
               ),
             ),
@@ -98,15 +111,27 @@ class CurrentOverview extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Obx(() => Text(
+                  Obx(() {
+                    if (_homeController.myTransactions.isEmpty) {
+                      return Text(
+                        "0.0 SR",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.sp,
+                          letterSpacing: 0.7.w,
+                        ),
+                      );
+                    } else {
+                      return Text(
                         ' ${_homeController.totalExpense.value} SR',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 13.sp,
                           letterSpacing: 0.7.w,
-                          color: expenseColor,
                         ),
-                      )),
+                      );
+                    }
+                  }),
                 ],
               ),
             ),
