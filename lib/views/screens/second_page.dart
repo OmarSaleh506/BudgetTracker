@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../constants/colors.dart';
+import '../../routes/routes.dart';
 
 class SecondPage extends StatelessWidget {
   const SecondPage({super.key});
@@ -56,7 +57,7 @@ class SecondPage extends StatelessWidget {
                       top: 18.h,
                       child: TextButton(
                         onPressed: () {
-                          Get.off(ThirdPage());
+                          Get.offNamed(Routes.thirdPage);
                         },
                         child: Icon(
                           Icons.arrow_forward,

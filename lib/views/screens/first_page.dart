@@ -1,3 +1,4 @@
+import 'package:budget_tracker/routes/routes.dart';
 import 'package:budget_tracker/views/screens/second_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class FirstPage extends StatelessWidget {
                       top: 7.h,
                       child: TextButton(
                         onPressed: () {
-                          Get.to(SecondPage());
+                          Get.offNamed(Routes.secondPage);
                         },
                         child: Icon(
                           Icons.arrow_forward,

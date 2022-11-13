@@ -28,12 +28,11 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           theme: Themes.lightTheme,
-          initialRoute: Routes.dashboardScreen,
+          initialRoute: Routes.splashScreen,
           getPages: AppRoute.routes,
           initialBinding: HomeBinding(),
         );
       },
-
     );
   }
 }

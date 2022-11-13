@@ -56,9 +56,7 @@ class _AddGoalsState extends State<AddGoals> {
                 : "0xff1C6DD0");
 
         await DatabaseProviderGoals.insertGoal(goalModel);
-        Get.toNamed(Routes.homeScreen);
-        Get.back();
-
+        
         print("this is id ${goalModel.id}");
         print("this is goalAmount ${goalModel.goalAmount}");
         print("this is savedAmount ${goalModel.savedAmount}");
