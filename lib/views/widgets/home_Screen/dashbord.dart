@@ -43,14 +43,19 @@ class DashBord extends StatelessWidget {
                 ),
               ),
             ),
-            Obx(() => Text(
-                  "${_homeController.totalBalance.value.toStringAsFixed(2)} SR",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17.sp,
-                    letterSpacing: 1.1.w,
-                  ),
-                )),
+            Obx(() {
+              if(_homeController.myTransactions.isEmpty) {
+                return  Text("0.00 SR" ,style: TextStyle(fontWeight: FontWeight.bold,
+                  fontSize: 17.sp,
+                  letterSpacing: 1.1.w,),);
+              } else{ return Text(
+                "${_homeController.totalBalance.value.toStringAsFixed(2)} SR",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17.sp,
+                  letterSpacing: 1.1.w,
+                ),
+              );}}),
             Padding(
               padding: EdgeInsets.fromLTRB(54.w, 0.h, 0.w, 0.h),
               child: Text(
