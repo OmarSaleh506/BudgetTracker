@@ -140,7 +140,7 @@ class _EditGoalState extends State<EditGoal> {
             width: 87.w,
             child: TextButton(
               onPressed: () async {
-                await DatabaseProviderGoals.deleteGoal(widget.goalModel!.id!);
+                await goalController.deleteGoal(widget.goalModel!.id!);
                 await goalController.getTransactions();
                 Get.back();
               },
@@ -193,7 +193,7 @@ class _EditGoalState extends State<EditGoal> {
         image: widget.goalModel!.image,
         id: widget.goalModel!.id,
       );
-      await DatabaseProviderGoals.updateGoal(transactionModel);
+      await goalController.updateGoal(transactionModel);
       Get.back();
     }
   }

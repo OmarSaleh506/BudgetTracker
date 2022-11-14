@@ -119,6 +119,7 @@ class CurrentOverview extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 13.sp,
                           letterSpacing: 0.7.w,
+                          color: Colors.red
                         ),
                       );
                     } else {
@@ -128,6 +129,7 @@ class CurrentOverview extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 13.sp,
                           letterSpacing: 0.7.w,
+                            color: Colors.red
                         ),
                       );
                     }

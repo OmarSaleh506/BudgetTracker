@@ -48,7 +48,15 @@ class GoalPage extends StatelessWidget {
                 height: 1.h,
               ),
               Expanded(
-                child: ListView.builder(
+                child:_goalController.myGoal.length==0 ?
+                 //show message if there is no any goal
+                Center(
+                  child: Text(
+                  "لا توجد أهداف لعرضها",
+                  style: TextStyle(fontSize: 12.sp),
+              ),
+                )
+                    : ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
                   itemCount: _goalController.myGoal.length,

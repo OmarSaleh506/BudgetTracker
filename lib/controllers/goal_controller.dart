@@ -29,11 +29,11 @@ class GoalsController extends GetxController {
     tracker(transactionsFromDB);
   }
 
-  Future<int?> deleteTransaction(String id) async {
+  Future<int?> deleteGoal(String id) async {
     return await DatabaseProviderGoals.deleteGoal(id);
   }
 
-  Future<int?> updateTransaction(GoalModel transactionModel) async {
+  Future<int?> updateGoal(GoalModel transactionModel) async {
     return await DatabaseProviderGoals.updateGoal(transactionModel);
   }
 
