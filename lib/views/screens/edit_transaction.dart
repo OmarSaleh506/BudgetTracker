@@ -11,6 +11,7 @@ import '../../controllers/home_controlle.dart';
 import '../../models/goalModel.dart';
 import '../../providers/db_provider.dart';
 import '../../providers/db_provider_goals.dart';
+import '../../routes/routes.dart';
 import '../widgets/custom_edit_goal.dart';
 import '../widgets/home_Screen/custom_text.dart';
 
@@ -111,6 +112,8 @@ class _EditTransactionState extends State<EditTransaction> {
                       print(_amountController.text);
                       _updateTrans();
                       await _homeController.getTransactions();
+                      Get.offNamed(Routes.dashboardScreen);
+                      Get.back();
                     },
                     style: ButtonStyle(
                         backgroundColor:
@@ -144,7 +147,7 @@ class _EditTransactionState extends State<EditTransaction> {
                   width: 40.h,
                   child: TextButton(
                     onPressed: () async {
-                      await DatabaseProvider.deleteTransaction(
+                      await _homeController.deleteTransaction(
                           widget.transactionModel!.id!);
                       await _homeController.getTransactions();
                       Get.back();
@@ -196,8 +199,8 @@ class _EditTransactionState extends State<EditTransaction> {
         name: _tranNameController.text,
         amount: _amountController.text,
       );
-      await DatabaseProvider.updateTransaction(transactionModel);
-      Get.back();
+      await _homeController.updateTransaction(transactionModel);
+
     }
   }
 }

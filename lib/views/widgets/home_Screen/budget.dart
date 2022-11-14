@@ -191,7 +191,7 @@ class Budget extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 15.0),
                       child: InkWell(
                         onTap: () {
-                          Get.toNamed(Routes.dashboardScreen);
+                          Get.offNamed(Routes.dashboardScreen);
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
