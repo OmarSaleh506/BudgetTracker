@@ -33,7 +33,7 @@ class Header extends StatelessWidget {
                     style: TextStyle(
                       color: lightModeScaffoldBgCle,
                       fontWeight: FontWeight.w400,
-                      letterSpacing: 1.1.w,
+                      letterSpacing:0.3.w,
                       fontSize: 16.sp,
                     ),
                   ),
@@ -44,7 +44,7 @@ class Header extends StatelessWidget {
                     'تابع وجدول فواتيرك',
                     style: TextStyle(
                       color: lightModeScaffoldBgCle,
-                      letterSpacing: 0.5.w,
+                      letterSpacing: 0.3.w,
                       fontSize: 10.sp,
                     ),
                   ),

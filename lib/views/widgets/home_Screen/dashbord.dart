@@ -39,7 +39,7 @@ class DashBord extends StatelessWidget {
                 style: TextStyle(
                   color: detailColor,
                   fontSize: 12.sp,
-                  letterSpacing: 0.5.w,
+                  letterSpacing: 0.1.w,
                 ),
               ),
             ),
@@ -63,7 +63,7 @@ class DashBord extends StatelessWidget {
                 style: TextStyle(
                   color: detailColor,
                   fontSize: 12.sp,
-                  letterSpacing: 0.8.w,
+                  letterSpacing: 0.1.w,
                 ),
               ),
             ),

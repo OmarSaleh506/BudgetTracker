@@ -24,153 +24,155 @@ class HomeScreen extends StatelessWidget {
     BuildContext context,
   ) {
     GoalModel goalModel;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Stack(alignment: Alignment(0, 24.h), children: [
-                Header(),
-                DashBord(),
-              ]),
-              SizedBox(
-                height: 17.h,
-              ),
-              Padding(
-                padding: EdgeInsets.all(2.w),
-                child: Builder(builder: (context) {
-                  if(_homeController.myTransactions.isNotEmpty){
-                    if (_homeController.totalIncome.value <
-                        _homeController.totalExpense.value) {
-                      return Container(
-                        margin: EdgeInsets.all(1.0.w),
-                        padding: EdgeInsets.only(
-                            left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
-                        decoration: BoxDecoration(
-                            border: Border.all(
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Stack(alignment: Alignment(0, 24.h), children: [
+                  Header(),
+                  DashBord(),
+                ]),
+                SizedBox(
+                  height: 17.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.all(2.w),
+                  child: Builder(builder: (context) {
+                    if(_homeController.myTransactions.isNotEmpty){
+                      if (_homeController.totalIncome.value <
+                          _homeController.totalExpense.value) {
+                        return Container(
+                          margin: EdgeInsets.all(1.0.w),
+                          padding: EdgeInsets.only(
+                              left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: expenseColor,
+                              ),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(4.w),
+                              )),
+                          child: Text(
+                            ' 😱 صرفت آكثر من ما دخلت',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 10.sp,
                               color: expenseColor,
+                              letterSpacing: 0.08.w,
                             ),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4.w),
-                            )),
-                        child: Text(
-                          ' 😱 صرفت آكثر من ما دخلت',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 10.sp,
-                            color: expenseColor,
-                            letterSpacing: 0.08.w,
                           ),
-                        ),
-                      );
-                    } else if (_homeController.totalIncome.value >
-                        _homeController.totalExpense.value) {
-                      return Container(
-                        margin: EdgeInsets.all(1.0.w),
-                        padding: EdgeInsets.only(
-                            left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
-                        decoration: BoxDecoration(
-                            border: Border.all(
+                        );
+                      } else if (_homeController.totalIncome.value >
+                          _homeController.totalExpense.value) {
+                        return Container(
+                          margin: EdgeInsets.all(1.0.w),
+                          padding: EdgeInsets.only(
+                              left: 26.w, top: 0.2.h, right: 26.w, bottom: 0.4.h),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: detailColor,
+                              ),
+                              borderRadius: BorderRadius.all(Radius.circular(4.w))),
+                          child: Text(
+                            '👍 كفو دخلت آكثر من ما صرفت',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 9.sp,
                               color: detailColor,
+                              letterSpacing: 0.08.w,
                             ),
-                            borderRadius: BorderRadius.all(Radius.circular(4.w))),
-                        child: Text(
-                          '👍 كفو دخلت آكثر من ما صرفت',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 9.sp,
-                            color: detailColor,
-                            letterSpacing: 0.08.w,
                           ),
-                        ),
-                      );
-                    } else
+                        );
+                      } else
+                        return SizedBox(
+                          height: 0.h,
+                        );
+                    }
+                    else
                       return SizedBox(
                         height: 0.h,
                       );
-                  }
-                  else
-                    return SizedBox(
-                      height: 0.h,
-                    );
 
-                }),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(62.w, 1.h, 0.w, 1.3.h),
-                child: Text(
-                  'معدل صرفك',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 12.sp,
-                    color: detailColor,
+                  }),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(62.w, 1.h, 0.w, 1.3.h),
+                  child: Text(
+                    'معدل صرفك',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 12.sp,
+                      color: detailColor,
+                    ),
                   ),
                 ),
-              ),
-              CurrentOverview(),
-              SizedBox(
-                height: 3.h,
-              ),
-              Budget(),
-              SizedBox(
-                height: 2.h,
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 67.w),
-                child: Text(
-                  'أهداف',
-                  style: TextStyle(
-                    color: detailColor,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 14.sp,
-                    letterSpacing: 0.5.w,
+                CurrentOverview(),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Budget(),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 67.w),
+                  child: Text(
+                    'أهداف',
+                    style: TextStyle(
+                      color: detailColor,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14.sp,
+                      letterSpacing: 0.5.w,
+                    ),
                   ),
                 ),
-              ),
-              Builder(builder: (context) {
-                if (_goalController.myGoal.isEmpty) {
-                  return AddNewGoal();
-                } else if (_goalController.myGoal.isNotEmpty) {
-                  return Column(
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          Scaffold.of(context).showBottomSheet<void>(
-                            ((BuildContext context) {
-                              return Card(
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      color: Colors.white70, width: 1.w),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: SizedBox(
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.height * .7,
-                                  child: EditGoal(
-                                    goalModel: _goalController.myGoal.last,
+                Builder(builder: (context) {
+                  if (_goalController.myGoal.isEmpty) {
+                    return AddNewGoal();
+                  } else if (_goalController.myGoal.isNotEmpty) {
+                    return Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            Scaffold.of(context).showBottomSheet<void>(
+                              ((BuildContext context) {
+                                return Card(
+                                  shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: Colors.white70, width: 1.w),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                ),
-                              );
-                            }),
-                          );
-                          await _goalController.getTransactions();
-                        },
-                        child: Goals(goalModel: _goalController.myGoal.last),
-                      ),
-                      AllGoals(),
-                    ],
-                  );
-                } else
-                  return SizedBox(
-                    height: 0,
-                  );
-              }),
-              AddNewTransaction(),
-            ],
-          )),
+                                  child: SizedBox(
+                                    width: MediaQuery.of(context).size.width,
+                                    height:
+                                        MediaQuery.of(context).size.height * .7,
+                                    child: EditGoal(
+                                      goalModel: _goalController.myGoal.last,
+                                    ),
+                                  ),
+                                );
+                              }),
+                            );
+                            await _goalController.getTransactions();
+                          },
+                          child: Goals(goalModel: _goalController.myGoal.last),
+                        ),
+                        AllGoals(),
+                      ],
+                    );
+                  } else
+                    return SizedBox(
+                      height: 0,
+                    );
+                }),
+                AddNewTransaction(),
+              ],
+            )),
+      ),
     );
   }
 }

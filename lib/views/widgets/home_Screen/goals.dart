@@ -97,7 +97,7 @@ class Goals extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 13.sp,
-                          letterSpacing: 1.w,
+                          letterSpacing: 0.1.w,
                         ),
                       )
                     ],

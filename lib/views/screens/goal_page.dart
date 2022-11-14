@@ -39,7 +39,7 @@ class GoalPage extends StatelessWidget {
                       color: Colors.black,
                       fontWeight: FontWeight.w700,
                       fontSize: 14.sp,
-                      letterSpacing: 0.5.w,
+                      letterSpacing: 0.1.w,
                     ),
                   ),
                 ],
